@@ -5,15 +5,21 @@
         $totalQuests = count($quests);
         $completedQuests = $quests->where('log_exists', true)->count();
     @endphp
-    <!-- Контейнер расширен до max-w-2xl для идеальной симметрии и пропорций с тренировками -->
-    <div class='max-w-2xl mx-auto p-4 space-y-6 pb-20'>
+    <!-- Контейнер с реактивным стейтом для мгновенного обновления прогресса в реальном времени -->
+    <div class='max-w-2xl mx-auto p-4 space-y-6 pb-20' x-data="{
+        completedCount: {{ $completedQuests }},
+        totalCount: {{ $totalQuests }},
+        get percent() {
+            return this.totalCount > 0 ? Math.round((this.completedCount / this.totalCount) * 100) : 0;
+        }
+    }">
 
         <!-- Заголовок страницы -->
         <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
             <div>
                 <h1 class="text-2xl font-black tracking-wider text-slate-100 uppercase">Мои квесты</h1>
                 <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">
-                    {{ $quests->where('log_exists', true)->count() }} / {{ count($quests) }} Выполнено
+                    <span x-text="completedCount"></span> / <span x-text="totalCount"></span> Выполнено
                 </p>
             </div>
             
@@ -32,23 +38,19 @@
         @endif
 
         <!-- Визуальный прогресс-бар выполнения -->
-        @php
-            $totalQuests = count($quests);
-            $completedQuests = $quests->where('log_exists', true)->count();
-            $percent = $totalQuests > 0 ? round(($completedQuests / $totalQuests) * 100) : 0;
-        @endphp
         <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-4 shadow-lg">
             <div class="flex justify-between items-center mb-2.5">
                 <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">📊 Прогресс дня</span>
-                <span class="text-xs font-black text-slate-200 font-mono">{{ $completedQuests }} / {{ $totalQuests }}</span>
+                <span class="text-xs font-black text-slate-200 font-mono" x-text="completedCount + ' / ' + totalCount"></span>
             </div>
             <div class="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-900/80">
-                <div class="h-full rounded-full transition-all duration-700 ease-out {{ $percent === 100 ? 'bg-gradient-to-r from-emerald-500 to-emerald-400' : 'bg-gradient-to-r from-indigo-600 to-violet-500' }}"
-                     style="width: {{ $percent }}%"></div>
+                <div class="h-full rounded-full transition-all duration-500 ease-out"
+                     :class="percent === 100 ? 'bg-gradient-to-r from-emerald-500 to-emerald-400' : 'bg-gradient-to-r from-indigo-600 to-violet-500'"
+                     :style="'width: ' + percent + '%'"></div>
             </div>
             <div class="flex justify-between items-center mt-2">
                 <span class="text-[10px] font-bold text-slate-500">0%</span>
-                <span class="text-xs font-black {{ $percent === 100 ? 'text-emerald-400' : 'text-indigo-400' }}">{{ $percent }}%</span>
+                <span class="text-xs font-black transition-colors duration-300" :class="percent === 100 ? 'text-emerald-400' : 'text-indigo-400'" x-text="percent + '%'"></span>
                 <span class="text-[10px] font-bold text-slate-500">100%</span>
             </div>
         </div>
@@ -64,7 +66,7 @@
                     <form method="POST" action="{{ route('quest_complete', $quest->id) }}">
                         @csrf
                         <button type="submit" 
-                                @click.prevent="completed = !completed; $el.closest('form').submit()"
+                                @click.prevent="completed = !completed; completed ? completedCount++ : completedCount--; $el.closest('form').submit()"
                                 class="w-full text-left flex items-center gap-4 border-l-4 rounded-2xl p-5 shadow-lg transition-all duration-300 cursor-pointer focus:outline-none group/card"
                                 :class="completed ? 'bg-slate-900/35 border-slate-950/80 border-l-emerald-500' : 'bg-slate-900/70 border-slate-900/60 border-l-indigo-500 hover:border-indigo-500/30 hover:bg-slate-900/40 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-950/20'">
                             
