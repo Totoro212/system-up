@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Quest;
+use App\Models\StoicQuote;
+
+class DashboardController extends Controller
+{
+    /**
+     * Отобразить список квестов пользователя на сегодня.
+     */
+    public function index()
+    {
+        $quests = Quest::where('user_id', auth()->id())
+            ->withExists(['log' => function ($query) {
+                $query->whereDate('created_at', today())
+                      ->where('user_id', auth()->id());
+            }])->get();
+ 
+        return view('dashboard', [
+            'quests' => $quests
+        ]);
+    }
+
+    /**
+     * Создать новую стоическую цитату.
+     */
+    public function storeStoicQuote(Request $request)
+    {
+        $request->validate([
+            'text' => 'required|string|max:5000',
+            'practice' => 'nullable|string|max:5000',
+        ]);
+
+        StoicQuote::create([
+            'text' => $request->text,
+            'practice' => $request->practice,
+        ]);
+
+        return redirect()->back()->with('success', 'Стоическая цитата успешно добавлена в свитки!');
+    }
+}

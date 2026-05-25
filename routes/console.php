@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Artisan;
+
+Artisan::command('inspire', function () {
+    $this->comment(Inspiring::quote());
+})->purpose('Display an inspiring quote');
+
+Artisan::command('user:create {name} {email} {password}', function ($name, $email, $password) {
+    if (\App\Models\User::where('email', $email)->exists()) {
+        $this->error("Пользователь с email {$email} уже существует!");
+        return;
+    }
+
+    $user = \App\Models\User::create([
+        'name' => $name,
+        'email' => $email,
+        'password' => \Illuminate\Support\Facades\Hash::make($password),
+    ]);
+
+    $this->info("Пользователь {$user->name} ({$user->email}) успешно создан!");
+})->purpose('Создать нового пользователя вручную');
