@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Шаг 2: Создание основного продакшен-образа PHP + Nginx
-FROM serversideup/php:8.3-fpm-nginx AS runner
+FROM serversideup/php:8.4-fpm-nginx AS runner
 
 # Временно переключаемся на root, чтобы установить zip/unzip и скопировать скрипт развертывания
 USER root
