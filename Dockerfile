@@ -16,18 +16,18 @@ RUN apt-get update && apt-get install -y unzip git && rm -rf /var/lib/apt/lists/
 # Копируем наш кастомный deploy скрипт в системную папку автозапуска контейнера
 COPY --chmod=755 docker/99-laravel-deploy.sh /etc/entrypoint.d/99-laravel-deploy.sh
 
-# Возвращаемся в контекст безопасного пользователя webuser
-USER webuser
+# Возвращаемся в контекст безопасного пользователя www-data
+USER www-data
 
 # Указываем корневую папку для Nginx
 ENV AUTOCONF_DOCUMENT_ROOT=/var/www/html/public
 ENV PHP_OPCACHE_ENABLE=1
 
 # Копируем исходный код проекта
-COPY --chown=webuser:webgroup . /var/www/html
+COPY --chown=www-data:www-data . /var/www/html
 
 # Копируем скомпилированные ассеты из Шага 1
-COPY --from=assets-builder --chown=webuser:webgroup /app/public/build /var/www/html/public/build
+COPY --from=assets-builder --chown=www-data:www-data /app/public/build /var/www/html/public/build
 
 # Устанавливаем PHP зависимости через Composer для продакшена (без dev-зависимостей)
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
