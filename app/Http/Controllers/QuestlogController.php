@@ -27,9 +27,18 @@ class QuestlogController extends Controller
         if ($existingLog) {
             // Если сегодня уже выполняли - удаляем (отменяем)
             $existingLog->delete();
+            $completed = false;
         } else {
             // Иначе - создаем
             Questlog::create(['quest_id' => $quest->id, 'user_id' => auth()->id()]);
+            $completed = true;
+        }
+
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'completed' => $completed,
+            ]);
         }
 
         return redirect()->back();
