@@ -59,33 +59,33 @@
                         <!-- ВЫПОЛНЕННЫЙ КВЕСТ (Изумрудный акцент, зачеркнутый текст, плавное затемнение) -->
                         <form method="POST" action="{{ route('quest_complete', $quest->id) }}">
                             @csrf
-                            <div class="bg-slate-900/35 border border-slate-950/80 border-l-4 border-l-emerald-500 rounded-2xl p-5 shadow-lg flex items-center gap-4 transition-all duration-300 hover:bg-slate-900/50">
+                            <button type="submit" class="w-full text-left flex items-center gap-4 bg-slate-900/35 border border-slate-950/80 border-l-4 border-l-emerald-500 rounded-2xl p-5 shadow-lg transition-all duration-300 hover:bg-slate-900/50 cursor-pointer focus:outline-none group/card" title="Отменить выполнение">
                                 <!-- Интерактивный кастомный чекбокс (выполнен) -->
-                                <button type="submit" class="flex-shrink-0 w-6 h-6 rounded-lg bg-emerald-500/10 border-2 border-emerald-500 flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-emerald-500/20" title="Отменить выполнение">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-lg bg-emerald-500/10 border-2 border-emerald-500 flex items-center justify-center transition-all duration-300 group-hover/card:bg-emerald-500/20">
                                     <svg class="w-3.5 h-3.5 text-emerald-400 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                     </svg>
-                                </button>
+                                </div>
 
                                 <div class="flex-grow pr-8">
                                     <h3 class="text-sm font-extrabold text-slate-500 line-through uppercase tracking-wide">
                                         {{ $quest->title }}
                                     </h3>
-                                    <p class="text-xs text-slate-600 font-sans mt-0.5 leading-relaxed">
-                                        Выполнено. Нажмите на чекбокс, чтобы сбросить.
+                                    <p class="text-xs text-slate-650 font-sans mt-0.5 leading-relaxed">
+                                        Выполнено. Нажмите в любое место карточки, чтобы сбросить.
                                     </p>
                                 </div>
-                            </div>
+                            </button>
                         </form>
                     @else
                         <!-- АКТИВНЫЙ КВЕСТ (Индиго акцент, яркий текст, Hover-эффект приподнимания) -->
                         <form method="POST" action="{{ route('quest_complete', $quest->id) }}">
                             @csrf
-                            <div class="bg-slate-900/70 border border-slate-900/60 border-l-4 border-l-indigo-500 rounded-2xl p-5 shadow-lg flex items-center gap-4 transition-all duration-300 hover:border-indigo-500/30 hover:bg-slate-900/40 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-950/20">
+                            <button type="submit" class="w-full text-left flex items-center gap-4 bg-slate-900/70 border border-slate-900/60 border-l-4 border-l-indigo-500 rounded-2xl p-5 shadow-lg transition-all duration-300 hover:border-indigo-500/30 hover:bg-slate-900/40 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-950/20 cursor-pointer focus:outline-none group/card" title="Отметить как выполненный">
                                 <!-- Интерактивный кастомный чекбокс (активен) -->
-                                <button type="submit" class="flex-shrink-0 w-6 h-6 rounded-lg border-2 border-slate-700 flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-indigo-400 hover:bg-indigo-500/10 group/check" title="Отметить как выполненный">
-                                    <div class="w-2.5 h-2.5 bg-indigo-500 rounded-sm scale-0 group-hover/check:scale-100 transition-transform duration-200"></div>
-                                </button>
+                                <div class="flex-shrink-0 w-6 h-6 rounded-lg border-2 border-slate-700 flex items-center justify-center transition-all duration-300 group-hover/card:border-indigo-400 group-hover/card:bg-indigo-500/10">
+                                    <div class="w-2.5 h-2.5 bg-indigo-500 rounded-sm scale-0 group-hover/card:scale-100 transition-transform duration-200"></div>
+                                </div>
 
                                 <div class="flex-grow pr-8">
                                     <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">
@@ -95,7 +95,7 @@
                                         {{ $quest->description }}
                                     </p>
                                 </div>
-                            </div>
+                            </button>
                         </form>
                     @endif
 
