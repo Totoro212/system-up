@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+        $totalQuests = count($quests);
+        $completedQuests = $quests->where('log_exists', true)->count();
+    @endphp
     <!-- Контейнер расширен до max-w-2xl для идеальной симметрии и пропорций с тренировками -->
     <!-- Контейнер с реактивным стейтом для мгновенного обновления прогресса в реальном времени -->
     <div class='max-w-2xl mx-auto p-4 space-y-6 pb-20' x-data="{
