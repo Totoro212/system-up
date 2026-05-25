@@ -2,8 +2,20 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <!-- PWA & Mobile Standalone Mode Config -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Arise">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="#020617">
+
+        <!-- App Icons and Manifest -->
+        <link rel="apple-touch-icon" href="/logo.svg">
+        <link rel="icon" type="image/svg+xml" href="/logo.svg">
+        <link rel="manifest" href="/manifest.json">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 

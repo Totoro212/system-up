@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Градиент фона (глубокий темный) -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#0b1329" />
+    </linearGradient>
+    <!-- Энергичный неоновый градиент для логотипа -->
+    <linearGradient id="logo-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <!-- Мягкое свечение -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Закругленный премиальный фон иконки -->
+  <rect width="512" height="512" rx="112" fill="url(#bg-grad)" />
+
+  <!-- Декоративное фоновое кольцо с низкой прозрачностью -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#1e293b" stroke-width="4" stroke-dasharray="16 8" opacity="0.3" />
+
+  <!-- Группа логотипа (восходящий треугольник / дельта стоицизма с эффектом свечения) -->
+  <g filter="url(#glow)">
+    <!-- Внутренний полигон восходящего шеврона -->
+    <polygon points="256,120 376,340 330,340 256,200 182,340 136,340" fill="url(#logo-grad)" />
+    <!-- Точка на вершине (символ фокуса и цели) -->
+    <circle cx="256" cy="256" r="16" fill="#f8fafc" />
+  </g>
+</svg>
