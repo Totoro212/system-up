@@ -14,7 +14,7 @@
 
         <!-- ================= БЛОК: STOIC DAILY (СТОИЦИЗМ НА ДЕНЬ) ================= -->
         @if ($stoicQuote)
-            <div class="bg-slate-900 border border-indigo-500/20 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="bg-slate-900/40 border border-indigo-500/20 backdrop-blur-md rounded-2xl p-6 shadow-2xl relative overflow-hidden">
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl"></div>
                 
                 <!-- Шапка карточки -->
@@ -50,12 +50,12 @@
             <div class="grid grid-cols-1 gap-3.5">
                 @foreach ($baseCodex as $index => $cat)
                     @php $catId = $index + 1; @endphp
-                    <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg transition-all duration-200">
+                    <div class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 hover:border-indigo-500/30 transition-all duration-300">
                         <!-- Шапка категории -->
                         <div class="cursor-pointer flex justify-between items-center"
                             x-on:click="activeCategory = activeCategory === {{ $catId }} ? null : {{ $catId }}">
                             <div class="flex items-center gap-3">
-                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center border border-slate-850/50">{{ $cat['icon'] }}</span>
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">{{ $cat['icon'] }}</span>
                                 <div>
                                     <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">{{ $cat['title'] }}</h3>
                                     <p class="text-xs text-slate-400 mt-0.5">{{ $cat['description'] }}</p>
@@ -86,12 +86,12 @@
             <div class="grid grid-cols-1 gap-3.5">
                 @foreach ($advancedCodex as $index => $cat)
                     @php $catId = $index + 100; @endphp
-                    <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg transition-all duration-200">
+                    <div class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 hover:border-indigo-500/30 transition-all duration-300">
                         <!-- Шапка категории -->
                         <div class="cursor-pointer flex justify-between items-center"
                             x-on:click="activeCategory = activeCategory === {{ $catId }} ? null : {{ $catId }}">
                             <div class="flex items-center gap-3">
-                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center border border-slate-850/50">{{ $cat['icon'] }}</span>
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">{{ $cat['icon'] }}</span>
                                 <div>
                                     <h3 class="text-sm font-black text-indigo-300 uppercase tracking-wide">{{ $cat['title'] }}</h3>
                                     <p class="text-xs text-slate-400 mt-0.5">{{ $cat['description'] }}</p>
