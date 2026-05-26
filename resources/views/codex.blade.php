@@ -43,24 +43,6 @@
             </div>
         @endif
 
-        <!-- ================= МАНИФЕСТ СЧАСТЬЯ (СТОИЦИЗМ) ================= -->
-        <div class="relative bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 border border-indigo-500/20 backdrop-blur-md rounded-2xl p-5 shadow-xl overflow-hidden group">
-            <!-- Абстрактное свечение -->
-            <div class="absolute -right-10 -top-10 w-28 h-28 bg-indigo-500/20 rounded-full blur-2xl group-hover:scale-110 transition-all duration-700"></div>
-            <div class="absolute -left-10 -bottom-10 w-28 h-28 bg-purple-500/20 rounded-full blur-2xl group-hover:scale-110 transition-all duration-700"></div>
-            
-            <div class="relative space-y-3">
-                <div class="flex items-center gap-2">
-                    <span class="text-xs">📜</span>
-                    <span class="text-[9px] font-black uppercase tracking-widest text-indigo-400">Великий Манифест Счастья</span>
-                </div>
-                <blockquote class="text-xs font-serif italic text-slate-100 leading-relaxed pl-3.5 border-l-2 border-indigo-500/40">
-                    «Счастливый человек — это не тот, у кого всё есть, а тот, кто ценит то, что имеет; тот, кто умеет находить смысл и в страдании; это не тот, кто достиг всех целей, а тот, кто наслаждается путем к ним.»
-                </blockquote>
-                <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest text-right">— Мудрость Кодекса</div>
-            </div>
-        </div>
-
         <!-- ================= БЛОК: 5 СТОЛПОВ СЧАСТЬЯ ================= -->
         <div x-data="{ activePillar: 'health' }" class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 space-y-4">
             
