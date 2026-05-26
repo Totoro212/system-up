@@ -81,9 +81,10 @@
             }
         </style>
     </head>
-    <body class="antialiased text-slate-100 bg-slate-950">
-        <!-- Декоративное фоновое свечение за формой -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-indigo-500/5 blur-[100px] pointer-events-none"></div>
+    <body class="antialiased text-slate-100 bg-slate-950 overflow-x-hidden relative">
+        <!-- Роскошные амбиентные неоновые сферы для гостевой страницы -->
+        <div class="absolute top-[-10%] left-[-15%] w-[500px] h-[500px] rounded-full bg-indigo-600/8 blur-[120px] pointer-events-none z-0"></div>
+        <div class="absolute bottom-[-10%] right-[-15%] w-[600px] h-[600px] rounded-full bg-emerald-600/4 blur-[140px] pointer-events-none z-0"></div>
 
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative z-10">
             <div>
@@ -92,7 +93,7 @@
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-6 bg-slate-900/40 border border-slate-900/80 backdrop-blur-md shadow-2xl overflow-hidden rounded-2xl">
+            <div class="w-full sm:max-w-md mt-6 px-6 py-6 bg-slate-900/45 border border-slate-800/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden rounded-2xl">
                 {{ $slot }}
             </div>
         </div>
