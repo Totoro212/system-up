@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Контейнер расширен до max-w-2xl для идеального баланса и простора на любых экранах -->
-    <div class='max-w-2xl mx-auto p-4 space-y-6 pb-20'>
+    <div class='max-w-2xl mx-auto p-4 space-y-6'>
 
         <!-- Заголовок страницы -->
         <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">

@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Контейнер расширен до max-w-2xl для идеальной гармонии с тренировками и квестами -->
-    <div class="max-w-2xl mx-auto p-4 space-y-6 pb-20" x-data="{ activeCategory: null }">
+    <div class="max-w-2xl mx-auto p-4 space-y-6" x-data="{ activeCategory: null }">
 
         <!-- Заголовок страницы -->
         <div class="pb-4 border-b border-slate-900/50">

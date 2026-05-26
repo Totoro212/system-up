@@ -6,7 +6,7 @@
         $completedQuests = $quests->where('log_exists', true)->count();
     @endphp
     <!-- Контейнер с реактивным стейтом для мгновенного обновления прогресса в реальном времени -->
-    <div class='max-w-2xl mx-auto p-4 space-y-6 pb-20' x-data="{
+    <div class='max-w-2xl mx-auto p-4 space-y-6' x-data="{
         completedCount: {{ $completedQuests }},
         totalCount: {{ $totalQuests }},
         get percent() {
