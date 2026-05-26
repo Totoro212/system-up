@@ -129,6 +129,10 @@
                             <span class="text-emerald-400">⚖️</span>
                             <span><strong>Стоический взгляд:</strong> Тело — это «предпочтительное безразличное». Оно не подконтрольно разуму целиком, но забота о нем — долг мудреца.</span>
                         </div>
+                        <div class="flex gap-2 items-start bg-emerald-950/20 border border-emerald-500/15 p-3 rounded-lg col-span-1 sm:col-span-2 text-slate-300">
+                            <span class="text-emerald-400">🧠</span>
+                            <span><strong>Нейробиология счастья:</strong> Физические упражнения, здоровое питание и достаточный сон напрямую способствуют активной выработке гормонов счастья (дофамина, серотонина, эндорфинов). Это биологический фундамент твоей продуктивности!</span>
+                        </div>
                     </div>
                 </div>
 
@@ -194,6 +198,10 @@
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
                             <span class="text-rose-400">🤝</span>
                             <span><strong>Стоический взгляд:</strong> Мы рождены друг для друга (Сенека). Заботься об общем благе и поддерживай близких — в этом проявляется справедливость.</span>
+                        </div>
+                        <div class="flex gap-2 items-start bg-rose-950/20 border border-rose-500/15 p-3 rounded-lg col-span-1 sm:col-span-2 text-slate-300">
+                            <span class="text-rose-400">🧠</span>
+                            <span><strong>Нейробиология счастья:</strong> Крепкие социальные связи запускают мощную выработку окситоцина (гормона доверия, спокойствия и привязанности). Общение с любимыми снижает стресс на биологическом уровне.</span>
                         </div>
                     </div>
                 </div>
