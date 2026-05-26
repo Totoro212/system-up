@@ -82,9 +82,11 @@
         </style>
     </head>
     <body class="antialiased text-slate-100 bg-slate-950 overflow-x-hidden relative">
-        <!-- Роскошные амбиентные неоновые сферы для гостевой страницы -->
-        <div class="absolute top-[-10%] left-[-15%] w-[500px] h-[500px] rounded-full bg-indigo-600/8 blur-[120px] pointer-events-none z-0"></div>
-        <div class="absolute bottom-[-10%] right-[-15%] w-[600px] h-[600px] rounded-full bg-emerald-600/4 blur-[140px] pointer-events-none z-0"></div>
+        <!-- Роскошные амбиентные неоновые сферы в фиксированном контейнере для гостевой страницы -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="absolute top-[-10%] left-[-15%] w-[500px] h-[500px] rounded-full bg-indigo-600/8 blur-[120px]"></div>
+            <div class="absolute bottom-[-10%] right-[-15%] w-[600px] h-[600px] rounded-full bg-emerald-600/4 blur-[140px]"></div>
+        </div>
 
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative z-10">
             <div>

@@ -145,9 +145,11 @@
 
 <body class="antialiased text-slate-100 overflow-x-hidden">
     <div class="min-h-screen bg-slate-950 relative overflow-x-hidden">
-        <!-- Деликатные фоновые эмбиент-свечения (ambient mesh glow) для создания глубины -->
-        <div class="absolute top-[-10%] left-[-15%] w-[600px] h-[600px] rounded-full bg-indigo-600/8 blur-[130px] pointer-events-none z-0"></div>
-        <div class="absolute bottom-[-10%] right-[-15%] w-[800px] h-[800px] rounded-full bg-emerald-600/4 blur-[160px] pointer-events-none z-0"></div>
+        <!-- Деликатные фоновые эмбиент-свечения (ambient mesh glow) в фиксированном контейнере, чтобы не растягивать высоту страницы на смартфонах -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="absolute top-[-10%] left-[-15%] w-[600px] h-[600px] rounded-full bg-indigo-600/8 blur-[130px]"></div>
+            <div class="absolute bottom-[-10%] right-[-15%] w-[800px] h-[800px] rounded-full bg-emerald-600/4 blur-[160px]"></div>
+        </div>
 
         <!-- ================= ПРЕМИАЛЬНЫЙ СТЕКЛЯННЫЙ НИЖНИЙ ДОК ================= -->
         <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/65 border border-slate-800/50 px-6 py-2.5 rounded-2xl backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.55)] flex items-center gap-8 z-50 max-w-[95%] sm:max-w-none transition-all duration-300">
