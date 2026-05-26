@@ -43,12 +43,12 @@
             </div>
         @endif
 
-        <!-- ================= БЛОК: 5 СТОЛПОВ СЧАСТЬЯ (МАРГУЛАН СЕЙСЕМБАЕВ) ================= -->
+        <!-- ================= БЛОК: 5 СТОЛПОВ СЧАСТЬЯ ================= -->
         <div x-data="{ activePillar: 'health' }" class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 space-y-4">
             
             <!-- Заголовок блока -->
             <div class="flex items-center justify-between pb-3 border-b border-slate-950">
-                <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">🧭 5 Столпов Счастья (Миссия Выполнима 2.0)</span>
+                <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">🧭 5 Столпов Счастья (Путь к балансу)</span>
                 <span class="text-[9px] font-bold text-indigo-400 uppercase tracking-wider">Интерактивный Баланс</span>
             </div>
 
@@ -118,7 +118,7 @@
                         <h3 class="text-xs font-black uppercase tracking-wider">Здоровье — Фундамент Биокомпьютера</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        Маргулан Сейсембаев утверждает: <span class="text-emerald-400 font-semibold">«Здоровье — это твой главный физический капитал»</span>. Твое тело — это биологический компьютер. Если он зависает или перегревается, никакие успехи в бизнесе или делах не принесут счастья.
+                        Помни золотое правило: <span class="text-emerald-400 font-semibold">«Здоровье — это твой главный физический капитал»</span>. Твое тело — это биологический компьютер. Если он зависает или перегревается, никакие успехи в бизнесе или делах не принесут счастья.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
@@ -144,7 +144,7 @@
                         <h3 class="text-xs font-black uppercase tracking-wider">Безопасность — Спокойствие Духа</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        Безопасность по Маргулану — это <span class="text-blue-400 font-semibold">«отсутствие постоянного страха за завтрашний день»</span>. Это финансовая, физическая и психологическая защита, которая избавляет мозг от стресса выживания.
+                        Дисциплинированный разум знает: настоящая безопасность — это <span class="text-blue-400 font-semibold">«отсутствие постоянного страха за завтрашний день»</span>. Это финансовая, физическая и психологическая защита, которая избавляет мозг от стресса выживания.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
@@ -166,7 +166,7 @@
                         <h3 class="text-xs font-black uppercase tracking-wider">Свобода — Независимость Выбора</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        Маргулан считает свободу важнейшим множителем счастья: <span class="text-violet-400 font-semibold">«Свобода — это возможность не делать то, чего ты делать не хочешь»</span>. Свобода от чужих ожиданий, долгов и навязанного мнения.
+                        Свобода — это важнейший множитель счастья: <span class="text-violet-400 font-semibold">«Свобода — это возможность не делать то, чего ты делать не хочешь»</span>. Свобода от чужих ожиданий, долгов и навязанного мнения.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
@@ -188,7 +188,7 @@
                         <h3 class="text-xs font-black uppercase tracking-wider">Близкие Люди — Тепло и Окружение</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        Человек — существо социальное. Маргулан Сейсембаев напоминает: <span class="text-rose-400 font-semibold">«Отношения — это сад, его нужно поливать каждый день»</span>. Окружай себя донаторами энергии, цени верность и дари любовь в ответ.
+                        Человек — существо социальное. В Кодексе записано: <span class="text-rose-400 font-semibold">«Отношения — это сад, его нужно поливать каждый день»</span>. Окружай себя донаторами энергии, цени верность и дари любовь в ответ.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
@@ -214,7 +214,7 @@
                         <h3 class="text-xs font-black uppercase tracking-wider">Любимое Дело — Поток и Полезность</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        Любимое дело по Маргулану дает ключевое чувство: <span class="text-amber-400 font-semibold">«осознание нужности своего существования»</span>. Это работа в состоянии Потока, когда ты сфокусирован на пользе людям и качестве процесса, а не только на деньгах.
+                        Любимое дело дает ключевое чувство: <span class="text-amber-400 font-semibold">«осознание нужности своего существования»</span>. Это работа в состоянии Потока, когда ты сфокусирован на пользе людям и качестве процесса, а не только на деньгах.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
