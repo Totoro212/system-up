@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout title='Квесты'>
     @php
         $totalQuests = count($quests);
         $completedQuests = $quests->where('log_exists', true)->count();
@@ -23,11 +21,10 @@
                 </p>
             </div>
 
-            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-quest')"
-                class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-indigo-950/40 hover:-translate-y-0.5">
+            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-quest')">
                 <span>+</span>
                 <span>Новый квест</span>
-            </button>
+            </x-primary-button>
         </div>
 
         <!-- Уведомления об успехе (Success Alert) -->
@@ -39,7 +36,8 @@
         @endif
 
         <!-- Визуальный прогресс-бар выполнения -->
-        <div class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10">
+        <div
+            class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10">
             <div class="flex justify-between items-center mb-2.5">
                 <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">📊 Прогресс дня</span>
                 <span class="text-xs font-black text-slate-200 font-mono"
@@ -47,7 +45,8 @@
             </div>
             <div class="w-full h-3 bg-slate-950/80 rounded-full overflow-hidden border border-slate-900/80">
                 <div class="h-full rounded-full transition-all duration-500 ease-out"
-                    :class="percent === 100 ? 'bg-gradient-to-r from-emerald-500 to-teal-400 shadow-[0_0_12px_rgba(16,185,129,0.3)]' :
+                    :class="percent === 100 ?
+                        'bg-gradient-to-r from-emerald-500 to-teal-400 shadow-[0_0_12px_rgba(16,185,129,0.3)]' :
                         'bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 shadow-[0_0_12px_rgba(99,102,241,0.3)]'"
                     :style="'width: ' + percent + '%'"></div>
             </div>
@@ -61,7 +60,8 @@
 
         <!-- Список квестов -->
         <div class="space-y-4">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">🎯 Активные квесты на сегодня</h2>
+            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">🎯 Активные квесты на сегодня
+            </h2>
 
             @forelse ($quests as $quest)
                 <div x-data="{ completed: {{ $quest->log_exists ? 'true' : 'false' }} }" class="relative group transition-all duration-300">
@@ -71,7 +71,8 @@
                         <button type="submit"
                             @click.prevent="completed = !completed; completed ? completedCount++ : completedCount--; $el.closest('form').submit()"
                             class="w-full text-left flex items-center gap-4 border-l-4 rounded-2xl p-5 shadow-lg transition-all duration-300 cursor-pointer focus:outline-none group/card"
-                            :class="completed ? 'bg-slate-950/20 border-slate-900/60 border-l-emerald-500 opacity-60 backdrop-blur-sm shadow-none' :
+                            :class="completed ?
+                                'bg-slate-950/20 border-slate-900/60 border-l-emerald-500 opacity-60 backdrop-blur-sm shadow-none' :
                                 'bg-slate-900/40 border border-slate-800/40 border-l-indigo-500 backdrop-blur-md hover:border-indigo-500/40 hover:bg-slate-900/55 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-950/30'">
 
                             <!-- Интерактивный кастомный чекбокс -->
@@ -133,10 +134,9 @@
                     <div class="pt-2">
                         <form method="POST" action="{{ route('quests.seed_default') }}">
                             @csrf
-                            <button type="submit"
-                                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-indigo-950/40 hover:-translate-y-0.5">
+                            <x-primary-button>
                                 🚀 Загрузить квесты по умолчанию
-                            </button>
+                            </x-primary-button>
                         </form>
                     </div>
                 </div>
@@ -154,20 +154,14 @@
                     @csrf
 
                     <div>
-                        <label for="title"
-                            class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Название</label>
-                        <input type="text" name="title" id="title" required
-                            placeholder="Например: Выпить 2 литра воды"
-                            class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
+                        <x-input-label for="title" value='Название'></x-input-label>
+                        <x-text-input type="text" name="title" id="title" required placeholder="Например: Выпить 2 литра воды" />
                         <x-input-error :messages="$errors->get('title')" class="mt-1" />
                     </div>
 
                     <div>
-                        <label for="description"
-                            class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Описание</label>
-                        <input type="text" name="description" id="description" required
-                            placeholder="Детали, регулярность или цель..."
-                            class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
+                        <x-input-label for="description" value="Описание" />
+                        <x-text-input type="text" name="description" id="description" required placeholder="Детали, регулярность или цель..." />
                         <x-input-error :messages="$errors->get('description')" class="mt-1" />
                     </div>
 
@@ -175,16 +169,12 @@
                         <x-secondary-button x-on:click="$dispatch('close')" type="button">
                             Отмена
                         </x-secondary-button>
-                        <button type="submit"
-                            class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs tracking-wider uppercase transition-all cursor-pointer">
+                        <x-primary-button>
                             Добавить в список
-                        </button>
+                        </x-primary-button>
                     </div>
                 </form>
             </div>
         </x-modal>
-
-
-
     </div>
-@endsection
+</x-app-layout>

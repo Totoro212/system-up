@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout title='Тренировки'>
     <!-- Контейнер расширен до max-w-2xl для идеального баланса и простора на любых экранах -->
     <div class='max-w-2xl mx-auto p-4 space-y-6'>
 
@@ -8,14 +6,13 @@
         <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
             <div>
                 <h1 class="text-2xl font-black tracking-wider text-slate-100 uppercase">Расписание</h1>
-                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Сегодня: {{ $todayDayOfWeek }}</p>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Сегодня: {{ $todayDayOfWeek }}
+                </p>
             </div>
-
-            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-workout')"
-                class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-indigo-950/40 hover:-translate-y-0.5">
+            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-workout')">
                 <span>+</span>
                 <span>Создать план</span>
-            </button>
+            </x-primary-button>
         </div>
 
         <!-- Уведомления об успехе -->
@@ -31,7 +28,8 @@
             <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Сегодня в плане</h2>
 
             @if ($todayWorkout)
-                <div class="bg-slate-900 border-2 border-indigo-500/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+                <div
+                    class="bg-slate-900 border-2 border-indigo-500/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
                     <div class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl"></div>
 
                     <!-- Шапка -->
@@ -83,14 +81,16 @@
 
                                         <!-- Бейдж прогрессии -->
                                         @if ($exercise->progression_status !== 'new')
-                                            <span class="text-xs font-bold px-2.5 py-0.5 rounded border {{ $exercise->progression_color }}">
+                                            <span
+                                                class="text-xs font-bold px-2.5 py-0.5 rounded border {{ $exercise->progression_color }}">
                                                 📈 {{ $exercise->progression_label }}
                                             </span>
                                         @endif
 
                                         <!-- Рекомендация при стагнации или регрессе -->
                                         @if ($exercise->suggested_weight)
-                                            <span class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2.5 py-0.5 rounded border border-amber-400/20 animate-pulse">
+                                            <span
+                                                class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2.5 py-0.5 rounded border border-amber-400/20 animate-pulse">
                                                 ⚡ Рекомендуем: {{ $exercise->suggested_weight }} кг
                                             </span>
                                         @endif
@@ -98,15 +98,14 @@
 
                                     <!-- Инпут для ввода рабочего веса -->
                                     <div class="mt-3 flex items-center gap-2">
-                                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest whitespace-nowrap">Вес (кг):</label>
-                                        <input type="number" 
-                                               name="weights[{{ $exercise->id }}]" 
-                                               step="0.5" 
-                                               min="0" 
-                                               max="500"
-                                               placeholder="{{ $exercise->suggested_weight ?? $exercise->last_weight ?? 'кг' }}"
-                                               value="{{ $exercise->last_weight }}"
-                                               class="w-full bg-slate-950 border border-slate-900 rounded-lg px-3 py-2 text-xs text-slate-200 font-mono placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
+                                        <label
+                                            class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest whitespace-nowrap">Вес
+                                            (кг):</label>
+                                        <input type="number" name="weights[{{ $exercise->id }}]" step="0.5"
+                                            min="0" max="500"
+                                            placeholder="{{ $exercise->suggested_weight ?? ($exercise->last_weight ?? 'кг') }}"
+                                            value="{{ $exercise->last_weight }}"
+                                            class="w-full bg-slate-950 border border-slate-900 rounded-lg px-3 py-2 text-xs text-slate-200 font-mono placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
                                     </div>
 
                                     @if ($exercise->description)
@@ -120,11 +119,10 @@
                         </div>
 
                         <!-- Кнопка «Выполнить тренировку» -->
-                        <button type="submit"
-                            class="w-full mt-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-widest shadow-lg shadow-indigo-950/50 hover:shadow-indigo-500/20 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2">
+                        <x-primary-button class="w-full mt-5 py-3 text-xs tracking-widest">
                             <span>✅</span>
                             <span>Выполнить и записать веса</span>
-                        </button>
+                        </x-primary-button>
                     </form>
                 </div>
             @else
@@ -133,7 +131,8 @@
                     class="bg-slate-900/40 border border-slate-900 rounded-2xl p-8 text-center shadow-lg relative overflow-hidden">
                     <div class="absolute -right-8 -top-8 w-20 h-20 bg-emerald-500/5 rounded-full blur-xl"></div>
                     <span class="text-3xl block">✨</span>
-                    <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mt-2.5">Сегодня день отдыха!</h3>
+                    <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mt-2.5">Сегодня день отдыха!
+                    </h3>
                     <p class="text-xs text-slate-400 mt-1.5 max-w-[280px] mx-auto leading-relaxed">
                         Отличный день, чтобы восстановить мышцы, выспаться или выполнить пару новых ежедневных квестов!
                     </p>
@@ -146,7 +145,8 @@
             <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Мои программы</h2>
 
             @forelse ($workouts as $workout)
-                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg transition-all duration-200">
+                <div
+                    class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg transition-all duration-200">
 
                     <div class="flex justify-between items-center gap-4">
                         <!-- Клик для раскрытия списка упражнений -->
@@ -155,7 +155,8 @@
                             <div class="flex flex-wrap items-center gap-1.5">
                                 @if (is_array($workout->day_of_week) && count($workout->day_of_week) > 0)
                                     @foreach ($workout->day_of_week as $day)
-                                        <span class="text-xs font-bold text-slate-300 bg-slate-800 px-2.5 py-0.5 rounded">
+                                        <span
+                                            class="text-xs font-bold text-slate-300 bg-slate-800 px-2.5 py-0.5 rounded">
                                             📅 {{ $day }}
                                         </span>
                                     @endforeach
@@ -231,14 +232,16 @@
 
                                     <!-- Бейдж прогрессии -->
                                     @if ($exercise->progression_status !== 'new')
-                                        <span class="text-xs font-bold px-2 py-0.5 rounded border {{ $exercise->progression_color }}">
+                                        <span
+                                            class="text-xs font-bold px-2 py-0.5 rounded border {{ $exercise->progression_color }}">
                                             📈 {{ $exercise->progression_label }}
                                         </span>
                                     @endif
 
                                     <!-- Рекомендация при стагнации -->
                                     @if ($exercise->suggested_weight)
-                                        <span class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-400/20">
+                                        <span
+                                            class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-400/20">
                                             ⚡ +2.5 кг → {{ $exercise->suggested_weight }} кг
                                         </span>
                                     @endif
@@ -259,12 +262,14 @@
                     <span class="text-3xl block">📅</span>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Программы не созданы</h3>
                     <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-                        Создайте вашу первую тренировку с помощью кнопки сверху или мгновенно загрузите готовую профессиональную программу!
+                        Создайте вашу первую тренировку с помощью кнопки сверху или мгновенно загрузите готовую
+                        профессиональную программу!
                     </p>
                     <div class="pt-2">
                         <form method="POST" action="{{ route('workouts.seed_default') }}">
                             @csrf
-                            <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5">
+                            <button type="submit"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5">
                                 🚀 Загрузить PUSH / PULL / LEGS по умолчанию
                             </button>
                         </form>
@@ -286,9 +291,11 @@
                         <div class="flex items-center gap-3">
                             <span class="text-lg">📈</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Прогрессия нагрузок
+                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Прогрессия
+                                    нагрузок
                                 </h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Еженедельная перегрузка, научный темп и нейросвязь
+                                <p class="text-xs text-slate-400 mt-0.5">Еженедельная перегрузка, научный темп и
+                                    нейросвязь
                                 </p>
                             </div>
                         </div>
@@ -299,7 +306,8 @@
                     <div x-show="activeTab === 1" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-4">
                         <div class="space-y-3.5">
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🔄 Еженедельная
+                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🔄
+                                    Еженедельная
                                     перегрузка</h4>
                                 <p class="text-xs text-slate-300 leading-relaxed mb-2">Каждую неделю делай ОДНО из:</p>
                                 <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
@@ -312,9 +320,11 @@
                             </div>
 
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🔬 Научный Темп
+                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🔬 Научный
+                                    Темп
                                     (3-1-1)</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Контроль негативной фазы (Время под
+                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Контроль негативной фазы (Время
+                                    под
                                     нагрузкой - Time Under Tension):</p>
                                 <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
                                     <li><strong>3 секунды</strong> — максимально подконтрольно опускай вес</li>
@@ -349,11 +359,13 @@
                             </div>
 
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-red-400 uppercase tracking-wider mb-1.5">🛑 Разгрузочная
+                                <h4 class="text-xs font-black text-red-400 uppercase tracking-wider mb-1.5">🛑
+                                    Разгрузочная
                                     неделя (Deload)</h4>
                                 <p class="text-xs text-slate-300 leading-relaxed">
                                     Каждые 8–10 недель устраивай разгрузку: делай те же упражнения, но с 50% от обычных
-                                    подходов и повторений. При высоком темпе PPL×2 (6 тренировок в неделю) deload жизненно
+                                    подходов и повторений. При высоком темпе PPL×2 (6 тренировок в неделю) deload
+                                    жизненно
                                     необходим, чтобы избежать перетренированности ЦНС и воспаления суставов.
                                 </p>
                             </div>
@@ -368,7 +380,8 @@
                         <div class="flex items-center gap-3">
                             <span class="text-lg">🧠</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Восстановление и сон
+                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Восстановление и
+                                    сон
                                 </h3>
                                 <p class="text-xs text-slate-400 mt-0.5">Тестостерон, гигиена сна и научные добавки</p>
                             </div>
@@ -380,7 +393,8 @@
                     <div x-show="activeTab === 2" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-4">
                         <div class="space-y-3.5">
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">😴 Сон — 7–9
+                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">😴 Сон —
+                                    7–9
                                     часов</h4>
                                 <p class="text-xs text-slate-300 leading-relaxed mb-2">Недосып (меньше 6 часов) снижает
                                     уровень тестостерона на 10–15% всего за одну неделю!</p>
@@ -393,9 +407,11 @@
                             </div>
 
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🧘 Управление
+                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🧘
+                                    Управление
                                     стрессом</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Кортизол (гормон стресса) — главный
+                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Кортизол (гормон стресса) —
+                                    главный
                                     враг тестостерона и роста мышц:</p>
                                 <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
                                     <li>Дыхание 4-7-8: вдох 4 сек → задержка 7 сек → выдох 8 сек (3–4 цикла)</li>
@@ -442,7 +458,8 @@
                                         +5–10% к силе и выносливости. Самая изученная и эффективная добавка.
                                     </li>
                                     <li>
-                                        <strong class="text-indigo-300">⭐ Витамин D3 (2000 МЕ/день)</strong> — критически
+                                        <strong class="text-indigo-300">⭐ Витамин D3 (2000 МЕ/день)</strong> —
+                                        критически
                                         важен для синтеза тестостерона, особенно осенью и зимой.
                                     </li>
                                     <li>
@@ -462,8 +479,10 @@
                         <div class="flex items-center gap-3">
                             <span class="text-lg">🍗</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Правила питания</h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Правило тарелки, нормы белка и черный список</p>
+                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Правила питания
+                                </h3>
+                                <p class="text-xs text-slate-400 mt-0.5">Правило тарелки, нормы белка и черный список
+                                </p>
                             </div>
                         </div>
                         <span class="text-xs text-slate-400 transform transition-transform duration-200"
@@ -477,8 +496,10 @@
                                     запрета (для сушки и рекомпозиции)</h4>
                                 <ul class="list-disc pl-4 text-xs text-slate-450 space-y-1.5">
                                     <li><strong class="text-slate-200">НОЛЬ алкоголя</strong> — полностью блокирует
-                                        окисление и сжигание жиров на 24–72 часа + катастрофически рушит тестостерон.</li>
-                                    <li><strong class="text-slate-200">НОЛЬ чистого сахара и сладостей</strong> — вызывают
+                                        окисление и сжигание жиров на 24–72 часа + катастрофически рушит тестостерон.
+                                    </li>
+                                    <li><strong class="text-slate-200">НОЛЬ чистого сахара и сладостей</strong> —
+                                        вызывают
                                         резкий инсулиновый скачок, направляющий калории напрямую в жировые депо.</li>
                                     <li><strong class="text-slate-200">НОЛЬ соков и газировок</strong> — пустые жидкие
                                         калории с огромным объемом сахара, которые не дают насыщения, но моментально
@@ -492,13 +513,16 @@
                                 <p class="text-xs text-slate-300 leading-relaxed mb-2">Каждый твой основной прием пищи
                                     должен визуально строиться так:</p>
                                 <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
-                                    <li><strong>½ тарелки — БЕЛОК</strong> (куриное филе, говядина, индейка, белая/красная
+                                    <li><strong>½ тарелки — БЕЛОК</strong> (куриное филе, говядина, индейка,
+                                        белая/красная
                                         рыба, яйца, творог)</li>
                                     <li><strong>¼ тарелки — СВЕЖИЕ ОВОЩИ</strong> (огурцы, помидоры, зелень, брокколи,
                                         капуста в любом объеме)</li>
-                                    <li><strong>¼ тарелки — СЛОЖНЫЕ УГЛЕВОДЫ</strong> (гречка, бурый рис, овсянка длительной
+                                    <li><strong>¼ тарелки — СЛОЖНЫЕ УГЛЕВОДЫ</strong> (гречка, бурый рис, овсянка
+                                        длительной
                                         варки, печеный картофель)</li>
-                                    <li><strong>+ Полезные жиры</strong> (нерафинированные масла, горсть орехов, авокадо)
+                                    <li><strong>+ Полезные жиры</strong> (нерафинированные масла, горсть орехов,
+                                        авокадо)
                                     </li>
                                 </ul>
                             </div>
@@ -506,7 +530,8 @@
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
                                 <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">💡 Белок —
                                     твой главный щит</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Белок защищает твои мышечные волокна
+                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Белок защищает твои мышечные
+                                    волокна
                                     от разрушения при похудении. Без него тело будет жечь мышцы вместо жира!</p>
                                 <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
                                     <li>Минимум: съедай порцию белка размером с твою ладонь в каждый прием пищи</li>
@@ -517,7 +542,9 @@
 
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                    <h4 class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1.5">✅
+                                    <h4
+                                        class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1.5">
+                                        ✅
                                         ЧТО ЕСТЬ МОЖНО</h4>
                                     <ul class="text-[11px] text-slate-400 space-y-1">
                                         <li>• Курица, индейка, говядина</li>
@@ -552,7 +579,8 @@
                             <div>
                                 <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Дневник и график
                                     сплита</h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Расписание сплита, замеры и правила пропусков</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Расписание сплита, замеры и правила пропусков
+                                </p>
                             </div>
                         </div>
                         <span class="text-xs text-slate-400 transform transition-transform duration-200"
@@ -562,21 +590,28 @@
                     <div x-show="activeTab === 4" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-4">
                         <div class="space-y-3.5">
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📅 Идеальный
+                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📅
+                                    Идеальный
                                     PPL×2 график сплита</h4>
                                 <p class="text-xs text-slate-300 leading-relaxed mb-2">Обеспечивает оптимальную частоту
-                                    проработки каждой мышечной группы (2 раза в неделю) для стабильного гипертрофического
+                                    проработки каждой мышечной группы (2 раза в неделю) для стабильного
+                                    гипертрофического
                                     отклика:</p>
                                 <ul class="list-none text-xs text-slate-400 space-y-1.5">
-                                    <li><span class="text-indigo-400 font-bold">ПН:</span> 🔴 PUSH (Грудь/Плечи/Трицепс) +
+                                    <li><span class="text-indigo-400 font-bold">ПН:</span> 🔴 PUSH
+                                        (Грудь/Плечи/Трицепс) +
                                         30 мин легкого Zone 2 кардио</li>
                                     <li><span class="text-indigo-400 font-bold">ВТ:</span> 🔴 PULL (Спина/Бицепс)</li>
-                                    <li><span class="text-indigo-400 font-bold">СР:</span> 🔴 LEGS + CORE (Ноги/Пресс)</li>
-                                    <li><span class="text-indigo-400 font-bold">ЧТ:</span> 🔴 PUSH (Грудь/Плечи/Трицепс) +
+                                    <li><span class="text-indigo-400 font-bold">СР:</span> 🔴 LEGS + CORE (Ноги/Пресс)
+                                    </li>
+                                    <li><span class="text-indigo-400 font-bold">ЧТ:</span> 🔴 PUSH
+                                        (Грудь/Плечи/Трицепс) +
                                         30 мин легкого Zone 2 кардио</li>
                                     <li><span class="text-indigo-400 font-bold">ПТ:</span> 🔴 PULL (Спина/Бицепс)</li>
-                                    <li><span class="text-indigo-400 font-bold">СБ:</span> 🔴 LEGS + CORE (Ноги/Пресс)</li>
-                                    <li><span class="text-emerald-400 font-bold">ВС:</span> ✨ ПОЛНЫЙ ОТДЫХ (или 45 минут
+                                    <li><span class="text-indigo-400 font-bold">СБ:</span> 🔴 LEGS + CORE (Ноги/Пресс)
+                                    </li>
+                                    <li><span class="text-emerald-400 font-bold">ВС:</span> ✨ ПОЛНЫЙ ОТДЫХ (или 45
+                                        минут
                                         прогулки на свежем воздухе)</li>
                                 </ul>
                             </div>
@@ -589,24 +624,30 @@
                                     <li><strong>Если пропустил день:</strong> Ничего страшного! Не пытайся сделать две
                                         тренировки в один день. Просто сделай ту тренировку, которая запланирована на
                                         СЕГОДНЯ, пропустив вчерашнюю.</li>
-                                    <li>Но помни: пропуская вчерашний день, ты пропускаешь одну группу мышц. Если пропустишь
+                                    <li>Но помни: пропуская вчерашний день, ты пропускаешь одну группу мышц. Если
+                                        пропустишь
                                         её два раза подряд — она получит статус <span
-                                            class="text-red-400 font-bold">Отстает!</span> и начнет слабеть. Держи баланс!
+                                            class="text-red-400 font-bold">Отстает!</span> и начнет слабеть. Держи
+                                        баланс!
                                     </li>
                                     <li>Постарайся никогда не допускать пропусков тренировок 2 дня подряд.</li>
                                 </ul>
                             </div>
 
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📸 Чекпоинты
+                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📸
+                                    Чекпоинты
                                     (Замеры и Фото)</h4>
                                 <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1.5">
                                     <li><strong>Каждое воскресенье (утро):</strong> Контрольное взвешивание натощак.
                                         Записывай среднее значение за неделю.</li>
-                                    <li><strong>Каждое 1-е число месяца:</strong> Полные замеры сантиметровой лентой (талия,
+                                    <li><strong>Каждое 1-е число месяца:</strong> Полные замеры сантиметровой лентой
+                                        (талия,
                                         грудь, бицепс, бедро). Максимумы в подтягиваниях и брусьях.</li>
-                                    <li><strong>ГЛАВНОЕ: ДЕЛАЙ ФОТО!</strong> Весы часто обманывают из-за задержки воды и
-                                        рекомпозиции (когда уходит жир и приходят мышцы). Фотография в зеркале раз в месяц —
+                                    <li><strong>ГЛАВНОЕ: ДЕЛАЙ ФОТО!</strong> Весы часто обманывают из-за задержки воды
+                                        и
+                                        рекомпозиции (когда уходит жир и приходят мышцы). Фотография в зеркале раз в
+                                        месяц —
                                         твой самый мощный и честный мотиватор!</li>
                                 </ul>
                             </div>
@@ -643,29 +684,24 @@
 
                     <!-- Название тренировки -->
                     <div>
-                        <label for="workout_title"
-                            class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Название
-                            тренировки</label>
-                        <input type="text" name="title" id="workout_title" required
-                            placeholder="Например: Силовая А, Сплит: Грудь/Спина"
-                            class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
+                        <x-input-label for="workout_title" value="Название программы" />
+                        <x-text-input type="text" name="title" id="workout_title" required placeholder="Например: Силовая А, Сплит: Грудь/Спина" />
                         <x-input-error :messages="$errors->get('title')" class="mt-1" />
                     </div>
 
                     <!-- Выбор нескольких дней недели (Премиальная сетка бейджей) -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Дни недели для
-                            тренировки</label>
+                        <x-input-label value="Дни недели для тренировки" class="mb-2" />
                         <div class="grid grid-cols-4 gap-2">
                             @foreach ([
-            'Понедельник' => 'ПН',
-            'Вторник' => 'ВТ',
-            'Среда' => 'СР',
-            'Четверг' => 'ЧТ',
-            'Пятница' => 'ПТ',
-            'Суббота' => 'СБ',
-            'Воскресенье' => 'ВС',
-        ] as $fullDay => $shortDay)
+        'Понедельник' => 'ПН',
+        'Вторник' => 'ВТ',
+        'Среда' => 'СР',
+        'Четверг' => 'ЧТ',
+        'Пятница' => 'ПТ',
+        'Суббота' => 'СБ',
+        'Воскресенье' => 'ВС',
+    ] as $fullDay => $shortDay)
                                 <label
                                     class="relative flex items-center justify-center p-3 rounded-xl bg-slate-950 border border-slate-850 cursor-pointer transition-all hover:bg-slate-900 select-none text-center">
                                     <input type="checkbox" name="day_of_week[]" value="{{ $fullDay }}"
@@ -695,7 +731,8 @@
 
                         <div class="space-y-4 max-h-[300px] overflow-y-auto pr-1">
                             <template x-for="(exercise, index) in exercises" :key="index">
-                                <div class="bg-slate-950/80 border border-slate-850 p-4 rounded-2xl relative space-y-3">
+                                <div
+                                    class="bg-slate-950/80 border border-slate-850 p-4 rounded-2xl relative space-y-3">
 
                                     <!-- Кнопка удаления упражнения -->
                                     <button type="button" x-show="exercises.length > 1"
@@ -744,7 +781,8 @@
 
                                     <!-- Описание техники -->
                                     <div>
-                                        <textarea :name="'exercises[' + index + '][description]'" rows="2" placeholder="Техника выполнения (необязательно)"
+                                        <textarea :name="'exercises[' + index + '][description]'" rows="2"
+                                            placeholder="Техника выполнения (необязательно)"
                                             class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors font-sans leading-relaxed"></textarea>
                                     </div>
 
@@ -758,14 +796,13 @@
                         <x-secondary-button x-on:click="$dispatch('close')" type="button">
                             Отмена
                         </x-secondary-button>
-                        <button type="submit"
-                            class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs tracking-wider uppercase transition-all cursor-pointer">
-                            Сохранить plan
-                        </button>
+                        <x-primary-button>
+                            Сохранить план
+                        </x-primary-button>
                     </div>
                 </form>
             </div>
         </x-modal>
 
     </div>
-@endsection
+</x-app-layout>

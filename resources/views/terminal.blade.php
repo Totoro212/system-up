@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout title='Пульт'>
     <div class="max-w-2xl mx-auto p-4 space-y-6 pb-20" x-data="marketTerminal()">
 
         <!-- ================= ЭКРАН 1: ГЛАВНЫЙ ХАБ ИНСТРУМЕНТОВ ================= -->
@@ -248,4 +246,4 @@
             };
         }
     </script>
-@endsection
+</x-app-layout>

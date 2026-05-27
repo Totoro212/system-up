@@ -37,8 +37,11 @@ class WorkoutController extends Controller
         $todayDayOfWeek = $days[now()->dayOfWeekIso];
 
         // Ищем тренировку на сегодня (проверяем, входит ли сегодняшний день в массив запланированных дней тренировки)
+        // И исключаем её, если она уже была успешно выполнена сегодня
         $todayWorkout = $workouts->first(function ($workout) use ($todayDayOfWeek) {
-            return is_array($workout->day_of_week) && in_array($todayDayOfWeek, $workout->day_of_week);
+            $isScheduledToday = is_array($workout->day_of_week) && in_array($todayDayOfWeek, $workout->day_of_week);
+            $alreadyPerformedToday = $workout->last_performed_at && $workout->last_performed_at->isToday();
+            return $isScheduledToday && !$alreadyPerformedToday;
         });
 
         // Рассчитываем статусы отставания для каждой тренировки

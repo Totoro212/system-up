@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout title='Кодекс'>
     <!-- Контейнер расширен до max-w-2xl для идеальной гармонии с тренировками и квестами -->
     <div class="max-w-2xl mx-auto p-4 space-y-6" x-data="{ activeCategory: null }">
 
@@ -479,14 +477,14 @@
                 @csrf
                 
                 <div>
-                    <label for="stoic_text" class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Высказывание / Цитата</label>
+                    <x-input-label for="stoic_text" value="Высказывание / Цитата" />
                     <textarea name="text" id="stoic_text" required rows="3" placeholder="Например: Смерти не следует бояться, ведь когда мы есть — её нет, а когда она есть — нас нет."
                               class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors font-sans leading-relaxed"></textarea>
                     <x-input-error :messages="$errors->get('text')" class="mt-1" />
                 </div>
                 
                 <div>
-                    <label for="stoic_practice" class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Практика дня / Размышление</label>
+                    <x-input-label for="stoic_practice" value="Практика дня / Размышление" />
                     <textarea name="practice" id="stoic_practice" rows="2" placeholder="Например: 📌 Практика дня: Подумай о том, что большинство твоих страхов существуют только в твоей голове."
                               class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors font-sans leading-relaxed"></textarea>
                     <x-input-error :messages="$errors->get('practice')" class="mt-1" />
@@ -496,11 +494,11 @@
                     <x-secondary-button x-on:click="$dispatch('close')" type="button">
                         Отмена
                     </x-secondary-button>
-                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs tracking-wider uppercase transition-all cursor-pointer">
+                    <x-primary-button>
                         Добавить в свитки
-                    </button>
+                    </x-primary-button>
                 </div>
             </form>
         </div>
     </x-modal>
-@endsection
+</x-app-layout>
