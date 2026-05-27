@@ -112,266 +112,234 @@
                 
                 <!-- Описание Здоровья -->
                 <div x-show="activePillar === 'health'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                     class="bg-slate-950/60 p-5 rounded-xl border border-emerald-500/20 space-y-4">
+                     class="bg-slate-950/60 p-4 rounded-xl border border-emerald-500/20 space-y-3"
+                     x-data="{ openSub: 'physical' }">
                     <div class="flex items-center gap-2 text-emerald-400">
                         <span class="text-lg">🏥</span>
                         <h3 class="text-xs font-black uppercase tracking-wider">Здоровье — Фундамент Биокомпьютера</h3>
                     </div>
-                    
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
                         Помни золотое правило: <span class="text-emerald-400 font-semibold">«Здоровье — это твой главный физический капитал»</span>. Твое тело — это биологический компьютер. Если он зависает или перегревается, никакие успехи в бизнесе или делах не принесут счастья.
                     </p>
 
-                    <!-- Подразделы здоровья -->
-                    <div class="space-y-4 pt-1">
-                        
-                        <!-- 1. Физическое здоровье -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-emerald-400/80 block">💪 Физическое Здоровье</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🏃‍♂️ Физическая активность:</strong> Движение — это жизнь. Регулярные тренировки дают тонус.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🥗 Здоровое питание:</strong> Мы буквально состоим из того, что едим.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>💤 Достаточный сон:</strong> Время, когда тело и мозг полностью восстанавливаются.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🚭 Без вредных привычек:</strong> Они как ржавчина, незаметно разъедающая внутренний механизм.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🩺 Медицинские осмотры:</strong> Регулярная профилактика всегда лучше, быстрее и дешевле лечения.
+                    <div class="space-y-2 pt-1">
+                        {{-- 1. Физическое здоровье --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'physical' ? '' : 'physical'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'physical' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>💪 Физическое Здоровье</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'physical' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'physical'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🏃‍♂️ Физическая активность:</strong> Движение — это жизнь. Регулярные тренировки дают тонус.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🥗 Здоровое питание:</strong> Мы буквально состоим из того, что едим.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>💤 Достаточный сон:</strong> Время, когда тело и мозг полностью восстанавливаются.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🚭 Без вредных привычек:</strong> Они как ржавчина, незаметно разъедающая внутренний механизм.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 sm:col-span-2"><strong>🩺 Медицинские осмотры:</strong> Регулярная профилактика всегда лучше, быстрее и дешевле лечения.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2. Эмоциональное здоровье -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-emerald-400/80 block">🌀 Эмоциональное Здоровье</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>💬 Выражение чувств:</strong> Невыраженные эмоции подобны буре, запертой внутри тесной комнаты.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🤝 Поиск поддержки:</strong> Не стесняйся просить о помощи, особенно это касается мужчин.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🧘‍♂️ Релаксация:</strong> Регулярные практики — это клапан, выпускающий избыточное давление.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>👥 Сообщества поддержки:</strong> Участие в группах создает чувство безопасности и принятия социума.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🩺 Консультации специалистов:</strong> Обращение за помощью в трудный момент — признак силы, а не слабости.
+                        {{-- 2. Эмоциональное здоровье --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'emotional' ? '' : 'emotional'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'emotional' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🌀 Эмоциональное Здоровье</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'emotional' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'emotional'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>💬 Выражение чувств:</strong> Невыраженные эмоции подобны буре, запертой внутри тесной комнаты.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🤝 Поиск поддержки:</strong> Не стесняйся просить о помощи, особенно это касается мужчин.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🧘‍♂️ Релаксация:</strong> Регулярные практики — это клапан, выпускающий избыточное давление.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>👥 Сообщества поддержки:</strong> Участие в группах создает чувство безопасности и принятия социума.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 sm:col-span-2"><strong>🩺 Консультации специалистов:</strong> Обращение за помощью в трудный момент — признак силы, а не слабости.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 3. Ментальное здоровье -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-emerald-400/80 block">🧠 Ментальное Здоровье</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>☀️ Позитивное мышление:</strong> Мы неизбежно становимся тем, о чем думаем больше всего.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🔥 Борьба со стрессом:</strong> Стресс подобен огню — в малых дозах согревает, в больших — сжигает.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>🧩 Интеллектуальный тонус:</strong> Наш мозг, как и мышцы, нуждается в регулярной тренировке.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5">
-                                    <strong>📚 Обучение и развитие:</strong> Жизнь устроена просто — это либо постоянное развитие, либо деградация.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🧘‍♂️ Осознанность:</strong> Медитация и практики фокусировки — ценное умение быть здесь и сейчас.
+                        {{-- 3. Ментальное здоровье --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'mental' ? '' : 'mental'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'mental' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🧠 Ментальное Здоровье</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'mental' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'mental'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>☀️ Позитивное мышление:</strong> Мы неизбежно становимся тем, о чем думаем больше всего.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🔥 Борьба со стрессом:</strong> Стресс подобен огню — в малых дозах согревает, в больших — сжигает.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🧩 Интеллектуальный тонус:</strong> Наш мозг, как и мышцы, нуждается в регулярной тренировке.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>📚 Обучение и развитие:</strong> Жизнь устроена просто — это либо постоянное развитие, либо деградация.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 sm:col-span-2"><strong>🧘‍♂️ Осознанность:</strong> Медитация и практики фокусировки — ценное умение быть здесь и сейчас.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4. Наука и Стоицизм -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-400 pt-2 border-t border-slate-900">
-                            <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
-                                <span class="text-emerald-400">⚖️</span>
-                                <span><strong>Стоический взгляд:</strong> Тело — это «предпочтительное безразличное». Оно не подконтрольно разуму целиком, но забота о нем — долг мудреца.</span>
-                            </div>
-                            <div class="flex gap-2 items-start bg-emerald-950/20 border border-emerald-500/15 p-2.5 rounded-lg text-slate-300">
-                                <span class="text-emerald-400">🧠</span>
-                                <span><strong>Нейробиология счастья:</strong> Спорт, здоровое питание, сон и близкие связи напрямую способствуют выработке гормонов счастья (дофамина, серотонина, эндорфинов и окситоцина).</span>
+                        {{-- 4. Наука и Философия --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'science' ? '' : 'science'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'science' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>⚖️ Наука и Философия</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'science' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'science'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-400">
+                                    <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg"><span class="text-emerald-400">⚖️</span><span><strong>Стоический взгляд:</strong> Тело — это «предпочтительное безразличное». Оно не подконтрольно разуму целиком, но забота о нем — долг мудреца.</span></div>
+                                    <div class="flex gap-2 items-start bg-emerald-950/20 border border-emerald-500/15 p-2.5 rounded-lg text-slate-300"><span class="text-emerald-400">🧠</span><span><strong>Нейробиология счастья:</strong> Спорт, здоровое питание, сон и близкие связи напрямую способствуют выработке гормонов счастья (дофамина, серотонина, эндорфинов и окситоцина).</span></div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <!-- Описание Безопасности -->
                 <div x-show="activePillar === 'security'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                     class="bg-slate-950/60 p-5 rounded-xl border border-blue-500/20 space-y-4">
+                     class="bg-slate-950/60 p-4 rounded-xl border border-blue-500/20 space-y-3"
+                     x-data="{ openSub: 'personal' }">
                     <div class="flex items-center gap-2 text-blue-400">
                         <span class="text-lg">🛡️</span>
                         <h3 class="text-xs font-black uppercase tracking-wider">Безопасность — Спокойствие Духа</h3>
                     </div>
-                    
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
                         Дисциплинированный разум знает: настоящая безопасность — это <span class="text-blue-400 font-semibold">«отсутствие постоянного страха за завтрашний день»</span>. Это финансовая, физическая и юридическая защита, которая избавляет мозг от стресса выживания.
                     </p>
 
-                    <!-- Подразделы безопасности -->
-                    <div class="space-y-4 pt-1">
-                        
-                        <!-- 1. Личная безопасность -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-blue-400/80 block">👤 Личная Безопасность</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5">
-                                    <strong>🏠 Безопасный район:</strong> Территория влияет на нас больше, чем мы думаем. Выбирай надежную среду обитания.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5">
-                                    <strong>🛡️ Предотвращение угроз:</strong> Избегай заведомо опасных ситуаций. Лучшая битва — та, которая не состоялась.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🥋 Умение постоять за себя:</strong> Знания самообороны подобны страховке: лучше иметь и не нуждаться, чем нуждаться и не иметь.
+                    <div class="space-y-2 pt-1">
+                        {{-- 1. Личная безопасность --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'personal' ? '' : 'personal'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'personal' ? 'bg-blue-500/10 text-blue-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>👤 Личная Безопасность</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'personal' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'personal'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5"><strong>🏠 Безопасный район:</strong> Территория влияет на нас больше, чем мы думаем. Выбирай надежную среду обитания.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5"><strong>🛡️ Предотвращение угроз:</strong> Избегай заведомо опасных ситуаций. Лучшая битва — та, которая не состоялась.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5 sm:col-span-2"><strong>🥋 Умение постоять за себя:</strong> Знания самообороны подобны страховке: лучше иметь и не нуждаться, чем нуждаться и не иметь.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2. Экономическая безопасность -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-blue-400/80 block">💰 Экономическая Безопасность</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5">
-                                    <strong>📈 Стабильный доход:</strong> Наличие надежного и легального источника дохода, приносящего удовлетворение.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5">
-                                    <strong>💼 Подушка безопасности:</strong> Финансовый резерв, покрывающий минимум 6 месяцев твоих обычных расходов.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3. Юридическая безопасность -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-blue-400/80 block">⚖️ Юридическая Безопасность</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5">
-                                    <strong>📜 Знание своих прав:</strong> Понимай свои права, законы и правовые возможности. Знание законов освобождает от многих проблем.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5">
-                                    <strong>🔑 Легальные статусы:</strong> Держи в порядке все необходимые доступы, разрешения, лицензии и документы.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5 col-span-1 sm:col-span-2">
-                                    <strong>💼 Законное ведение дел:</strong> Защита от злоумышленников через честный бизнес. Полный отказ от «серых» схем, срезания углов и мутных связей.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5 col-span-1 sm:col-span-2">
-                                    <strong>✍️ Письменное оформление:</strong> Абсолютно любые сделки и отношения с физ. и юр. лицами фиксируй строго в письменном виде по закону.
+                        {{-- 2. Экономическая безопасность --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'economic' ? '' : 'economic'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'economic' ? 'bg-blue-500/10 text-blue-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>💰 Экономическая Безопасность</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'economic' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'economic'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5"><strong>📈 Стабильный доход:</strong> Наличие надежного и легального источника дохода, приносящего удовлетворение.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5"><strong>💼 Подушка безопасности:</strong> Финансовый резерв, покрывающий минимум 6 месяцев твоих обычных расходов.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4. Мудрость стоиков -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-400 pt-2 border-t border-slate-900">
-                            <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg col-span-1 sm:col-span-2">
-                                <span class="text-blue-400">🧘</span>
-                                <span><strong>Стоический взгляд:</strong> Внешняя защита важна, но истинная крепость — это Атараксия (внутренняя невозмутимость духа). Внешние события бессильны, если ты спокоен внутри.</span>
+                        {{-- 3. Юридическая безопасность --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'legal' ? '' : 'legal'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'legal' ? 'bg-blue-500/10 text-blue-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>⚖️ Юридическая Безопасность</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'legal' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'legal'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5"><strong>📜 Знание своих прав:</strong> Понимай свои права, законы и правовые возможности. Знание законов освобождает от многих проблем.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5"><strong>🔑 Легальные статусы:</strong> Держи в порядке все необходимые доступы, разрешения, лицензии и документы.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5 sm:col-span-2"><strong>💼 Законное ведение дел:</strong> Защита от злоумышленников через честный бизнес. Полный отказ от «серых» схем, срезания углов и мутных связей.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-blue-500/5 sm:col-span-2"><strong>✍️ Письменное оформление:</strong> Абсолютно любые сделки и отношения с физ. и юр. лицами фиксируй строго в письменном виде по закону.</div>
+                                </div>
                             </div>
                         </div>
 
+                        {{-- 4. Философия Защиты --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'stoic' ? '' : 'stoic'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'stoic' ? 'bg-blue-500/10 text-blue-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🧘 Философия Защиты</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'stoic' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'stoic'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 text-[11px] font-sans text-slate-400">
+                                    <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg"><span class="text-blue-400">🧘</span><span><strong>Стоический взгляд:</strong> Внешняя защита важна, но истинная крепость — это Атараксия (внутренняя невозмутимость духа). Внешние события бессильны, если ты спокоен внутри.</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Описание Свободы -->
                 <div x-show="activePillar === 'freedom'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                     class="bg-slate-950/60 p-5 rounded-xl border border-violet-500/20 space-y-4">
+                     class="bg-slate-950/60 p-4 rounded-xl border border-violet-500/20 space-y-3"
+                     x-data="{ openSub: 'choice' }">
                     <div class="flex items-center gap-2 text-violet-400">
                         <span class="text-lg">🕊️</span>
                         <h3 class="text-xs font-black uppercase tracking-wider">Свобода — Независимость Выбора</h3>
                     </div>
-                    
                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
                         Свобода — это важнейший множитель счастья: <span class="text-violet-400 font-semibold">«Свобода — это возможность не делать то, чего ты делать не хочешь»</span>. Свобода от чужих ожиданий, долгов и навязанного мнения.
                     </p>
 
-                    <!-- Подразделы свободы -->
-                    <div class="space-y-4 pt-1">
-                        
-                        <!-- 1. Свобода Выбора -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-violet-400/80 block">🕊️ Реализация Свободы Выбора</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>🔍 Истинные желания:</strong> Осознавай свои истинные желания и потребности. Познай себя!
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>📖 Доступ к информации:</strong> Достоверные данные для обоснованных решений. Знание освобождает.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>🛡️ Стойкость к давлению:</strong> Противостой манипуляциям и толпе. Будь хозяином своих решений!
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>⚖️ Ответственность:</strong> Бери на себя ответственность за свои выборы. Они неразделимы со свободой.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🧠 Критическое мышление:</strong> Развивай критический ум. Никогда не верь слепо всему, что слышишь или читаешь.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 col-span-1 sm:col-span-2">
-                                    <strong>⚡ Действие:</strong> Свобода выбора реализуется только через реальные шаги и решения.
+                    <div class="space-y-2 pt-1">
+                        {{-- 1. Свобода Выбора --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'choice' ? '' : 'choice'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'choice' ? 'bg-violet-500/10 text-violet-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🕊️ Свобода Выбора</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'choice' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'choice'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🔍 Истинные желания:</strong> Осознавай свои истинные желания и потребности. Познай себя!</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>📖 Доступ к информации:</strong> Достоверные данные для обоснованных решений. Знание освобождает.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🛡️ Стойкость к давлению:</strong> Противостой манипуляциям и толпе. Будь хозяином своих решений!</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>⚖️ Ответственность:</strong> Бери на себя ответственность за свои выборы. Они неразделимы со свободой.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>🧠 Критическое мышление:</strong> Развивай критический ум. Никогда не верь слепо всему, что слышишь или читаешь.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>⚡ Действие:</strong> Свобода выбора реализуется только через реальные шаги и решения.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2. Свобода Самовыражения -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-violet-400/80 block">🎨 Свобода Самовыражения</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>👤 Индивидуальность:</strong> Будь собой: все остальные роли уже заняты.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>🎨 Творчество:</strong> Находи свои способы созидательного самовыражения. Оно освобождает душу.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>👥 Разнообразие мнений:</strong> Создавай среду и окружение из людей, которые думают иначе.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>💬 Конструктивные эмоции:</strong> Умей выражать свои эмоции без разрушительных последствий.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🦁 Отвага быть собой:</strong> Страх быть непонятым или отвергнутым — главный враг самовыражения.
+                        {{-- 2. Свобода Самовыражения --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'expression' ? '' : 'expression'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'expression' ? 'bg-violet-500/10 text-violet-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🎨 Свобода Самовыражения</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'expression' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'expression'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>👤 Индивидуальность:</strong> Будь собой: все остальные роли уже заняты.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🎨 Творчество:</strong> Находи свои способы созидательного самовыражения. Оно освобождает душу.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>👥 Разнообразие мнений:</strong> Создавай среду и окружение из людей, которые думают иначе.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>💬 Конструктивные эмоции:</strong> Умей выражать свои эмоции без разрушительных последствий.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>🦁 Отвага быть собой:</strong> Страх быть непонятым или отвергнутым — главный враг самовыражения.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 3. Достижение Независимости -->
-                        <div class="space-y-2">
-                            <span class="text-[9px] font-black uppercase tracking-wider text-violet-400/80 block">🏔️ Достижение Независимости</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>🧘‍♂️ Самодостаточность:</strong> Развивай умение быть глубоко счастливым наедине с собой.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>💰 Финансовая независимость:</strong> Деньги не гарантируют счастья, но дают свободу выбора.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>🏛️ Собственные ценности:</strong> Формируй свои взгляды. Не позволяй другим думать за тебя!
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5">
-                                    <strong>🛠️ Решение проблем:</strong> Самостоятельно преодолевай преграды. Каждая победа делает тебя сильнее.
-                                </div>
-                                <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 col-span-1 sm:col-span-2">
-                                    <strong>🚫 Независимость от одобрения:</strong> Жизнь по чужим стандартам и погоня за лайками — это не твоя жизнь.
+                        {{-- 3. Личная Независимость --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'independence' ? '' : 'independence'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'independence' ? 'bg-violet-500/10 text-violet-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🏔️ Личная Независимость</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'independence' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'independence'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🧘‍♂️ Самодостаточность:</strong> Развивай умение быть глубоко счастливым наедине с собой.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>💰 Финансовая независимость:</strong> Деньги не гарантируют счастья, но дают свободу выбора.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🏛️ Собственные ценности:</strong> Формируй свои взгляды. Не позволяй другим думать за тебя!</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🛠️ Решение проблем:</strong> Самостоятельно преодолевай преграды. Каждая победа делает тебя сильнее.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>🚫 Независимость от одобрения:</strong> Жизнь по чужим стандартам и погоня за лайками — это не твоя жизнь.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4. Мудрость стоиков -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-400 pt-2 border-t border-slate-900">
-                            <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg col-span-1 sm:col-span-2">
-                                <span class="text-violet-400">🔑</span>
-                                <span><strong>Стоический взгляд:</strong> Настоящая свобода — это власть разума над страстями. Свободен лишь тот, кто желает лишь того, что находится в его полной личной воле (Дихотомия контроля).</span>
+                        {{-- 4. Философия Свободы --}}
+                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
+                            <button type="button" @click="openSub = openSub === 'stoic' ? '' : 'stoic'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'stoic' ? 'bg-violet-500/10 text-violet-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
+                                <span>🔑 Философия Свободы</span>
+                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'stoic' && 'rotate-180'">▼</span>
+                            </button>
+                            <div x-show="openSub === 'stoic'" x-collapse>
+                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 text-[11px] font-sans text-slate-400">
+                                    <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg"><span class="text-violet-400">🔑</span><span><strong>Стоический взгляд:</strong> Настоящая свобода — это власть разума над страстями. Свободен лишь тот, кто желает лишь того, что находится в его полной личной воле (Дихотомия контроля).</span></div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
