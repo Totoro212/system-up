@@ -4,10 +4,10 @@
 
         <!-- Заголовок страницы -->
         <div class="pb-4 border-b border-slate-900/50">
-            <h1 class="text-2xl font-black tracking-wider text-slate-100 uppercase">📜 Кодекс Охотника</h1>
-            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">
+            <x-h1>📜 Кодекс Охотника</x-h1>
+            <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">
                 Свод железных правил личной дисциплины и ментальных моделей
-            </p>
+            </x-p>
         </div>
 
         <!-- ================= БЛОК: STOIC DAILY (СТОИЦИЗМ НА ДЕНЬ) ================= -->
@@ -28,25 +28,25 @@
                 </div>
 
                 <!-- Текст цитаты -->
-                <p class="text-sm text-slate-100 font-sans italic leading-relaxed mt-3.5 mb-2">
+                <x-p class="text-sm text-slate-100 italic mt-3.5 mb-2">
                     «{{ $stoicQuote->text }}»
-                </p>
+                </x-p>
 
                 <!-- Разделитель и Практика дня -->
                 @if ($stoicQuote->practice)
-                    <div class="border-t border-slate-950 mt-4 pt-4 text-xs text-slate-300 leading-relaxed font-sans">
+                    <x-p class="border-t border-slate-950 mt-4 pt-4 text-slate-300">
                         {{ $stoicQuote->practice }}
-                    </div>
+                    </x-p>
                 @endif
             </div>
         @endif
 
         <!-- ================= БЛОК: 5 СТОЛПОВ СЧАСТЬЯ ================= -->
-        <div x-data="{ activePillar: 'health' }" class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 space-y-4">
+        <x-card x-data="{ activePillar: 'health' }" class="space-y-4">
             
             <!-- Заголовок блока -->
             <div class="flex items-center justify-between pb-3 border-b border-slate-950">
-                <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">🧭 5 Столпов Счастья (Путь к балансу)</span>
+                <x-h2 class="text-[10px] block">🧭 5 Столпов Счастья (Путь к балансу)</x-h2>
                 <span class="text-[9px] font-bold text-indigo-400 uppercase tracking-wider">Интерактивный Баланс</span>
             </div>
 
@@ -114,11 +114,11 @@
                      x-data="{ openSub: 'physical' }">
                     <div class="flex items-center gap-2 text-emerald-400">
                         <span class="text-lg">🏥</span>
-                        <h3 class="text-xs font-black uppercase tracking-wider">Здоровье — Фундамент Биокомпьютера</h3>
+                        <x-h3 class="text-xs">Здоровье — Фундамент Биокомпьютера</x-h3>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                    <x-p class="text-slate-300">
                         Помни золотое правило: <span class="text-emerald-400 font-semibold">«Здоровье — это твой главный физический капитал»</span>. Твое тело — это биологический компьютер. Если он зависает или перегревается, никакие успехи в бизнесе или делах не принесут счастья.
-                    </p>
+                    </x-p>
 
                     <div class="space-y-2 pt-1">
                         {{-- 1. Физическое здоровье --}}
@@ -194,11 +194,11 @@
                      x-data="{ openSub: 'personal' }">
                     <div class="flex items-center gap-2 text-blue-400">
                         <span class="text-lg">🛡️</span>
-                        <h3 class="text-xs font-black uppercase tracking-wider">Безопасность — Спокойствие Духа</h3>
+                        <x-h3 class="text-xs">Безопасность — Спокойствие Духа</x-h3>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                    <x-p class="text-slate-300">
                         Дисциплинированный разум знает: настоящая безопасность — это <span class="text-blue-400 font-semibold">«отсутствие постоянного страха за завтрашний день»</span>. Это финансовая, физическая и юридическая защита, которая избавляет мозг от стресса выживания.
-                    </p>
+                    </x-p>
 
                     <div class="space-y-2 pt-1">
                         {{-- 1. Личная безопасность --}}
@@ -267,11 +267,11 @@
                      x-data="{ openSub: 'choice' }">
                     <div class="flex items-center gap-2 text-violet-400">
                         <span class="text-lg">🕊️</span>
-                        <h3 class="text-xs font-black uppercase tracking-wider">Свобода — Независимость Выбора</h3>
+                        <x-h3 class="text-xs">Свобода — Независимость Выбора</x-h3>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                    <x-p class="text-slate-300">
                         Свобода — это важнейший множитель счастья: <span class="text-violet-400 font-semibold">«Свобода — это возможность не делать то, чего ты делать не хочешь»</span>. Свобода от чужих ожиданий, долгов и навязанного мнения.
-                    </p>
+                    </x-p>
 
                     <div class="space-y-2 pt-1">
                         {{-- 1. Свобода Выбора --}}
@@ -346,11 +346,11 @@
                      class="bg-slate-950/60 p-5 rounded-xl border border-rose-500/20 space-y-3">
                     <div class="flex items-center gap-2 text-rose-400">
                         <span class="text-lg">❤️</span>
-                        <h3 class="text-xs font-black uppercase tracking-wider">Близкие Люди — Тепло и Окружение</h3>
+                        <x-h3 class="text-xs">Близкие Люди — Тепло и Окружение</x-h3>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                        Человек — существо социальное. В Кодексе записано: <span class="text-rose-400 font-semibold">«Отношения — это сад, его нужно поливать каждый день»</span>. Окружай себя донаторами энергии, цени верность и дари любовь в ответ.
-                    </p>
+                    <x-p class="text-slate-300">
+                        Человек — существо socialное. В Кодексе записано: <span class="text-rose-400 font-semibold">«Отношения — это сад, его нужно поливать каждый день»</span>. Окружай себя донаторами энергии, цени верность и дари любовь в ответ.
+                    </x-p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
                             <span class="text-rose-400">🌱</span>
@@ -372,11 +372,11 @@
                      class="bg-slate-950/60 p-5 rounded-xl border border-amber-500/20 space-y-3">
                     <div class="flex items-center gap-2 text-amber-400">
                         <span class="text-lg">🎯</span>
-                        <h3 class="text-xs font-black uppercase tracking-wider">Любимое Дело — Поток и Полезность</h3>
+                        <x-h3 class="text-xs">Любимое Дело — Поток и Полезность</x-h3>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                    <x-p class="text-slate-300">
                         Любимое дело дает ключевое чувство: <span class="text-amber-400 font-semibold">«осознание нужности своего существования»</span>. Это работа в состоянии Потока, когда ты сфокусирован на пользе людям и качестве процесса, а не только на деньгах.
-                    </p>
+                    </x-p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
                             <span class="text-amber-400">🎯</span>
@@ -391,77 +391,73 @@
 
             </div>
 
-        </div>
+        </x-card>
 
 
         <!-- ================= РАЗДЕЛ 1: БАЗОВЫЕ ПРАВИЛА ================= -->
         <div class="space-y-3.5">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">⚔️ Базовый кодекс жизни</h2>
-
+            <x-h2 class="mb-1">⚔️ Базовый кодекс жизни</x-h2>
             <div class="grid grid-cols-1 gap-3.5">
                 @foreach ($baseCodex as $index => $cat)
                     @php $catId = $index + 1; @endphp
-                    <div class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <x-card hover>
                         <!-- Шапка категории -->
                         <div class="cursor-pointer flex justify-between items-center"
                             x-on:click="activeCategory = activeCategory === {{ $catId }} ? null : {{ $catId }}">
                             <div class="flex items-center gap-3">
                                 <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">{{ $cat['icon'] }}</span>
                                 <div>
-                                    <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">{{ $cat['title'] }}</h3>
-                                    <p class="text-xs text-slate-400 mt-0.5">{{ $cat['description'] }}</p>
+                                    <x-h3>{{ $cat['title'] }}</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">{{ $cat['description'] }}</x-p>
                                 </div>
                             </div>
                             <span class="text-xs text-slate-400 transform transition-transform duration-200"
                                 :class="activeCategory === {{ $catId }} ? 'rotate-180' : ''">▼</span>
                         </div>
-
                         <!-- Раскрывающиеся правила -->
                         <div x-show="activeCategory === {{ $catId }}" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-3">
                             @foreach ($cat['rules'] as $rule)
                                 <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900 flex gap-3 items-start">
                                     <span class="text-indigo-400 text-xs font-bold mt-0.5">⚡</span>
-                                    <p class="text-xs text-slate-200 leading-relaxed font-sans">{{ $rule }}</p>
+                                    <x-p class="text-slate-200">{{ $rule }}</x-p>
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                    </x-card>
                 @endforeach
             </div>
         </div>
 
         <!-- ================= РАЗДЕЛ 2: ПРОДВИНУТЫЕ ЗНАНИЯ ================= -->
-        <div class="space-y-3.5 pt-4">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">📐 Тайные свитки и архитектура систем</h2>
-
+         <div class="space-y-3.5 pt-4">
+            <x-h2 class="mb-1">📐 Тайные свитки и архитектура систем</x-h2>
             <div class="grid grid-cols-1 gap-3.5">
                 @foreach ($advancedCodex as $index => $cat)
                     @php $catId = $index + 100; @endphp
-                    <div class="bg-slate-900/40 border border-slate-800/40 backdrop-blur-md rounded-2xl p-5 shadow-lg shadow-indigo-950/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <x-card hover>
                         <!-- Шапка категории -->
                         <div class="cursor-pointer flex justify-between items-center"
                             x-on:click="activeCategory = activeCategory === {{ $catId }} ? null : {{ $catId }}">
                             <div class="flex items-center gap-3">
                                 <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">{{ $cat['icon'] }}</span>
                                 <div>
-                                    <h3 class="text-sm font-black text-indigo-300 uppercase tracking-wide">{{ $cat['title'] }}</h3>
-                                    <p class="text-xs text-slate-400 mt-0.5">{{ $cat['description'] }}</p>
+                                    <x-h3 class="text-indigo-300">{{ $cat['title'] }}</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">{{ $cat['description'] }}</x-p>
                                 </div>
                             </div>
                             <span class="text-xs text-slate-400 transform transition-transform duration-200"
                                 :class="activeCategory === {{ $catId }} ? 'rotate-180' : ''">▼</span>
                         </div>
-
                         <!-- Раскрывающиеся правила -->
                         <div x-show="activeCategory === {{ $catId }}" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-3">
                             @foreach ($cat['rules'] as $rule)
                                 <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900 flex gap-3 items-start">
                                     <span class="text-emerald-400 text-xs font-bold mt-0.5">🌟</span>
-                                    <p class="text-xs text-slate-200 leading-relaxed font-sans">{{ $rule }}</p>
+                                    <x-p class="text-slate-200">{{ $rule }}</x-p>
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                    </x-card>
                 @endforeach
             </div>
         </div>
@@ -471,7 +467,7 @@
     <!-- Модальное окно создания стоической цитаты -->
     <x-modal name="create-stoic-quote" :show="$errors->isNotEmpty()" focusable>
         <div class="p-6">
-            <h2 class="text-base font-bold text-slate-100 uppercase tracking-wider mb-4 pb-2 border-b border-slate-800/80">Добавить стоическую цитату</h2>
+            <x-h2 class="text-base text-slate-100 tracking-wider mb-4 pb-2 border-b border-slate-800/80">Добавить стоическую цитату</x-h2>
             
             <form method="POST" action="{{ route('stoic_quotes.store') }}" class="space-y-4">
                 @csrf

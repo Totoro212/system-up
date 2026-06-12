@@ -6,8 +6,8 @@
             <div class="space-y-6">
                 <!-- Заголовок Хаба -->
                 <div class="pb-4 border-b border-slate-900/50">
-                    <h1 class="text-2xl font-black tracking-wider text-slate-100 uppercase">🛠️ Инструменты</h1>
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Полезные утилиты и персональные помощники</p>
+                    <x-h1>🛠️ Инструменты</x-h1>
+                    <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Полезные утилиты и персональные помощники</x-p>
                 </div>
 
                 <!-- Список инструментов -->
@@ -21,37 +21,37 @@
                         <div class="flex items-center gap-3.5">
                             <span class="text-2xl bg-slate-950/80 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-850/50">📈</span>
                             <div>
-                                <h3 class="text-sm font-black text-indigo-300 uppercase tracking-wide group-hover:text-indigo-200 transition-colors">Рыночный терминал</h3>
-                                <p class="text-xs text-slate-400 mt-1 leading-relaxed font-sans">Курсы BTC и USD к узбекскому суму (UZS) в реальном времени.</p>
+                                <x-h3 class="text-indigo-300 group-hover:text-indigo-200 transition-colors">Рыночный терминал</x-h3>
+                                <x-p class="text-slate-400 mt-1">Курсы BTC и USD к узбекскому суму (UZS) в реальном времени.</x-p>
                             </div>
                         </div>
                     </button>
 
                     <!-- КНОПКА: ГЕНЕРАТОР ПАРОЛЕЙ (СКОРО) -->
-                    <div class="bg-slate-900/40 border border-slate-900/40 opacity-60 rounded-2xl p-5 shadow-lg relative overflow-hidden">
+                    <x-card class="border-slate-900/40 opacity-60 relative overflow-hidden">
                         <div class="absolute top-4 right-4 bg-slate-950 px-2 py-0.5 rounded text-[9px] font-extrabold text-slate-500 uppercase tracking-widest border border-slate-900">СКОРО</div>
                         
                         <div class="flex items-center gap-3.5">
                             <span class="text-2xl bg-slate-950/40 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-900/50">🛡️</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-500 uppercase tracking-wide">Генератор паролей</h3>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed font-sans">Создание надежных паролей с настройкой сложности для безопасности.</p>
+                                <x-h3 class="text-slate-500">Генератор паролей</x-h3>
+                                <x-p class="text-slate-500 mt-1">Создание надежных паролей с настройкой сложности для безопасности.</x-p>
                             </div>
                         </div>
-                    </div>
+                    </x-card>
 
                     <!-- КНОПКА: ФОКУС-ТАЙМЕР (СКОРО) -->
-                    <div class="bg-slate-900/40 border border-slate-900/40 opacity-60 rounded-2xl p-5 shadow-lg relative overflow-hidden">
+                    <x-card class="border-slate-900/40 opacity-60 relative overflow-hidden">
                         <div class="absolute top-4 right-4 bg-slate-950 px-2 py-0.5 rounded text-[9px] font-extrabold text-slate-500 uppercase tracking-widest border border-slate-900">СКОРО</div>
                         
                         <div class="flex items-center gap-3.5">
                             <span class="text-2xl bg-slate-950/40 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-900/50">⏱️</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-500 uppercase tracking-wide">Фокус-таймер</h3>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed font-sans">Помодоро таймер для глубокой фокусировки на написании кода.</p>
+                                <x-h3 class="text-slate-500">Фокус-таймер</x-h3>
+                                <x-p class="text-slate-500 mt-1">Помодоро таймер для глубокой фокусировки на написании кода.</x-p>
                             </div>
                         </div>
-                    </div>
+                    </x-card>
 
                 </div>
             </div>
@@ -80,15 +80,15 @@
 
                 <!-- Заголовок страницы -->
                 <div>
-                    <h2 class="text-2xl font-black tracking-wider text-slate-100 uppercase">Рынки</h2>
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Рыночный терминал в реальном времени</p>
+                    <x-h1>Рынки</x-h1>
+                    <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Рыночный терминал в реальном времени</x-p>
                 </div>
 
                 <!-- Сетка карточек с котировками -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
                     <!-- КАРТОЧКА: BITCOIN -->
-                    <div class="bg-slate-900 border border-slate-850/80 rounded-2xl p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
+                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
                         <div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-500/5 rounded-full blur-xl"></div>
                         
                         <div>
@@ -104,10 +104,10 @@
                                 <p class="text-xs text-slate-400 font-medium mt-1" x-text="btcInUzsFormatted">--</p>
                             </div>
                         </div>
-                    </div>
+                    </x-card>
 
                     <!-- КАРТОЧКА: USD / UZS -->
-                    <div class="bg-slate-900 border border-slate-850/80 rounded-2xl p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
+                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
                         <div class="absolute -right-6 -top-6 w-20 h-20 bg-emerald-500/5 rounded-full blur-xl"></div>
                         
                         <div>
@@ -123,7 +123,7 @@
                                 <p class="text-xs text-slate-400 font-medium mt-1">Курс мирового валютного рынка</p>
                             </div>
                         </div>
-                    </div>
+                    </x-card>
 
                 </div>
 
