@@ -12,7 +12,13 @@ use Illuminate\View\View;
 class WorkoutController extends Controller
 {
     /**
-     * Отобразить список тренировок, расписание на сегодня и статус тонуса мышц.
+     * Отобразить список тренировок и определить следующую в очереди.
+     *
+     * Логика очереди (round-robin):
+     * Все тренировки пользователя отсортированы по sort_order.
+     * Следующая тренировка — та, у которой last_performed_at самая старая
+     * (или NULL, если ещё не выполнялась). При равенстве — приоритет по sort_order.
+     * Если текущая «следующая» тренировка уже выполнена сегодня — значит день отдыха.
      */
     public function index(): View
     {
@@ -22,27 +28,28 @@ class WorkoutController extends Controller
                   ->limit(2);
         }])
             ->where('user_id', auth()->id())
+            ->ordered()
             ->get();
 
-        // Русские дни недели
-        $days = [
-            1 => 'Понедельник',
-            2 => 'Вторник',
-            3 => 'Среда',
-            4 => 'Четверг',
-            5 => 'Пятница',
-            6 => 'Суббота',
-            7 => 'Воскресенье'
-        ];
-        $todayDayOfWeek = $days[now()->dayOfWeekIso];
+        // Определяем следующую тренировку в очереди (round-robin):
+        // Приоритет: сначала те, что никогда не выполнялись (NULL),
+        // затем те, что выполнялись давно, при равенстве — по sort_order.
+        $nextWorkout = $workouts
+            ->sortBy(function ($workout) {
+                // NULL last_performed_at => давность = максимум (приоритет в очереди)
+                $timestamp = $workout->last_performed_at
+                    ? $workout->last_performed_at->timestamp
+                    : 0;
+                // Вторичная сортировка: sort_order (через дробную часть для стабильности)
+                return $timestamp + ($workout->sort_order / 10000);
+            })
+            ->first();
 
-        // Ищем тренировку на сегодня (проверяем, входит ли сегодняшний день в массив запланированных дней тренировки)
-        // И исключаем её, если она уже была успешно выполнена сегодня
-        $todayWorkout = $workouts->first(function ($workout) use ($todayDayOfWeek) {
-            $isScheduledToday = is_array($workout->day_of_week) && in_array($todayDayOfWeek, $workout->day_of_week);
-            $alreadyPerformedToday = $workout->last_performed_at && $workout->last_performed_at->isToday();
-            return $isScheduledToday && !$alreadyPerformedToday;
-        });
+        // Если следующая тренировка уже выполнена сегодня — показываем день отдыха
+        $todayWorkout = null;
+        if ($nextWorkout && !($nextWorkout->last_performed_at && $nextWorkout->last_performed_at->isToday())) {
+            $todayWorkout = $nextWorkout;
+        }
 
         // Рассчитываем статусы отставания для каждой тренировки
         foreach ($workouts as $workout) {
@@ -66,6 +73,9 @@ class WorkoutController extends Controller
                     $workout->status_color = 'text-red-400 bg-red-500/10 border-red-500/20';
                 }
             }
+
+            // Позиция в очереди (1-indexed, для отображения)
+            $workout->queue_position = $workout->sort_order + 1;
 
             // Рассчитываем прогрессию для каждого упражнения
             foreach ($workout->exercises as $exercise) {
@@ -117,18 +127,19 @@ class WorkoutController extends Controller
             }
         }
 
-        return view('workouts', compact('workouts', 'todayWorkout', 'todayDayOfWeek'));
+        $totalWorkouts = $workouts->count();
+
+        return view('workouts', compact('workouts', 'todayWorkout', 'totalWorkouts'));
     }
 
     /**
      * Сохранить тренировку и все её упражнения одной безопасной транзакцией.
+     * sort_order назначается автоматически (следующий в очереди).
      */
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'day_of_week' => ['nullable', 'array'],
-            'day_of_week.*' => ['string', 'in:Понедельник,Вторник,Среда,Четверг,Пятница,Суббота,Воскресенье'],
             'exercises' => ['required', 'array', 'min:1'],
             'exercises.*.title' => ['required', 'string', 'max:255'],
             'exercises.*.sets' => ['required', 'integer', 'min:1'],
@@ -139,9 +150,12 @@ class WorkoutController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
+            // Автоматически определяем следующий sort_order
+            $maxOrder = auth()->user()->workouts()->max('sort_order') ?? -1;
+
             $workout = auth()->user()->workouts()->create([
                 'title' => $validated['title'],
-                'day_of_week' => $validated['day_of_week'] ?? [],
+                'sort_order' => $maxOrder + 1,
             ]);
 
             foreach ($validated['exercises'] as $exerciseData) {
@@ -196,6 +210,7 @@ class WorkoutController extends Controller
 
     /**
      * Загрузить легендарную программу PUSH/PULL/LEGS по умолчанию для текущего пользователя.
+     * Тренировки идут последовательно: PUSH → PULL → LEGS → ТОНУС.
      */
     public function seedDefault(): RedirectResponse
     {
@@ -205,11 +220,11 @@ class WorkoutController extends Controller
             // Очищаем старые тренировки пользователя, чтобы избежать дублирования
             Workout::where('user_id', $user->id)->delete();
 
-            // 1. PUSH
+            // 1. PUSH (sort_order: 0)
             $push = Workout::create([
                 'user_id' => $user->id,
                 'title' => 'PUSH — грудь, плечи, трицепс',
-                'day_of_week' => ['Понедельник', 'Четверг'],
+                'sort_order' => 0,
             ]);
 
             $push->exercises()->createMany([
@@ -255,11 +270,11 @@ class WorkoutController extends Controller
                 ],
             ]);
 
-            // 2. PULL
+            // 2. PULL (sort_order: 1)
             $pull = Workout::create([
                 'user_id' => $user->id,
                 'title' => 'PULL — спина, бицепс',
-                'day_of_week' => ['Вторник', 'Пятница'],
+                'sort_order' => 1,
             ]);
 
             $pull->exercises()->createMany([
@@ -305,11 +320,11 @@ class WorkoutController extends Controller
                 ],
             ]);
 
-            // 3. LEGS
+            // 3. LEGS (sort_order: 2)
             $legs = Workout::create([
                 'user_id' => $user->id,
                 'title' => 'LEGS + CORE — ноги, ягодицы, пресс',
-                'day_of_week' => ['Среда', 'Суббота'],
+                'sort_order' => 2,
             ]);
 
             $legs->exercises()->createMany([
@@ -379,11 +394,11 @@ class WorkoutController extends Controller
                 ],
             ]);
 
-            // 4. TONUS
+            // 4. TONUS (sort_order: 3)
             $tonus = Workout::create([
                 'user_id' => $user->id,
                 'title' => 'ТОНУС — всё тело (турник + брусья)',
-                'day_of_week' => [], // Вне плана
+                'sort_order' => 3,
             ]);
 
             $tonus->exercises()->createMany([

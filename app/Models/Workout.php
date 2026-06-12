@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,14 +12,22 @@ class Workout extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'day_of_week',
+        'sort_order',
         'last_performed_at',
     ];
 
     protected $casts = [
-        'day_of_week' => 'array',
+        'sort_order' => 'integer',
         'last_performed_at' => 'datetime',
     ];
+
+    /**
+     * Scope: сортировка по порядку в очереди.
+     */
+    public function scopeOrdered(Builder $query): Builder
+    {
+        return $query->orderBy('sort_order');
+    }
 
     /**
      * Получить пользователя, которому принадлежит тренировка.

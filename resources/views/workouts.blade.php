@@ -5,9 +5,8 @@
         <!-- Заголовок страницы -->
         <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
             <div>
-                <h1 class="text-2xl font-black tracking-wider text-slate-100 uppercase">Расписание</h1>
-                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Сегодня: {{ $todayDayOfWeek }}
-                </p>
+                <x-h1>🏋️ Тренировки</x-h1>
+                <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Очередь: {{ $totalWorkouts }} программ</x-p>
             </div>
             <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-workout')">
                 <span>+</span>
@@ -25,7 +24,7 @@
 
         <!-- ================= БЛОК: СЕГОДНЯ В РАСПИСАНИИ ================= -->
         <div>
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Сегодня в плане</h2>
+            <x-h2 class="mb-3">Следующая в очереди</x-h2>
 
             @if ($todayWorkout)
                 <div
@@ -36,9 +35,9 @@
                     <div class="flex justify-between items-start gap-4">
                         <div>
                             <span class="text-xs font-extrabold text-indigo-400 uppercase tracking-widest block">⭐
-                                ТРЕНИРОВКА НА СЕГОДНЯ</span>
-                            <h3 class="text-xl font-black text-slate-100 uppercase tracking-wide mt-1">
-                                {{ $todayWorkout->title }}</h3>
+                                СЛЕДУЮЩАЯ ТРЕНИРОВКА</span>
+                            <x-h3 class="text-xl mt-1">
+                                {{ $todayWorkout->title }}</x-h3>
                         </div>
 
                         <!-- Статус тонуса -->
@@ -57,8 +56,8 @@
                             @foreach ($todayWorkout->exercises as $exercise)
                                 <div class="bg-slate-950/50 border border-slate-900/60 rounded-xl p-4">
                                     <div class="flex justify-between items-center flex-wrap gap-2">
-                                        <h4 class="text-sm font-black text-slate-100 uppercase tracking-wide">
-                                            {{ $exercise->title }}</h4>
+                                        <x-h3>
+                                            {{ $exercise->title }}</x-h3>
                                         <span
                                             class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/5 px-2.5 py-1 rounded border border-emerald-500/10">
                                             {{ $exercise->sets }} × {{ $exercise->reps }}
@@ -109,10 +108,10 @@
                                     </div>
 
                                     @if ($exercise->description)
-                                        <p
-                                            class="text-xs text-slate-300 mt-3 leading-relaxed bg-slate-950 p-3 rounded-lg border border-slate-850/80 font-sans whitespace-pre-line">
+                                        <x-p
+                                            class="text-slate-300 mt-3 bg-slate-950 p-3 rounded-lg border border-slate-850/80 whitespace-pre-line">
                                             {{ $exercise->description }}
-                                        </p>
+                                        </x-p>
                                     @endif
                                 </div>
                             @endforeach
@@ -126,45 +125,34 @@
                     </form>
                 </div>
             @else
-                <!-- День отдыха -->
+                <!-- Все тренировки выполнены -->
                 <div
                     class="bg-slate-900/40 border border-slate-900 rounded-2xl p-8 text-center shadow-lg relative overflow-hidden">
                     <div class="absolute -right-8 -top-8 w-20 h-20 bg-emerald-500/5 rounded-full blur-xl"></div>
                     <span class="text-3xl block">✨</span>
-                    <h3 class="text-sm font-black text-slate-200 uppercase tracking-widest mt-2.5">Сегодня день отдыха!
-                    </h3>
-                    <p class="text-xs text-slate-400 mt-1.5 max-w-[280px] mx-auto leading-relaxed">
-                        Отличный день, чтобы восстановить мышцы, выспаться или выполнить пару новых ежедневных квестов!
-                    </p>
+                    <x-h3 class="text-slate-200 tracking-widest mt-2.5">Все тренировки выполнены!</x-h3>
+                    <x-p class="text-slate-400 mt-1.5 max-w-[280px] mx-auto">
+                        Отличная работа! Восстановись, выспись — завтра продолжим очередь с новой тренировкой.
+                    </x-p>
                 </div>
             @endif
         </div>
 
         <!-- ================= БЛОК: ВСЕ ПРОГРАММЫ ================= -->
         <div x-data="{ activeWorkout: null }" class="space-y-3.5">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Мои программы</h2>
+            <x-h2>Мои программы</x-h2>
 
             @forelse ($workouts as $workout)
-                <div
-                    class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg transition-all duration-200">
+                <x-card class="bg-slate-900/60 border-slate-900 duration-200">
 
                     <div class="flex justify-between items-center gap-4">
                         <!-- Клик для раскрытия списка упражнений -->
                         <div class="cursor-pointer flex-1"
                             x-on:click="activeWorkout = activeWorkout === {{ $workout->id }} ? null : {{ $workout->id }}">
                             <div class="flex flex-wrap items-center gap-1.5">
-                                @if (is_array($workout->day_of_week) && count($workout->day_of_week) > 0)
-                                    @foreach ($workout->day_of_week as $day)
-                                        <span
-                                            class="text-xs font-bold text-slate-300 bg-slate-800 px-2.5 py-0.5 rounded">
-                                            📅 {{ $day }}
-                                        </span>
-                                    @endforeach
-                                @else
-                                    <span class="text-xs font-bold text-slate-400 bg-slate-800 px-2.5 py-0.5 rounded">
-                                        📅 Вне плана
-                                    </span>
-                                @endif
+                                <span class="text-xs font-bold text-indigo-300 bg-indigo-500/10 px-2.5 py-0.5 rounded border border-indigo-500/20">
+                                    #{{ $workout->queue_position }} в очереди
+                                </span>
 
                                 <!-- Индикатор состояния -->
                                 <span
@@ -173,20 +161,20 @@
                                 </span>
                             </div>
 
-                            <h3
-                                class="text-base font-black text-slate-100 uppercase tracking-wide mt-2.5 flex items-center gap-2">
+                            <x-h3
+                                class="text-base mt-2.5 flex items-center gap-2">
                                 <span>{{ $workout->title }}</span>
                                 <span class="text-xs text-slate-400 transform transition-transform duration-200"
                                     :class="activeWorkout === {{ $workout->id }} ? 'rotate-180' : ''">▼</span>
-                            </h3>
+                            </x-h3>
 
-                            <span class="text-xs text-slate-400 block mt-1.5">
+                            <x-p class="text-slate-400 mt-1.5">
                                 @if ($workout->last_performed_at)
                                     Выполнялась: {{ $workout->last_performed_at->diffForHumans() }}
                                 @else
                                     Еще ни разу не выполнялась
                                 @endif
-                            </span>
+                            </x-p>
                         </div>
 
                         <!-- Кнопка удаления -->
@@ -210,8 +198,8 @@
                         @foreach ($workout->exercises as $exercise)
                             <div class="bg-slate-950/80 border border-slate-900 rounded-xl p-4">
                                 <div class="flex justify-between items-center flex-wrap gap-2">
-                                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wide">
-                                        {{ $exercise->title }}</h4>
+                                    <x-h3 class="text-slate-200 font-bold">
+                                        {{ $exercise->title }}</x-h3>
                                     <span
                                         class="text-xs font-mono text-emerald-400 font-bold bg-emerald-500/5 px-2.5 py-1 rounded">
                                         {{ $exercise->sets }} × {{ $exercise->reps }}
@@ -248,17 +236,17 @@
                                 </div>
 
                                 @if ($exercise->description)
-                                    <p
-                                        class="text-xs text-slate-300 mt-3 leading-relaxed bg-slate-950 p-3 rounded-lg border border-slate-850/80 font-sans whitespace-pre-line">
+                                    <x-p
+                                        class="text-slate-300 mt-3 bg-slate-950 p-3 rounded-lg border border-slate-850/80 whitespace-pre-line">
                                         {{ $exercise->description }}
-                                    </p>
+                                    </x-p>
                                 @endif
                             </div>
                         @endforeach
                     </div>
-                </div>
+                </x-card>
             @empty
-                <div class="text-center py-12 px-6 bg-slate-900/20 rounded-2xl border border-slate-900/50 space-y-4">
+                <x-card class="bg-slate-900/20 border-slate-900/50 text-center py-12 px-6 space-y-4">
                     <span class="text-3xl block">📅</span>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Программы не созданы</h3>
                     <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
@@ -274,29 +262,25 @@
                             </button>
                         </form>
                     </div>
-                </div>
+                </x-card>
             @endforelse
         </div>
 
         <!-- ================= БЛОК: БАЗА ЗНАНИЙ ================= -->
         <div class="space-y-3.5 pt-4">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">📖 База знаний</h2>
+            <x-h2>📖 База знаний</x-h2>
 
             <div x-data="{ activeTab: null }" class="grid grid-cols-1 gap-3.5">
 
                 <!-- 1. ПРОГРЕССИЯ -->
-                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg">
+                <x-card class="bg-slate-900/60 border-slate-900">
                     <div class="cursor-pointer flex justify-between items-center"
                         x-on:click="activeTab = activeTab === 1 ? null : 1">
                         <div class="flex items-center gap-3">
                             <span class="text-lg">📈</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Прогрессия
-                                    нагрузок
-                                </h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Еженедельная перегрузка, научный темп и
-                                    нейросвязь
-                                </p>
+                                <x-h3>Прогрессия нагрузок</x-h3>
+                                <x-p class="text-slate-400 mt-0.5">Еженедельная перегрузка, научный темп и нейросвязь</x-p>
                             </div>
                         </div>
                         <span class="text-xs text-slate-400 transform transition-transform duration-200"
@@ -371,19 +355,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-card>
 
                 <!-- 2. ВОССТАНОВЛЕНИЕ -->
-                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg">
+                <x-card class="bg-slate-900/60 border-slate-900">
                     <div class="cursor-pointer flex justify-between items-center"
                         x-on:click="activeTab = activeTab === 2 ? null : 2">
                         <div class="flex items-center gap-3">
                             <span class="text-lg">🧠</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Восстановление и
-                                    сон
-                                </h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Тестостерон, гигиена сна и научные добавки</p>
+                                <x-h3>Восстановление и сон</x-h3>
+                                <x-p class="text-slate-400 mt-0.5">Тестостерон, гигиена сна и научные добавки</x-p>
                             </div>
                         </div>
                         <span class="text-xs text-slate-400 transform transition-transform duration-200"
@@ -470,19 +452,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-card>
 
                 <!-- 3. ПИТАНИЕ -->
-                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg">
+                <x-card class="bg-slate-900/60 border-slate-900">
                     <div class="cursor-pointer flex justify-between items-center"
                         x-on:click="activeTab = activeTab === 3 ? null : 3">
                         <div class="flex items-center gap-3">
                             <span class="text-lg">🍗</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Правила питания
-                                </h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Правило тарелки, нормы белка и черный список
-                                </p>
+                                <x-h3>Правила питания</x-h3>
+                                <x-p class="text-slate-400 mt-0.5">Правило тарелки, нормы белка и черный список</x-p>
                             </div>
                         </div>
                         <span class="text-xs text-slate-400 transform transition-transform duration-200"
@@ -568,19 +548,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-card>
 
                 <!-- 4. ДНЕВНИК И ПРАВИЛА -->
-                <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-5 shadow-lg">
+                <x-card class="bg-slate-900/60 border-slate-900">
                     <div class="cursor-pointer flex justify-between items-center"
                         x-on:click="activeTab = activeTab === 4 ? null : 4">
                         <div class="flex items-center gap-3">
                             <span class="text-lg">📓</span>
                             <div>
-                                <h3 class="text-sm font-black text-slate-100 uppercase tracking-wide">Дневник и график
-                                    сплита</h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Расписание сплита, замеры и правила пропусков
-                                </p>
+                                <x-h3>Дневник и график сплита</x-h3>
+                                <x-p class="text-slate-400 mt-0.5">Расписание сплита, замеры и правила пропусков</x-p>
                             </div>
                         </div>
                         <span class="text-xs text-slate-400 transform transition-transform duration-200"
@@ -653,7 +631,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-card>
 
             </div>
         </div>
@@ -674,10 +652,9 @@
                 }
             }">
 
-                <h2
-                    class="text-base font-bold text-slate-100 uppercase tracking-wider mb-4 pb-2 border-b border-slate-800/80">
+                <x-h2 class="text-base text-slate-100 tracking-wider mb-4 pb-2 border-b border-slate-800/80">
                     Создать программу
-                </h2>
+                </x-h2>
 
                 <form method="POST" action="{{ route('workouts.store') }}" class="space-y-4">
                     @csrf
@@ -689,33 +666,12 @@
                         <x-input-error :messages="$errors->get('title')" class="mt-1" />
                     </div>
 
-                    <!-- Выбор нескольких дней недели (Премиальная сетка бейджей) -->
-                    <div>
-                        <x-input-label value="Дни недели для тренировки" class="mb-2" />
-                        <div class="grid grid-cols-4 gap-2">
-                            @foreach ([
-        'Понедельник' => 'ПН',
-        'Вторник' => 'ВТ',
-        'Среда' => 'СР',
-        'Четверг' => 'ЧТ',
-        'Пятница' => 'ПТ',
-        'Суббота' => 'СБ',
-        'Воскресенье' => 'ВС',
-    ] as $fullDay => $shortDay)
-                                <label
-                                    class="relative flex items-center justify-center p-3 rounded-xl bg-slate-950 border border-slate-850 cursor-pointer transition-all hover:bg-slate-900 select-none text-center">
-                                    <input type="checkbox" name="day_of_week[]" value="{{ $fullDay }}"
-                                        class="sr-only peer">
-                                    <!-- Элегантная неоновая обводка и фон при выделении -->
-                                    <div
-                                        class="absolute inset-0 rounded-xl border border-transparent peer-checked:border-indigo-500/40 peer-checked:bg-indigo-500/5 transition-all">
-                                    </div>
-                                    <span
-                                        class="relative z-10 text-xs font-black text-slate-400 peer-checked:text-indigo-400 uppercase tracking-widest">{{ $shortDay }}</span>
-                                </label>
-                            @endforeach
-                        </div>
-                        <x-input-error :messages="$errors->get('day_of_week')" class="mt-1" />
+                    <!-- Информация: тренировка будет добавлена в конец очереди -->
+                    <div class="bg-indigo-500/5 border border-indigo-500/15 rounded-xl px-4 py-3">
+                        <p class="text-xs text-indigo-300 font-semibold">
+                            💡 Тренировка будет автоматически добавлена в конец очереди.
+                            Тренировки идут последовательно друг за другом — пропуск дня не сдвигает очередь.
+                        </p>
                     </div>
 
                     <!-- Динамический блок упражнений -->
