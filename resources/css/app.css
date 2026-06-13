@@ -11,11 +11,11 @@
 
     /* Soft Dark Pastel Theme Overrides */
     
-    /* Backgrounds (Slate) - Deep soft grey-purple */
-    --color-slate-800: #363a4f;
-    --color-slate-850: #2b2e40; /* custom mid-step */
-    --color-slate-900: #24273a;
-    --color-slate-950: #1e2030;
+    /* Backgrounds (Slate) - Deep soft midnight blue/black (much darker) */
+    --color-slate-800: #1e232e;
+    --color-slate-850: #171b24; /* custom mid-step */
+    --color-slate-900: #11151c;
+    --color-slate-950: #0a0c10;
 
     /* Text colors - Softened whites and greys */
     --color-slate-200: #cad3f5;
