@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Quest;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quest;
 use App\Models\StoicQuote;
@@ -19,7 +20,7 @@ class DashboardController extends Controller
                       ->where('user_id', auth()->id());
             }])->get();
  
-        return view('dashboard', [
+        return view('quest.index', [
             'quests' => $quests
         ]);
     }

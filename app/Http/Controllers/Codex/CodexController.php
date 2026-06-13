@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Codex;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\StoicQuote;
 
@@ -184,6 +185,6 @@ class CodexController extends Controller
             $stoicQuote = StoicQuote::skip($offset)->first();
         }
 
-        return view('codex', compact('baseCodex', 'advancedCodex', 'stoicQuote'));
+        return view('codex.index', compact('baseCodex', 'advancedCodex', 'stoicQuote'));
     }
 }

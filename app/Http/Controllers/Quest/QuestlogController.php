@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Quest;
 
+use App\Http\Controllers\Controller;
 use App\Models\Quest;
 use App\Models\Questlog;
 use Illuminate\Http\Request;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Workout;
 
+use App\Http\Controllers\Controller;
 use App\Models\Workout;
 use App\Models\ExerciseLog;
 use Illuminate\Http\RedirectResponse;
@@ -131,7 +132,7 @@ class WorkoutController extends Controller
 
         $totalProgramWorkouts = $programWorkouts->count();
 
-        return view('workouts', compact('programWorkouts', 'standaloneWorkouts', 'todayWorkout', 'totalProgramWorkouts'));
+        return view('workout.index', compact('programWorkouts', 'standaloneWorkouts', 'todayWorkout', 'totalProgramWorkouts'));
     }
 
     /**
