@@ -177,7 +177,7 @@
                             </button>
                         </form>
                     </div>
-                    @include('workouts._exercise-list', ['workout' => $workout])
+                    @include('workout._exercise-list', ['workout' => $workout])
                 </x-card>
             @empty
                 <x-card class="bg-slate-900/20 border-slate-900/50 text-center py-12 px-6 space-y-4">
@@ -246,7 +246,7 @@
                             </form>
                         </div>
                     </div>
-                    @include('workouts._exercise-list', ['workout' => $workout])
+                    @include('workout._exercise-list', ['workout' => $workout])
                 </x-card>
             @endforeach
         </div>
