@@ -58,7 +58,16 @@
         </x-card>
 
         @include('quest.partials.quest-list')
+        
+        <!-- Финансы (Интегрировано в главную панель) -->
+        <div class="mt-8 mb-4 border-b border-slate-900/50 pb-2">
+            <x-h1>Управление финансами</x-h1>
+            <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Аналитика и распределение</x-p>
+        </div>
+        @include('finance.partials.funds')
+        @include('finance.partials.accounts')
 
         @include('quest.partials.modals')
+        @include('finance.partials.modals')
     </div>
 </x-app-layout>

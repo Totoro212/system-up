@@ -40,9 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('codex', [\App\Http\Controllers\Codex\CodexController::class, 'index'])->name('codex');
     Route::get('terminal', [\App\Http\Controllers\Terminal\TerminalController::class, 'index'])->name('terminal');
 
-    // Finance Module
+    // Finance Module (API endpoints for modals)
     Route::prefix('finance')->name('finance.')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Finance\FinanceController::class, 'index'])->name('index');
         Route::post('/income', [\App\Http\Controllers\Finance\FinanceController::class, 'storeIncome'])->name('income.store');
         Route::post('/expense', [\App\Http\Controllers\Finance\FinanceController::class, 'storeExpense'])->name('expense.store');
         Route::post('/transfer', [\App\Http\Controllers\Finance\FinanceController::class, 'transfer'])->name('transfer');

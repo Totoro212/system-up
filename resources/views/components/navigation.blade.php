@@ -48,20 +48,7 @@
                     </svg>
                 </div>
                 <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('terminal') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Пульт</span>
-                <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('terminal') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
-            </a>
 
-            <!-- Финансы -->
-            <a href="{{ route('finance.index') }}"
-                class="flex flex-col items-center gap-1 group transition-all duration-200">
-                <div class="flex flex-col items-center transition-transform duration-200 group-hover:scale-105 {{ request()->routeIs('finance.*') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">
-                    <svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                    </svg>
-                </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('finance.*') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Деньги</span>
-                <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('finance.*') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
-            </a>
 
             <!-- Профиль -->
             <a href="{{ route('profile.edit') }}"
