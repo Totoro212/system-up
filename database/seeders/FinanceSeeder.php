@@ -24,9 +24,9 @@ class FinanceSeeder extends Seeder
         \App\Models\Account::create(['user_id' => $user->id, 'name' => 'Семейный Конверт', 'type' => 'cash', 'currency' => 'USD', 'balance' => 370, 'is_joint' => true]);
 
         // Create Funds (Virtual Buckets)
-        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Базовые нужды', 'target_percentage' => 50, 'balance' => 0, 'currency' => 'UZS', 'icon' => '🛒', 'color' => 'emerald']);
-        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Желания и Лайфстайл', 'target_percentage' => 40, 'balance' => 0, 'currency' => 'UZS', 'icon' => '✨', 'color' => 'yellow']);
-        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Сбережения', 'target_percentage' => 10, 'balance' => 0, 'currency' => 'UZS', 'icon' => '🏦', 'color' => 'indigo']);
-        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Семейный капитал', 'target_percentage' => null, 'balance' => 370, 'currency' => 'USD', 'icon' => '👨‍👩‍👦', 'color' => 'purple']);
+        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Нужды (Базовые)', 'target_percentage' => 50, 'balance' => 0, 'currency' => 'UZS', 'icon' => '🛒', 'color' => 'emerald']);
+        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Желания (Развлечения)', 'target_percentage' => 35, 'balance' => 0, 'currency' => 'UZS', 'icon' => '✨', 'color' => 'yellow']);
+        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Сбережения (Инвестиции)', 'target_percentage' => 10, 'balance' => 0, 'currency' => 'UZS', 'icon' => '🏦', 'color' => 'indigo']);
+        \App\Models\Fund::create(['user_id' => $user->id, 'name' => 'Семейный капитал', 'target_percentage' => 5, 'balance' => 370, 'currency' => 'USD', 'icon' => '👨‍👩‍👧', 'color' => 'purple']);
     }
 }
