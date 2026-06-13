@@ -12,12 +12,10 @@ class QuestController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:5000',
         ]);
 
         Quest::create([
             'title' => $validated['title'],
-            'description' => $validated['description'],
             'user_id' => auth()->id(),
             'type' => 'main',
         ]);
@@ -48,21 +46,18 @@ class QuestController extends Controller
 
         Quest::create([
             'title' => 'Движение тела',
-            'description' => 'Минимум 30 минут физической активности: кардио, растяжка, прогулка быстрым шагом или тренировка. Разгони лимфу и заряди тело энергией на день.',
             'user_id' => $user->id,
             'type' => 'main',
         ]);
 
         Quest::create([
             'title' => 'Deep Work (Глубокая работа)',
-            'description' => '90 минут работы над главным проектом или навыком в режиме абсолютного фокуса. Телефон в беззвучном режиме в другой комнате, никаких соцсетей и перебиваний.',
             'user_id' => $user->id,
             'type' => 'main',
         ]);
 
         Quest::create([
             'title' => 'Поглощение знаний',
-            'description' => 'Чтение минимум 20 минут качественной нон-фикшн или профессиональной литературы. Зафиксируй одну мысль или идею, которую применишь на практике.',
             'user_id' => $user->id,
             'type' => 'main',
         ]);

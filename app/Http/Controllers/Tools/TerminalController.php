@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Tools;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Event;
 
 class TerminalController extends Controller
@@ -14,7 +13,7 @@ class TerminalController extends Controller
     public function index()
     {
         // События
-        $events = \App\Models\Event::getUpcomingEvents(auth()->id());
+        $events = Event::getUpcomingEvents(auth()->id());
 
         return view('tools.terminal.index', [
             'events' => $events

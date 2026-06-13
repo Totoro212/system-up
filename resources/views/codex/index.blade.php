@@ -1,55 +1,12 @@
+
 <x-app-layout title='Кодекс'>
     <!-- Контейнер расширен до max-w-2xl для идеальной гармонии с тренировками и квестами -->
     <div class="max-w-2xl mx-auto p-4 space-y-6" x-data="{ activeCategory: null }">
 
-        <!-- Заголовок страницы -->
-        <div class="pb-4 border-b border-slate-900/50">
-            <x-h1>📜 Кодекс Охотника</x-h1>
-            <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">
-                Свод железных правил личной дисциплины и ментальных моделей
-            </x-p>
-        </div>
-
-        <!-- ================= БЛОК: STOIC DAILY (СТОИЦИЗМ НА ДЕНЬ) ================= -->
-        @if ($stoicQuote)
-            <div class="bg-slate-900/40 border border-indigo-500/20 backdrop-blur-md rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl"></div>
-                
-                <!-- Шапка карточки -->
-                <div class="flex justify-between items-center gap-4">
-                    <span class="text-[10px] font-extrabold text-indigo-400 uppercase tracking-widest block">⚔️ STOIC DAILY</span>
-                    
-                    <!-- Кнопка добавления цитаты -->
-                    <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-stoic-quote')" 
-                            class="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1">
-                        <span>➕</span>
-                        <span>Добавить цитату</span>
-                    </button>
-                </div>
-
-                <!-- Текст цитаты -->
-                <x-p class="text-sm text-slate-100 italic mt-3.5 mb-2">
-                    «{{ $stoicQuote->text }}»
-                </x-p>
-
-                <!-- Разделитель и Практика дня -->
-                @if ($stoicQuote->practice)
-                    <x-p class="border-t border-slate-950 mt-4 pt-4 text-slate-300">
-                        {{ $stoicQuote->practice }}
-                    </x-p>
-                @endif
-            </div>
-        @endif
+        <x-h1>📜 Кодекс Охотника</x-h1>
 
         <!-- ================= БЛОК: 5 СТОЛПОВ СЧАСТЬЯ ================= -->
         <x-card x-data="{ activePillar: 'health' }" class="space-y-4">
-            
-            <!-- Заголовок блока -->
-            <div class="flex items-center justify-between pb-3 border-b border-slate-950">
-                <x-h2 class="text-[10px] block">🧭 5 Столпов Счастья (Путь к балансу)</x-h2>
-                <span class="text-[9px] font-bold text-indigo-400 uppercase tracking-wider">Интерактивный Баланс</span>
-            </div>
-
             <!-- Сетка 5-ти плиток -->
             <div class="grid grid-cols-5 gap-2 sm:gap-3">
                 
@@ -114,10 +71,10 @@
                      x-data="{ openSub: 'physical' }">
                     <div class="flex items-center gap-2 text-emerald-400">
                         <span class="text-lg">🏥</span>
-                        <x-h3 class="text-xs">Здоровье — Фундамент Биокомпьютера</x-h3>
+                        <x-h3 class="text-xs">Здоровье — Фундамент</x-h3>
                     </div>
                     <x-p class="text-slate-300">
-                        Помни золотое правило: <span class="text-emerald-400 font-semibold">«Здоровье — это твой главный физический капитал»</span>. Твое тело — это биологический компьютер. Если он зависает или перегревается, никакие успехи в бизнесе или делах не принесут счастья.
+                        <span class="text-emerald-400 font-semibold">«Здоровье — это твой главный физический капитал»</span>. Твое тело — это биологический компьютер. Если он зависает или перегревается, никакие успехи в бизнесе или делах не принесут счастья. Спорт, здоровое питание, сон и близкие связи напрямую способствуют выработке гормонов счастья (дофамина, серотонина, эндорфинов и окситоцина).
                     </x-p>
 
                     <div class="space-y-2 pt-1">
@@ -129,7 +86,7 @@
                             </button>
                             <div x-show="openSub === 'physical'" x-collapse>
                                 <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🏃‍♂️ Физическая активность:</strong> Движение — это жизнь. Регулярные тренировки дают тонус.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🏃‍♂️ Физическая активность:</strong> Регулярные тренировки дают тонус.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🥗 Здоровое питание:</strong> Мы буквально состоим из того, что едим.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>💤 Достаточный сон:</strong> Время, когда тело и мозг полностью восстанавливаются.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🚭 Без вредных привычек:</strong> Они как ржавчина, незаметно разъедающая внутренний механизм.</div>
@@ -148,9 +105,7 @@
                                 <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>💬 Выражение чувств:</strong> Невыраженные эмоции подобны буре, запертой внутри тесной комнаты.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🤝 Поиск поддержки:</strong> Не стесняйся просить о помощи, особенно это касается мужчин.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🧘‍♂️ Релаксация:</strong> Регулярные практики — это клапан, выпускающий избыточное давление.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>👥 Сообщества поддержки:</strong> Участие в группах создает чувство безопасности и принятия социума.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 sm:col-span-2"><strong>🩺 Консультации специалистов:</strong> Обращение за помощью в трудный момент — признак силы, а не слабости.</div>
                                 </div>
                             </div>
                         </div>
@@ -164,24 +119,8 @@
                             <div x-show="openSub === 'mental'" x-collapse>
                                 <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>☀️ Позитивное мышление:</strong> Мы неизбежно становимся тем, о чем думаем больше всего.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🔥 Борьба со стрессом:</strong> Стресс подобен огню — в малых дозах согревает, в больших — сжигает.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>🧩 Интеллектуальный тонус:</strong> Наш мозг, как и мышцы, нуждается в регулярной тренировке.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5"><strong>📚 Обучение и развитие:</strong> Жизнь устроена просто — это либо постоянное развитие, либо деградация.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-emerald-500/5 sm:col-span-2"><strong>🧘‍♂️ Осознанность:</strong> Медитация и практики фокусировки — ценное умение быть здесь и сейчас.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- 4. Наука и Философия --}}
-                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
-                            <button type="button" @click="openSub = openSub === 'science' ? '' : 'science'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'science' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
-                                <span>⚖️ Наука и Философия</span>
-                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'science' && 'rotate-180'">▼</span>
-                            </button>
-                            <div x-show="openSub === 'science'" x-collapse>
-                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-400">
-                                    <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg"><span class="text-emerald-400">⚖️</span><span><strong>Стоический взгляд:</strong> Тело — это «предпочтительное безразличное». Оно не подконтрольно разуму целиком, но забота о нем — долг мудреца.</span></div>
-                                    <div class="flex gap-2 items-start bg-emerald-950/20 border border-emerald-500/15 p-2.5 rounded-lg text-slate-300"><span class="text-emerald-400">🧠</span><span><strong>Нейробиология счастья:</strong> Спорт, здоровое питание, сон и близкие связи напрямую способствуют выработке гормонов счастья (дофамина, серотонина, эндорфинов и окситоцина).</span></div>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +136,7 @@
                         <x-h3 class="text-xs">Безопасность — Спокойствие Духа</x-h3>
                     </div>
                     <x-p class="text-slate-300">
-                        Дисциплинированный разум знает: настоящая безопасность — это <span class="text-blue-400 font-semibold">«отсутствие постоянного страха за завтрашний день»</span>. Это финансовая, физическая и юридическая защита, которая избавляет мозг от стресса выживания.
+                        Настоящая безопасность — это <span class="text-blue-400 font-semibold">«отсутствие постоянного страха за завтрашний день»</span>. Это финансовая, физическая и юридическая защита, которая избавляет мозг от стресса выживания.
                     </x-p>
 
                     <div class="space-y-2 pt-1">
@@ -245,19 +184,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- 4. Философия Защиты --}}
-                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
-                            <button type="button" @click="openSub = openSub === 'stoic' ? '' : 'stoic'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'stoic' ? 'bg-blue-500/10 text-blue-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
-                                <span>🧘 Философия Защиты</span>
-                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'stoic' && 'rotate-180'">▼</span>
-                            </button>
-                            <div x-show="openSub === 'stoic'" x-collapse>
-                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 text-[11px] font-sans text-slate-400">
-                                    <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg"><span class="text-blue-400">🧘</span><span><strong>Стоический взгляд:</strong> Внешняя защита важна, но истинная крепость — это Атараксия (внутренняя невозмутимость духа). Внешние события бессильны, если ты спокоен внутри.</span></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -270,7 +196,7 @@
                         <x-h3 class="text-xs">Свобода — Независимость Выбора</x-h3>
                     </div>
                     <x-p class="text-slate-300">
-                        Свобода — это важнейший множитель счастья: <span class="text-violet-400 font-semibold">«Свобода — это возможность не делать то, чего ты делать не хочешь»</span>. Свобода от чужих ожиданий, долгов и навязанного мнения.
+                        <span class="text-violet-400 font-semibold">«Свобода — это возможность не делать то, чего ты делать не хочешь»</span>. Свобода от чужих ожиданий, долгов и навязанного мнения. Настоящая свобода — это власть разума над страстями. Свободен лишь тот, кто желает лишь того, что находится в его полной личной воле
                     </x-p>
 
                     <div class="space-y-2 pt-1">
@@ -300,11 +226,8 @@
                             </button>
                             <div x-show="openSub === 'expression'" x-collapse>
                                 <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>👤 Индивидуальность:</strong> Будь собой: все остальные роли уже заняты.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🎨 Творчество:</strong> Находи свои способы созидательного самовыражения. Оно освобождает душу.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>👥 Разнообразие мнений:</strong> Создавай среду и окружение из людей, которые думают иначе.</div>
+                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>👤 Индивидуальность:</strong> Будь собой</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>💬 Конструктивные эмоции:</strong> Умей выражать свои эмоции без разрушительных последствий.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>🦁 Отвага быть собой:</strong> Страх быть непонятым или отвергнутым — главный враг самовыражения.</div>
                                 </div>
                             </div>
                         </div>
@@ -319,22 +242,7 @@
                                 <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-sans text-slate-300">
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🧘‍♂️ Самодостаточность:</strong> Развивай умение быть глубоко счастливым наедине с собой.</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>💰 Финансовая независимость:</strong> Деньги не гарантируют счастья, но дают свободу выбора.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🏛️ Собственные ценности:</strong> Формируй свои взгляды. Не позволяй другим думать за тебя!</div>
                                     <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🛠️ Решение проблем:</strong> Самостоятельно преодолевай преграды. Каждая победа делает тебя сильнее.</div>
-                                    <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>🚫 Независимость от одобрения:</strong> Жизнь по чужим стандартам и погоня за лайками — это не твоя жизнь.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- 4. Философия Свободы --}}
-                        <div class="rounded-xl border border-slate-800/60 overflow-hidden">
-                            <button type="button" @click="openSub = openSub === 'stoic' ? '' : 'stoic'" class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-[11px] font-black uppercase tracking-wider transition-colors duration-200" :class="openSub === 'stoic' ? 'bg-violet-500/10 text-violet-400' : 'bg-slate-950/40 text-slate-400 hover:text-slate-200'">
-                                <span>🔑 Философия Свободы</span>
-                                <span class="text-[9px] transition-transform duration-200" :class="openSub === 'stoic' && 'rotate-180'">▼</span>
-                            </button>
-                            <div x-show="openSub === 'stoic'" x-collapse>
-                                <div class="p-3 bg-slate-950/30 border-t border-slate-800/40 text-[11px] font-sans text-slate-400">
-                                    <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg"><span class="text-violet-400">🔑</span><span><strong>Стоический взгляд:</strong> Настоящая свобода — это власть разума над страстями. Свободен лишь тот, кто желает лишь того, что находится в его полной личной воле (Дихотомия контроля).</span></div>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +257,7 @@
                         <x-h3 class="text-xs">Близкие Люди — Тепло и Окружение</x-h3>
                     </div>
                     <x-p class="text-slate-300">
-                        Человек — существо socialное. В Кодексе записано: <span class="text-rose-400 font-semibold">«Отношения — это сад, его нужно поливать каждый день»</span>. Окружай себя донаторами энергии, цени верность и дари любовь в ответ.
+                        <span class="text-rose-400 font-semibold">«Отношения — это сад, его нужно поливать каждый день»</span>. Окружай себя донаторами энергии, цени верность и дари любовь в ответ. Крепкие социальные связи запускают мощную выработку окситоцина (гормона доверия, спокойствия и привязанности). Общение с любимыми снижает стресс на биологическом уровне.
                     </x-p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
@@ -358,11 +266,7 @@
                         </div>
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
                             <span class="text-rose-400">🤝</span>
-                            <span><strong>Стоический взгляд:</strong> Мы рождены друг для друга (Сенека). Заботься об общем благе и поддерживай близких — в этом проявляется справедливость.</span>
-                        </div>
-                        <div class="flex gap-2 items-start bg-rose-950/20 border border-rose-500/15 p-3 rounded-lg col-span-1 sm:col-span-2 text-slate-300">
-                            <span class="text-rose-400">🧠</span>
-                            <span><strong>Нейробиология счастья:</strong> Крепкие социальные связи запускают мощную выработку окситоцина (гормона доверия, спокойствия и привязанности). Общение с любимыми снижает стресс на биологическом уровне.</span>
+                            <span>Мы рождены друг для друга. Заботься об общем благе и поддерживай близких — в этом проявляется справедливость.</span>
                         </div>
                     </div>
                 </div>
@@ -380,121 +284,200 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-[11px] font-sans text-slate-400">
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
                             <span class="text-amber-400">🎯</span>
-                            <span><strong>Философия Kaizen:</strong> Маленькие шаги (+1% в день) в твоем ремесле ведут к величию. Кайфуй от процесса оттачивания мастерства.</span>
+                            <span><strong>Философия Kaizen:</strong> Маленькие шаги (+1% в день) в твоем ремесле ведут к величию. Наслаждайся процессом оттачивания мастерства.</span>
                         </div>
                         <div class="flex gap-2 items-start bg-slate-900/50 p-2.5 rounded-lg">
                             <span class="text-amber-400">🛠️</span>
-                            <span><strong>Стоический взгляд:</strong> Делай то, что велит твой долг и природа, делай это превосходно (Арете) на благо всего общества.</span>
+                            <span>Делай то, что велит твой долг и природа, делай это превосходно на благо всего общества.</span>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </x-card>
 
 
         <!-- ================= РАЗДЕЛ 1: БАЗОВЫЕ ПРАВИЛА ================= -->
         <div class="space-y-3.5">
-            <x-h2 class="mb-1">⚔️ Базовый кодекс жизни</x-h2>
+            <x-h2>⚔️ Базовый кодекс жизни</x-h2>
             <div class="grid grid-cols-1 gap-3.5">
-                @foreach ($baseCodex as $index => $cat)
-                    @php $catId = $index + 1; @endphp
                     <x-card hover>
                         <!-- Шапка категории -->
                         <div class="cursor-pointer flex justify-between items-center"
-                            x-on:click="activeCategory = activeCategory === {{ $catId }} ? null : {{ $catId }}">
+                            x-on:click="activeCategory = activeCategory === 1 ? null : 1">
                             <div class="flex items-center gap-3">
-                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">{{ $cat['icon'] }}</span>
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">👔</span>
                                 <div>
-                                    <x-h3>{{ $cat['title'] }}</x-h3>
-                                    <x-p class="text-slate-400 mt-0.5">{{ $cat['description'] }}</x-p>
+                                    <x-h3>Внешний вид</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Сила первого впечатления, базовые цвета и уход за обувью</x-p>
                                 </div>
                             </div>
                             <span class="text-xs text-slate-400 transform transition-transform duration-200"
-                                :class="activeCategory === {{ $catId }} ? 'rotate-180' : ''">▼</span>
+                                :class="activeCategory === 1 ? 'rotate-180' : ''">▼</span>
                         </div>
                         <!-- Раскрывающиеся правила -->
-                        <div x-show="activeCategory === {{ $catId }}" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-3">
-                            @foreach ($cat['rules'] as $rule)
-                                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900 flex gap-3 items-start">
-                                    <span class="text-indigo-400 text-xs font-bold mt-0.5">⚡</span>
-                                    <x-p class="text-slate-200">{{ $rule }}</x-p>
-                                </div>
-                            @endforeach
+                        <div x-show="activeCategory === 1" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Одежда по размеру — не мешком, не в обтяжку</li>
+                                <li>Без принтов и кричащих логотипов — однотон = взрослый вид</li>
+                                <li>Обувь чистая ВСЕГДА — люди смотрят на обувь</li>
+                                <li>Гладь рубашки. Стирай кроссовки. Следи за состоянием вещей</li>
+                                <li>Аксессуары: меньше = лучше. Часы > браслеты и цепочки</li>
+                            </ul>
                         </div>
                     </x-card>
-                @endforeach
-            </div>
-        </div>
 
-        <!-- ================= РАЗДЕЛ 2: ПРОДВИНУТЫЕ ЗНАНИЯ ================= -->
-         <div class="space-y-3.5 pt-4">
-            <x-h2 class="mb-1">📐 Тайные свитки и архитектура систем</x-h2>
-            <div class="grid grid-cols-1 gap-3.5">
-                @foreach ($advancedCodex as $index => $cat)
-                    @php $catId = $index + 100; @endphp
                     <x-card hover>
                         <!-- Шапка категории -->
                         <div class="cursor-pointer flex justify-between items-center"
-                            x-on:click="activeCategory = activeCategory === {{ $catId }} ? null : {{ $catId }}">
+                            x-on:click="activeCategory = activeCategory === 2 ? null : 2">
                             <div class="flex items-center gap-3">
-                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">{{ $cat['icon'] }}</span>
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">🗣️</span>
                                 <div>
-                                    <x-h3 class="text-indigo-300">{{ $cat['title'] }}</x-h3>
-                                    <x-p class="text-slate-400 mt-0.5">{{ $cat['description'] }}</x-p>
+                                    <x-h3>Речь</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Уверенность в общении, дикция и избавление от слов-паразитов</x-p>
                                 </div>
                             </div>
                             <span class="text-xs text-slate-400 transform transition-transform duration-200"
-                                :class="activeCategory === {{ $catId }} ? 'rotate-180' : ''">▼</span>
+                                :class="activeCategory === 2 ? 'rotate-180' : ''">▼</span>
                         </div>
                         <!-- Раскрывающиеся правила -->
-                        <div x-show="activeCategory === {{ $catId }}" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-3">
-                            @foreach ($cat['rules'] as $rule)
-                                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900 flex gap-3 items-start">
-                                    <span class="text-emerald-400 text-xs font-bold mt-0.5">🌟</span>
-                                    <x-p class="text-slate-200">{{ $rule }}</x-p>
-                                </div>
-                            @endforeach
+                        <div x-show="activeCategory === 2" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Говори медленнее — быстрая речь = нервозность</li>
+                                <li>Убери слова-паразиты: «ну», «типа», «короче», «как бы»</li>
+                                <li>Не оправдывайся</li>
+                                <li>Не извиняйся без причины</li>
+                                <li>Читай вслух — тренировка дикции и словарного запаса</li>
+                                <li>Не перебивай. Не жалуйся. Не матерись через слово</li>
+                            </ul>
                         </div>
                     </x-card>
-                @endforeach
+
+                    <x-card hover>
+                        <!-- Шапка категории -->
+                        <div class="cursor-pointer flex justify-between items-center"
+                            x-on:click="activeCategory = activeCategory === 3 ? null : 3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">🏋️</span>
+                                <div>
+                                    <x-h3>Тело и здоровье</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Гигиена, осанка, базовый баланс сна и питания</x-p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 transform transition-transform duration-200"
+                                :class="activeCategory === 3 ? 'rotate-180' : ''">▼</span>
+                        </div>
+                        <!-- Раскрывающиеся правила -->
+                        <div x-show="activeCategory === 3" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Душ каждый день, дезодорант — обязательно</li>
+                                <li>Чистые ногти, зубы 2 раза в день, уход за кожей</li>
+                                <li>Стрижка каждые 3–4 недели</li>
+                                <li>Осанка: плечи назад, грудь вперёд, подбородок параллельно полу</li>
+                                <li>Стой у стены 2 мин/день (затылок, лопатки, ягодицы, пятки)</li>
+                            </ul>
+                        </div>
+                    </x-card>
+
+                    <x-card hover>
+                        <!-- Шапка категории -->
+                        <div class="cursor-pointer flex justify-between items-center"
+                            x-on:click="activeCategory = activeCategory === 4 ? null : 4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">🧠</span>
+                                <div>
+                                    <x-h3>Интеллект</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Критическое мышление, привычка к чтению и цифровая гигиена</x-p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 transform transition-transform duration-200"
+                                :class="activeCategory === 4 ? 'rotate-180' : ''">▼</span>
+                        </div>
+                        <!-- Раскрывающиеся правила -->
+                        <div x-show="activeCategory === 4" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Формируй СВОЁ мнение, не повторяй чужие из тиктока</li>
+                                <li>Критическое мышление: «Где доказательства? Кому выгодно?»</li>
+                            </ul>
+                        </div>
+                    </x-card>
+
+                    <x-card hover>
+                        <!-- Шапка категории -->
+                        <div class="cursor-pointer flex justify-between items-center"
+                            x-on:click="activeCategory = activeCategory === 5 ? null : 5">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">🤝</span>
+                                <div>
+                                    <x-h3>Социалка</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Правила хорошего тона, пунктуальность и сила данного слова</x-p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 transform transition-transform duration-200"
+                                :class="activeCategory === 5 ? 'rotate-180' : ''">▼</span>
+                        </div>
+                        <!-- Раскрывающиеся правила -->
+                        <div x-show="activeCategory === 5" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Смотри в глаза при разговоре — мягко и уверенно</li>
+                                <li>Будь пунктуальным — приходи на 5 мин раньше</li>
+                                <li>Помогай без ожидания ответа</li>
+                            </ul>
+                        </div>
+                    </x-card>
+
+                    <x-card hover>
+                        <!-- Шапка категории -->
+                        <div class="cursor-pointer flex justify-between items-center"
+                            x-on:click="activeCategory = activeCategory === 6 ? null : 6">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">🏠</span>
+                                <div>
+                                    <x-h3>Быт</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Порядок в доме, дисциплина в мелочах и кулинарные навыки</x-p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 transform transition-transform duration-200"
+                                :class="activeCategory === 6 ? 'rotate-180' : ''">▼</span>
+                        </div>
+                        <!-- Раскрывающиеся правила -->
+                        <div x-show="activeCategory === 6" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Заправил кровать каждое утро (30 сек → тон дня)</li>
+                                <li>Не копи грязную посуду</li>
+                                <li>Выброси хлам: не используешь 6 мес → не нужно</li>
+                                <li>Проветривай комнату. Приятный запах</li>
+                                <li>Умей готовить 5 блюд: яичница, паста, рис+мясо, салат, суп</li>
+                            </ul>
+                        </div>
+                    </x-card>
+
+                    <x-card hover>
+                        <!-- Шапка категории -->
+                        <div class="cursor-pointer flex justify-between items-center"
+                            x-on:click="activeCategory = activeCategory === 7 ? null : 7">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl bg-slate-950/80 w-10 h-10 rounded-xl flex items-center justify-center">⚔️</span>
+                                <div>
+                                    <x-h3>Дисциплина</x-h3>
+                                    <x-p class="text-slate-400 mt-0.5">Управление эмоциями, лидерство и преодоление лени</x-p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400 transform transition-transform duration-200"
+                                :class="activeCategory === 7 ? 'rotate-180' : ''">▼</span>
+                        </div>
+                        <!-- Раскрывающиеся правила -->
+                        <div x-show="activeCategory === 7" x-collapse class="mt-4 pt-4 border-t border-slate-950">
+                            <ul class="list-disc pl-5 space-y-2.5 text-slate-300 text-sm font-sans marker:text-indigo-500">
+                                <li>Делай то, что нужно, даже когда не хочется</li>
+                                <li>Признавай ошибки быстро и без оправданий</li>
+                                <li>Не жалуйся — решай проблему или прими её</li>
+                                <li>Контролируй реакции — ты не контролируешь мир, но контролируешь себя</li>
+                                <li>Будь спокоен под давлением — это отличает лидера от толпы</li>
+                            </ul>
+                        </div>
+                    </x-card>
             </div>
         </div>
-
     </div>
-
-    <!-- Модальное окно создания стоической цитаты -->
-    <x-modal name="create-stoic-quote" :show="$errors->isNotEmpty()" focusable>
-        <div class="p-6">
-            <x-h2 class="text-base text-slate-100 tracking-wider mb-4 pb-2 border-b border-slate-800/80">Добавить стоическую цитату</x-h2>
-            
-            <form method="POST" action="{{ route('stoic_quotes.store') }}" class="space-y-4">
-                @csrf
-                
-                <div>
-                    <x-input-label for="stoic_text" value="Высказывание / Цитата" />
-                    <textarea name="text" id="stoic_text" required rows="3" placeholder="Например: Смерти не следует бояться, ведь когда мы есть — её нет, а когда она есть — нас нет."
-                              class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors font-sans leading-relaxed"></textarea>
-                    <x-input-error :messages="$errors->get('text')" class="mt-1" />
-                </div>
-                
-                <div>
-                    <x-input-label for="stoic_practice" value="Практика дня / Размышление" />
-                    <textarea name="practice" id="stoic_practice" rows="2" placeholder="Например: 📌 Практика дня: Подумай о том, что большинство твоих страхов существуют только в твоей голове."
-                              class="w-full bg-slate-950 border border-slate-850 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors font-sans leading-relaxed"></textarea>
-                    <x-input-error :messages="$errors->get('practice')" class="mt-1" />
-                </div>
-
-                <div class="flex justify-end gap-3 pt-2">
-                    <x-secondary-button x-on:click="$dispatch('close')" type="button">
-                        Отмена
-                    </x-secondary-button>
-                    <x-primary-button>
-                        Добавить в свитки
-                    </x-primary-button>
-                </div>
-            </form>
-        </div>
-    </x-modal>
 </x-app-layout>

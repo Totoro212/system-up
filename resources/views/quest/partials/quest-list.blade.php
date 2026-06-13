@@ -36,10 +36,6 @@
                                     {{ $quest->title }}
                                 </x-h3>
 
-                                <!-- Описание для активного квеста -->
-                                <x-p x-show="!completed" class="mt-0.5 text-[11px] text-slate-400 font-medium">
-                                    {{ $quest->description }}
-                                </x-p>
                             </div>
                         </button>
                     </form>
