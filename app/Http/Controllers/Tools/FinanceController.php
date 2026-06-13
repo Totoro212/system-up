@@ -190,8 +190,10 @@ class FinanceController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Новый счет успешно добавлен!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e;
         } catch (\Exception $e) {
-            dd($e->getMessage(), $e->getTraceAsString());
+            return redirect()->back()->withErrors(['system_error' => 'ОШИБКА: ' . $e->getMessage()]);
         }
     }
 }
