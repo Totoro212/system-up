@@ -26,4 +26,27 @@ class Event extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Возвращает отсортированный список предстоящих событий пользователя с расчетом дней
+     */
+    public static function getUpcomingEvents($userId)
+    {
+        return self::where('user_id', $userId)->get()->map(function ($event) {
+            $today = \Carbon\Carbon::today();
+            $eventDate = \Carbon\Carbon::parse($event->event_date)->startOfDay();
+            
+            if ($event->is_annual) {
+                $eventDate->year($today->year);
+                if ($eventDate->isPast() && !$eventDate->isToday()) {
+                    $eventDate->addYear();
+                }
+            }
+            
+            $event->days_remaining = $today->diffInDays($eventDate, false);
+            return $event;
+        })->filter(function ($event) {
+            return $event->days_remaining >= 0;
+        })->sortBy('days_remaining')->values();
+    }
 }
