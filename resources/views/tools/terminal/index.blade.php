@@ -17,7 +17,7 @@
     <script>
         function marketTerminal() {
             return {
-                currentTab: 'hub', // 'hub' или 'terminal'
+                currentTab: localStorage.getItem('terminalTab') || 'hub', // 'hub', 'terminal', 'finance', 'events'
                 btcPrice: null,
                 btcPrevPrice: null,
                 usdPrice: null,
@@ -28,6 +28,10 @@
                 timerInterval: null,
 
                 init() {
+                    this.$watch('currentTab', (val) => {
+                        localStorage.setItem('terminalTab', val);
+                    });
+
                     // Таймер тикает в фоновом режиме каждую секунду
                     this.timerInterval = setInterval(() => {
                         if (this.currentTab === 'terminal') {

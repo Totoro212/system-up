@@ -151,6 +151,27 @@
             <div class="absolute bottom-[-10%] right-[-15%] w-[800px] h-[800px] rounded-full bg-emerald-600/4 blur-[160px]"></div>
         </div>
         <x-navigation></x-navigation>
+
+        <!-- Global Toasts -->
+        @if (session('success'))
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 4000)" class="fixed top-4 right-4 z-50 bg-emerald-500/90 text-white px-6 py-3 rounded-xl shadow-lg border border-emerald-400/50 backdrop-blur-md flex items-center gap-3 transition-all" x-transition>
+                <i class="fa-solid fa-check-circle"></i>
+                <span class="text-sm font-bold tracking-wide">{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div x-data="{ show: true }" x-show="show" class="fixed top-4 right-4 z-50 bg-rose-500/90 text-white px-6 py-4 rounded-xl shadow-lg border border-rose-400/50 backdrop-blur-md flex items-start gap-3 transition-all" x-transition>
+                <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+                <div class="text-sm font-bold tracking-wide">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+                <button @click="show = false" class="ml-2 text-white/70 hover:text-white"><i class="fa-solid fa-times"></i></button>
+            </div>
+        @endif
+
         <!-- Page Content (Чистые, легкие отступы) -->
         <main class="pt-8 pb-28">
             {{ $slot }}
