@@ -28,7 +28,35 @@ class EventController extends Controller
             'is_annual' => $request->has('is_annual'),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Событие успешно добавлено!');
+        return redirect()->route('terminal')->with('success', 'Событие успешно добавлено!');
+    }
+
+    /**
+     * Обновить событие
+     */
+    public function update(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        if ($event->user_id !== auth()->id()) {
+            abort(403, 'У вас нет прав для изменения этого события.');
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'event_date' => 'required|date',
+            'icon' => 'nullable|string|max:10',
+            'is_annual' => 'nullable|boolean',
+        ]);
+
+        $event->update([
+            'title' => $validated['title'],
+            'event_date' => $validated['event_date'],
+            'icon' => $validated['icon'] ?? '📅',
+            'is_annual' => $request->has('is_annual'),
+        ]);
+
+        return redirect()->route('terminal')->with('success', 'Событие успешно обновлено!');
     }
 
     /**
@@ -44,6 +72,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Событие удалено!');
+        return redirect()->route('terminal')->with('success', 'Событие удалено!');
     }
 }

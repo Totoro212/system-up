@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
         Route::post('quests', [\App\Http\Controllers\Quest\QuestController::class, 'store'])->name('quests.store');
         Route::post('quests/seed-default', [\App\Http\Controllers\Quest\QuestController::class, 'seedDefault'])->name('quests.seed_default');
         Route::post('events', [EventController::class, 'store'])->name('events.store');
+        Route::put('events/{id}', [EventController::class, 'update'])->name('events.update');
         Route::post('workouts', [\App\Http\Controllers\Workout\WorkoutController::class, 'store'])->name('workouts.store');
         Route::post('workouts/seed-default', [\App\Http\Controllers\Workout\WorkoutController::class, 'seedDefault'])->name('workouts.seed_default');
         Route::post('workouts/{id}/complete', [\App\Http\Controllers\Workout\WorkoutController::class, 'complete'])->name('workouts.complete');
