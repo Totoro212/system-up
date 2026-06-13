@@ -1,11 +1,11 @@
 <x-app-layout title='Пульт'>
     <div class="max-w-2xl mx-auto p-4 space-y-6 pb-20" x-data="marketTerminal()">
 
-        @include('tools.terminal.partials.hub')
-        @include('tools.terminal.partials.market')
+        @include('tools.hub')
+        @include('tools.market.market')
         @include('tools.events.events')
 
-        @include('tools.terminal.partials.modals')
+        @include('tools.events.modals')
 
     </div>
 

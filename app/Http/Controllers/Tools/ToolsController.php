@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Tools;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 
-class TerminalController extends Controller
+class ToolsController extends Controller
 {
     /**
-     * Отобразить рыночный терминал.
+     * Отобразить хаб инструментов.
      */
     public function index()
     {
         // События
         $events = Event::getUpcomingEvents(auth()->id());
 
-        return view('tools.terminal.index', [
+        return view('tools.index', [
             'events' => $events
         ]);
     }
