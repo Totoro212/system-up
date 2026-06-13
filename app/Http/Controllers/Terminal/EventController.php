@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Quest;
+namespace App\Http\Controllers\Terminal;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

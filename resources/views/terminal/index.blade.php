@@ -208,34 +208,35 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="text-right">
-                                <span class="text-xl font-black block {{ $accentColor }}">
-                                    @if($event->days_remaining === 0)
-                                        СЕГОДНЯ!
-                                    @else
-                                        {{ $event->days_remaining }} <span class="text-xs uppercase tracking-widest">дн.</span>
-                                    @endif
-                                </span>
-                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="text-right">
+                                    <span class="text-xl font-black block {{ $accentColor }}">
+                                        @if($event->days_remaining === 0)
+                                            СЕГОДНЯ!
+                                        @else
+                                            {{ $event->days_remaining }} <span class="text-xs uppercase tracking-widest">дн.</span>
+                                        @endif
+                                    </span>
+                                </div>
 
-                            <div class="absolute top-1/2 -translate-y-1/2 -right-24 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-2">
-                                <!-- Кнопка редактирования -->
-                                <button type="button" @click="$dispatch('open-modal', 'edit-event-{{ $event->id }}')"
-                                    class="w-8 h-8 px-0 py-0 flex items-center justify-center rounded-lg bg-slate-950 border border-slate-900 hover:bg-indigo-500/10 hover:border-indigo-500/20 text-slate-400 hover:text-indigo-400 cursor-pointer"
-                                    title="Редактировать">
-                                    <span class="text-xs">✏️</span>
-                                </button>
+                                <div class="flex items-center gap-2 border-l border-slate-800 pl-4 ml-2">
+                                    <!-- Кнопка редактирования -->
+                                    <button type="button" @click="$dispatch('open-modal', 'edit-event-{{ $event->id }}')"
+                                        class="w-8 h-8 px-0 py-0 flex items-center justify-center rounded-lg bg-slate-950/60 border border-slate-900 hover:bg-indigo-500/10 hover:border-indigo-500/30 text-slate-400 hover:text-indigo-400 cursor-pointer transition-colors"
+                                        title="Редактировать">
+                                        <span class="text-xs">✏️</span>
+                                    </button>
 
-                                <!-- Кнопка удаления -->
-                                <form method="POST" action="{{ route('events.destroy', $event->id) }}" onsubmit="return confirm('Удалить событие?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-danger-button class="w-8 h-8 px-0 py-0 flex items-center justify-center rounded-lg bg-slate-950 border border-slate-900 hover:bg-red-500/10 hover:border-red-500/20"
-                                        title="Удалить событие">
-                                        <span class="text-[10px] text-slate-400 hover:text-red-400">✕</span>
-                                    </x-danger-button>
-                                </form>
+                                    <!-- Кнопка удаления -->
+                                    <form method="POST" action="{{ route('events.destroy', $event->id) }}" onsubmit="return confirm('Удалить событие?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-danger-button class="w-8 h-8 px-0 py-0 flex items-center justify-center rounded-lg bg-slate-950/60 border border-slate-900 hover:bg-red-500/10 hover:border-red-500/30 transition-colors"
+                                            title="Удалить событие">
+                                            <span class="text-[10px] text-slate-400 hover:text-red-400">✕</span>
+                                        </x-danger-button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
 

@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Quest\DashboardController;
 use App\Http\Controllers\Quest\QuestlogController;
-use App\Http\Controllers\Quest\EventController;
+use App\Http\Controllers\Terminal\EventController;
 
 Route::get('/', function () {
     return view('welcome');
