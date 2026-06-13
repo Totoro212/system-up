@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Quest\DashboardController;
 use App\Http\Controllers\Quest\QuestlogController;
-use App\Http\Controllers\Terminal\EventController;
+use App\Http\Controllers\Tools\EventController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,13 +38,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('workouts', [\App\Http\Controllers\Workout\WorkoutController::class, 'index'])->name('workouts.index');
     Route::get('codex', [\App\Http\Controllers\Codex\CodexController::class, 'index'])->name('codex');
-    Route::get('terminal', [\App\Http\Controllers\Terminal\TerminalController::class, 'index'])->name('terminal');
+    Route::get('terminal', [\App\Http\Controllers\Tools\TerminalController::class, 'index'])->name('terminal');
 
     // Finance Module (API endpoints for modals)
     Route::prefix('finance')->name('finance.')->group(function () {
-        Route::post('/income', [\App\Http\Controllers\Finance\FinanceController::class, 'storeIncome'])->name('income.store');
-        Route::post('/expense', [\App\Http\Controllers\Finance\FinanceController::class, 'storeExpense'])->name('expense.store');
-        Route::post('/transfer', [\App\Http\Controllers\Finance\FinanceController::class, 'transfer'])->name('transfer');
+        Route::post('/income', [\App\Http\Controllers\Tools\FinanceController::class, 'storeIncome'])->name('income.store');
+        Route::post('/expense', [\App\Http\Controllers\Tools\FinanceController::class, 'storeExpense'])->name('expense.store');
+        Route::post('/transfer', [\App\Http\Controllers\Tools\FinanceController::class, 'transfer'])->name('transfer');
     });
 });
 

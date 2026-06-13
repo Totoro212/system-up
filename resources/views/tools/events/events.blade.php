@@ -1,18 +1,17 @@
-        <!-- ================= ЭКРАН 3: ВАЖНЫЕ ДАТЫ ================= -->
+        <!-- ================= ВАЖНЫЕ ДАТЫ ================= -->
         <template x-if="currentTab === 'events'">
-            <div class="space-y-6">
-                <!-- Навигационная панель назад -->
-                <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
-                    <button @click="currentTab = 'hub'" 
-                            class="text-[10px] font-extrabold text-indigo-400 hover:text-indigo-300 uppercase tracking-widest flex items-center gap-1.5 cursor-pointer bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-850/50 hover:-translate-y-0.5 transition-all">
-                        <span>←</span>
-                        <span>В Инструменты</span>
-                    </button>
-                    <x-primary-button x-on:click.prevent="$dispatch('open-modal', 'create-event')">
-                        <span>+</span>
-                        <span>Добавить</span>
-                    </x-primary-button>
-                </div>
+        <div class="space-y-6">
+            <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
+                <button @click="currentTab = 'hub'" 
+                        class="text-[10px] font-extrabold text-indigo-400 hover:text-indigo-300 uppercase tracking-widest flex items-center gap-1.5 cursor-pointer bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-850/50 hover:-translate-y-0.5 transition-all">
+                    <span>←</span>
+                    <span>В Инструменты</span>
+                </button>
+                <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-event')">
+                    <span>+</span>
+                    <span>Добавить событие</span>
+                </x-primary-button>
+            </div>
 
                 <div>
                     <x-h1>📅 Важные даты</x-h1>

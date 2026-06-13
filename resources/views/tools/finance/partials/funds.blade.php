@@ -1,4 +1,5 @@
-<x-card>
+<template x-if="currentTab === 'finance'">
+<x-card class="mb-6">
     <div class="flex justify-between items-center mb-6">
         <x-h2>🎯 Виртуальные фонды (50/40/10)</x-h2>
         <div class="space-x-2">
@@ -38,3 +39,4 @@
         @endforelse
     </div>
 </x-card>
+</template>

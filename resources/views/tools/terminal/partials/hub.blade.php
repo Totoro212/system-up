@@ -38,6 +38,20 @@
                         </div>
                     </button>
 
+                    <!-- КНОПКА: ФИНАНСЫ -->
+                    <button @click="currentTab = 'finance'" 
+                            class="w-full bg-slate-900 hover:bg-slate-900/60 border border-slate-900 hover:border-indigo-500/20 text-left rounded-2xl p-5 transition-all duration-200 cursor-pointer shadow-lg group relative overflow-hidden block">
+                        <div class="absolute -right-6 -top-6 w-16 h-16 bg-yellow-500/5 rounded-full blur-xl group-hover:bg-yellow-500/10 transition-all"></div>
+                        
+                        <div class="flex items-center gap-3.5">
+                            <span class="text-2xl bg-slate-950/80 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-850/50">💸</span>
+                            <div>
+                                <x-h3 class="text-slate-200 group-hover:text-indigo-300 transition-colors">Финансы</x-h3>
+                                <x-p class="text-slate-400 mt-1">Управление бюджетом по правилу 50/40/10.</x-p>
+                            </div>
+                        </div>
+                    </button>
+
                     <!-- КНОПКА: ГЕНЕРАТОР ПАРОЛЕЙ (СКОРО) -->
                     <x-card class="border-slate-900/40 opacity-60 relative overflow-hidden">
                         <div class="absolute top-4 right-4 bg-slate-950 px-2 py-0.5 rounded text-[9px] font-extrabold text-slate-500 uppercase tracking-widest border border-slate-900">СКОРО</div>

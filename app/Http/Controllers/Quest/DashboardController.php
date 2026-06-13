@@ -22,14 +22,8 @@ class DashboardController extends Controller
                       ->where('user_id', auth()->id());
             }])->get();
             
-        // Финансы
-        $accounts = \App\Models\Account::where('user_id', auth()->id())->get();
-        $funds = \App\Models\Fund::where('user_id', auth()->id())->get();
-
         return view('quest.index', [
-            'quests' => $quests,
-            'accounts' => $accounts,
-            'funds' => $funds
+            'quests' => $quests
         ]);
     }
 
