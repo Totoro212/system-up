@@ -13,7 +13,7 @@
     <script>
         function marketTerminal() {
             return {
-                currentTab: localStorage.getItem('terminalTab') || 'hub', // 'hub', 'terminal', 'finance', 'events'
+                currentTab: (localStorage.getItem('terminalTab') === 'finance') ? 'hub' : (localStorage.getItem('terminalTab') || 'hub'),
                 btcPrice: null,
                 btcPrevPrice: null,
                 usdPrice: null,
