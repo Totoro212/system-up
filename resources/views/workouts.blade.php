@@ -6,7 +6,7 @@
         <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
             <div>
                 <x-h1>🏋️ Тренировки</x-h1>
-                <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Очередь: {{ $totalWorkouts }} программ</x-p>
+                <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Программа: {{ $totalProgramWorkouts }} тренировок в ротации</x-p>
             </div>
             <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-workout')">
                 <span>+</span>
@@ -138,36 +138,28 @@
             @endif
         </div>
 
-        <!-- ================= БЛОК: ВСЕ ПРОГРАММЫ ================= -->
+        <!-- ================= БЛОК: ПРОГРАММА (РОТАЦИЯ) ================= -->
         <div x-data="{ activeWorkout: null }" class="space-y-3.5">
-            <x-h2>Мои программы</x-h2>
+            <x-h2>🔄 Программа (ротация)</x-h2>
 
-            @forelse ($workouts as $workout)
+            @forelse ($programWorkouts as $workout)
                 <x-card class="bg-slate-900/60 border-slate-900 duration-200">
-
                     <div class="flex justify-between items-center gap-4">
-                        <!-- Клик для раскрытия списка упражнений -->
                         <div class="cursor-pointer flex-1"
                             x-on:click="activeWorkout = activeWorkout === {{ $workout->id }} ? null : {{ $workout->id }}">
                             <div class="flex flex-wrap items-center gap-1.5">
                                 <span class="text-xs font-bold text-indigo-300 bg-indigo-500/10 px-2.5 py-0.5 rounded border border-indigo-500/20">
                                     #{{ $workout->queue_position }} в очереди
                                 </span>
-
-                                <!-- Индикатор состояния -->
-                                <span
-                                    class="px-2.5 py-0.5 rounded text-xs font-black uppercase tracking-wider border {{ $workout->status_color }}">
+                                <span class="px-2.5 py-0.5 rounded text-xs font-black uppercase tracking-wider border {{ $workout->status_color }}">
                                     {{ $workout->status_label }}
                                 </span>
                             </div>
-
-                            <x-h3
-                                class="text-base mt-2.5 flex items-center gap-2">
+                            <x-h3 class="text-base mt-2.5 flex items-center gap-2">
                                 <span>{{ $workout->title }}</span>
                                 <span class="text-xs text-slate-400 transform transition-transform duration-200"
-                                    :class="activeWorkout === {{ $workout->id }} ? 'rotate-180' : ''">▼</span>
+                                    :class="activeWorkout === {{ $workout->id }} ? 'rotate-180' : ''">&#9660;</span>
                             </x-h3>
-
                             <x-p class="text-slate-400 mt-1.5">
                                 @if ($workout->last_performed_at)
                                     Выполнялась: {{ $workout->last_performed_at->diffForHumans() }}
@@ -176,88 +168,28 @@
                                 @endif
                             </x-p>
                         </div>
-
-                        <!-- Кнопка удаления -->
                         <form method="POST" action="{{ route('workouts.destroy', $workout->id) }}"
                             onsubmit="return confirm('Удалить эту программу тренировок?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-red-400 hover:border-red-900/30 flex items-center justify-center transition-colors cursor-pointer">
+                            <button type="submit" class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-red-400 hover:border-red-900/30 flex items-center justify-center transition-colors cursor-pointer">
                                 <span class="text-xs">✕</span>
                             </button>
                         </form>
                     </div>
-
-                    <!-- Раскрывающийся список упражнений (Alpine) -->
-                    <div x-show="activeWorkout === {{ $workout->id }}" x-collapse
-                        class="mt-4 pt-4 border-t border-slate-950 space-y-3">
-                        <span
-                            class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">Упражнения:</span>
-
-                        @foreach ($workout->exercises as $exercise)
-                            <div class="bg-slate-950/80 border border-slate-900 rounded-xl p-4">
-                                <div class="flex justify-between items-center flex-wrap gap-2">
-                                    <x-h3 class="text-slate-200 font-bold">
-                                        {{ $exercise->title }}</x-h3>
-                                    <span
-                                        class="text-xs font-mono text-emerald-400 font-bold bg-emerald-500/5 px-2.5 py-1 rounded">
-                                        {{ $exercise->sets }} × {{ $exercise->reps }}
-                                    </span>
-                                </div>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    @if ($exercise->target_muscles)
-                                        <span class="text-xs font-bold text-slate-300 bg-slate-900 px-2 py-0.5 rounded">
-                                            🎯 {{ $exercise->target_muscles }}
-                                        </span>
-                                    @endif
-                                    @if ($exercise->weight)
-                                        <span
-                                            class="text-xs font-bold text-amber-400 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-500/10">
-                                            💪 {{ $exercise->weight }}
-                                        </span>
-                                    @endif
-
-                                    <!-- Бейдж прогрессии -->
-                                    @if ($exercise->progression_status !== 'new')
-                                        <span
-                                            class="text-xs font-bold px-2 py-0.5 rounded border {{ $exercise->progression_color }}">
-                                            📈 {{ $exercise->progression_label }}
-                                        </span>
-                                    @endif
-
-                                    <!-- Рекомендация при стагнации -->
-                                    @if ($exercise->suggested_weight)
-                                        <span
-                                            class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-400/20">
-                                            ⚡ +2.5 кг → {{ $exercise->suggested_weight }} кг
-                                        </span>
-                                    @endif
-                                </div>
-
-                                @if ($exercise->description)
-                                    <x-p
-                                        class="text-slate-300 mt-3 bg-slate-950 p-3 rounded-lg border border-slate-850/80 whitespace-pre-line">
-                                        {{ $exercise->description }}
-                                    </x-p>
-                                @endif
-                            </div>
-                        @endforeach
-                    </div>
+                    @include('workouts._exercise-list', ['workout' => $workout])
                 </x-card>
             @empty
                 <x-card class="bg-slate-900/20 border-slate-900/50 text-center py-12 px-6 space-y-4">
                     <span class="text-3xl block">📅</span>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Программы не созданы</h3>
                     <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-                        Создайте вашу первую тренировку с помощью кнопки сверху или мгновенно загрузите готовую
-                        профессиональную программу!
+                        Создайте вашу первую тренировку или мгновенно загрузите готовую профессиональную программу!
                     </p>
                     <div class="pt-2">
                         <form method="POST" action="{{ route('workouts.seed_default') }}">
                             @csrf
-                            <button type="submit"
-                                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5">
+                            <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5">
                                 🚀 Загрузить PUSH / PULL / LEGS по умолчанию
                             </button>
                         </form>
@@ -265,6 +197,60 @@
                 </x-card>
             @endforelse
         </div>
+
+        <!-- ================= БЛОК: ОТДЕЛЬНЫЕ ТРЕНИРОВКИ (ВНЕ ПРОГРАММЫ) ================= -->
+        @if ($standaloneWorkouts->count() > 0)
+        <div x-data="{ activeStandalone: null }" class="space-y-3.5">
+            <x-h2>🎯 Вне программы</x-h2>
+
+            @foreach ($standaloneWorkouts as $workout)
+                <x-card class="bg-slate-900/40 border-slate-800/50 duration-200">
+                    <div class="flex justify-between items-center gap-4">
+                        <div class="cursor-pointer flex-1"
+                            x-on:click="activeStandalone = activeStandalone === {{ $workout->id }} ? null : {{ $workout->id }}">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="text-xs font-bold text-slate-400 bg-slate-800 px-2.5 py-0.5 rounded">
+                                    Свободная
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded text-xs font-black uppercase tracking-wider border {{ $workout->status_color }}">
+                                    {{ $workout->status_label }}
+                                </span>
+                            </div>
+                            <x-h3 class="text-base mt-2.5 flex items-center gap-2">
+                                <span>{{ $workout->title }}</span>
+                                <span class="text-xs text-slate-400 transform transition-transform duration-200"
+                                    :class="activeStandalone === {{ $workout->id }} ? 'rotate-180' : ''">&#9660;</span>
+                            </x-h3>
+                            <x-p class="text-slate-400 mt-1.5">
+                                @if ($workout->last_performed_at)
+                                    Выполнялась: {{ $workout->last_performed_at->diffForHumans() }}
+                                @else
+                                    Еще ни разу не выполнялась
+                                @endif
+                            </x-p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <form method="POST" action="{{ route('workouts.complete', $workout->id) }}">
+                                @csrf
+                                <button type="submit" class="px-3 py-1.5 rounded-xl bg-emerald-600/80 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer">
+                                    ✅ Выполнить
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ route('workouts.destroy', $workout->id) }}"
+                                onsubmit="return confirm('Удалить эту тренировку?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-red-400 hover:border-red-900/30 flex items-center justify-center transition-colors cursor-pointer">
+                                    <span class="text-xs">✕</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    @include('workouts._exercise-list', ['workout' => $workout])
+                </x-card>
+            @endforeach
+        </div>
+        @endif
 
         <!-- ================= БЛОК: БАЗА ЗНАНИЙ ================= -->
         <div class="space-y-3.5 pt-4">
@@ -666,12 +652,16 @@
                         <x-input-error :messages="$errors->get('title')" class="mt-1" />
                     </div>
 
-                    <!-- Информация: тренировка будет добавлена в конец очереди -->
-                    <div class="bg-indigo-500/5 border border-indigo-500/15 rounded-xl px-4 py-3">
-                        <p class="text-xs text-indigo-300 font-semibold">
-                            💡 Тренировка будет автоматически добавлена в конец очереди.
-                            Тренировки идут последовательно друг за другом — пропуск дня не сдвигает очередь.
-                        </p>
+                    <!-- Переключатель: включить в программу -->
+                    <div>
+                        <label class="flex items-center gap-3 cursor-pointer select-none bg-slate-950 border border-slate-850 rounded-xl px-4 py-3">
+                            <input type="checkbox" name="in_rotation" value="1" checked
+                                class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-indigo-500 focus:ring-indigo-500/30 focus:ring-offset-0 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold text-slate-200 block">🔄 Включить в программу ротации</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Тренировка будет идти по очереди с остальными. Если выключить — будет отдельной.</span>
+                            </div>
+                        </label>
                     </div>
 
                     <!-- Динамический блок упражнений -->

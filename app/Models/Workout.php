@@ -13,11 +13,13 @@ class Workout extends Model
         'user_id',
         'title',
         'sort_order',
+        'in_rotation',
         'last_performed_at',
     ];
 
     protected $casts = [
         'sort_order' => 'integer',
+        'in_rotation' => 'boolean',
         'last_performed_at' => 'datetime',
     ];
 
@@ -27,6 +29,22 @@ class Workout extends Model
     public function scopeOrdered(Builder $query): Builder
     {
         return $query->orderBy('sort_order');
+    }
+
+    /**
+     * Scope: только тренировки в ротации программы.
+     */
+    public function scopeInRotation(Builder $query): Builder
+    {
+        return $query->where('in_rotation', true);
+    }
+
+    /**
+     * Scope: только отдельные тренировки вне программы.
+     */
+    public function scopeStandalone(Builder $query): Builder
+    {
+        return $query->where('in_rotation', false);
     }
 
     /**
