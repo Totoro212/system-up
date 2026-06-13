@@ -172,22 +172,26 @@ class FinanceController extends Controller
 
     public function storeAccount(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|in:card,cash,deposit',
-            'currency' => 'required|in:UZS,USD',
-            'balance' => 'required|numeric|min:0'
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'type' => 'required|in:card,cash,deposit',
+                'currency' => 'required|in:UZS,USD',
+                'balance' => 'required|numeric|min:0'
+            ]);
 
-        \App\Models\Account::create([
-            'user_id' => auth()->id(),
-            'name' => $request->name,
-            'type' => $request->type,
-            'currency' => $request->currency,
-            'balance' => $request->balance,
-            'is_joint' => $request->has('is_joint') ? true : false,
-        ]);
+            \App\Models\Account::create([
+                'user_id' => auth()->id(),
+                'name' => $request->name,
+                'type' => $request->type,
+                'currency' => $request->currency,
+                'balance' => $request->balance,
+                'is_joint' => $request->has('is_joint') ? true : false,
+            ]);
 
-        return redirect()->back()->with('success', 'Новый счет успешно добавлен!');
+            return redirect()->back()->with('success', 'Новый счет успешно добавлен!');
+        } catch (\Exception $e) {
+            dd($e->getMessage(), $e->getTraceAsString());
+        }
     }
 }
