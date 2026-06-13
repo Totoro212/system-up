@@ -135,6 +135,86 @@
             @endforelse
         </div>
 
+        </div>
+
+        <!-- ================= БЛОК: ВАЖНЫЕ ДАТЫ (СОБЫТИЯ) ================= -->
+        <div class="mt-8 pt-6 border-t border-slate-900/50">
+            <div class="flex justify-between items-center pb-4">
+                <div>
+                    <x-h2>📅 Важные даты</x-h2>
+                    <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Дни рождения, подписки и события</x-p>
+                </div>
+                <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-event')">
+                    <span>+</span>
+                    <span>Добавить</span>
+                </x-primary-button>
+            </div>
+
+            <div class="space-y-3">
+                @forelse ($events ?? [] as $event)
+                    @php
+                        // Определяем цвет в зависимости от оставшихся дней
+                        $colorClass = 'border-slate-800 bg-slate-900/40 text-slate-400';
+                        $accentColor = 'text-slate-300';
+                        if ($event->days_remaining === 0) {
+                            $colorClass = 'border-red-500/50 bg-red-500/10 text-red-400 animate-pulse';
+                            $accentColor = 'text-red-400';
+                        } elseif ($event->days_remaining <= 3) {
+                            $colorClass = 'border-red-500/30 bg-red-500/5 text-red-400';
+                            $accentColor = 'text-red-400';
+                        } elseif ($event->days_remaining <= 7) {
+                            $colorClass = 'border-amber-500/30 bg-amber-500/5 text-amber-400';
+                            $accentColor = 'text-amber-400';
+                        }
+                    @endphp
+                    
+                    <div class="relative group flex justify-between items-center p-4 rounded-xl border {{ $colorClass }} transition-colors duration-300">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">{{ $event->icon }}</span>
+                            <div>
+                                <x-h3 class="{{ $accentColor }}">{{ $event->title }}</x-h3>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs font-mono font-bold">
+                                        {{ \Carbon\Carbon::parse($event->event_date)->format('d.m.Y') }}
+                                    </span>
+                                    @if($event->is_annual)
+                                        <span class="text-[10px] uppercase tracking-widest font-black bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Ежегодно</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-right">
+                            <span class="text-xl font-black block {{ $accentColor }}">
+                                @if($event->days_remaining === 0)
+                                    СЕГОДНЯ!
+                                @else
+                                    {{ $event->days_remaining }} <span class="text-xs uppercase tracking-widest">дн.</span>
+                                @endif
+                            </span>
+                        </div>
+
+                        <!-- Кнопка удаления -->
+                        <form method="POST" action="{{ route('events.destroy', $event->id) }}"
+                            class="absolute top-1/2 -translate-y-1/2 -right-12 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            @csrf
+                            @method('DELETE')
+                            <x-danger-button class="w-8 h-8 px-0 py-0 flex items-center justify-center rounded-lg bg-slate-950 border border-slate-900 hover:bg-red-500/10 hover:border-red-500/20"
+                                title="Удалить событие">
+                                <span class="text-[10px] text-slate-400 hover:text-red-400">✕</span>
+                            </x-danger-button>
+                        </form>
+                    </div>
+                @empty
+                    <x-card class="bg-slate-900/20 border-slate-900/50 text-center py-8 px-6">
+                        <span class="text-3xl block opacity-50 mb-3">🗓️</span>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Нет предстоящих событий</h3>
+                        <p class="text-xs text-slate-500">Добавьте важные даты, чтобы не забыть о них.</p>
+                    </x-card>
+                @endforelse
+            </div>
+        </div>
+
         <!-- Модальное окно создания квеста -->
         <x-modal name="create-quest" :show="$errors->isNotEmpty()" focusable>
             <div class="p-6">
@@ -165,6 +245,56 @@
                         </x-secondary-button>
                         <x-primary-button>
                             Добавить в список
+                        </x-primary-button>
+                    </div>
+                </form>
+            </div>
+        </x-modal>
+
+        <!-- Модальное окно создания события -->
+        <x-modal name="create-event" focusable>
+            <div class="p-6">
+                <x-h2 class="text-base text-slate-100 tracking-wider mb-4 pb-2 border-b border-slate-800/80">
+                    Добавить важную дату
+                </x-h2>
+
+                <form method="POST" action="{{ route('events.store') }}" class="space-y-4">
+                    @csrf
+
+                    <div>
+                        <x-input-label for="event_title" value='Название события'></x-input-label>
+                        <x-text-input type="text" name="title" id="event_title" required
+                            placeholder="Например: День рождения мамы, Продление Netflix" />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-input-label for="event_date" value="Дата" />
+                            <x-text-input type="date" name="event_date" id="event_date" required />
+                        </div>
+                        <div>
+                            <x-input-label for="event_icon" value="Иконка (Эмодзи)" />
+                            <x-text-input type="text" name="icon" id="event_icon" value="📅" maxlength="10" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-3 cursor-pointer select-none bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 hover:bg-slate-850 transition-colors">
+                            <input type="checkbox" name="is_annual" value="1"
+                                class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-indigo-500 focus:ring-indigo-500/30 cursor-pointer">
+                            <div>
+                                <span class="text-xs font-bold text-slate-200 block">🔁 Ежегодное событие</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Будет автоматически переноситься на следующий год</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end gap-3 pt-2">
+                        <x-secondary-button x-on:click="$dispatch('close')" type="button">
+                            Отмена
+                        </x-secondary-button>
+                        <x-primary-button>
+                            Сохранить дату
                         </x-primary-button>
                     </div>
                 </form>

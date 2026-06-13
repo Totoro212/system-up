@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Quest\DashboardController;
 use App\Http\Controllers\Quest\QuestlogController;
+use App\Http\Controllers\Quest\EventController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
         Route::post('quest/{id}/complete', [QuestlogController::class, 'complete'])->name('quest_complete');
         Route::post('quests', [\App\Http\Controllers\Quest\QuestController::class, 'store'])->name('quests.store');
         Route::post('quests/seed-default', [\App\Http\Controllers\Quest\QuestController::class, 'seedDefault'])->name('quests.seed_default');
+        Route::post('events', [EventController::class, 'store'])->name('events.store');
         Route::post('workouts', [\App\Http\Controllers\Workout\WorkoutController::class, 'store'])->name('workouts.store');
         Route::post('workouts/seed-default', [\App\Http\Controllers\Workout\WorkoutController::class, 'seedDefault'])->name('workouts.seed_default');
         Route::post('workouts/{id}/complete', [\App\Http\Controllers\Workout\WorkoutController::class, 'complete'])->name('workouts.complete');
@@ -29,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('throttle:30,1')->group(function () {
         Route::delete('quests/{id}', [\App\Http\Controllers\Quest\QuestController::class, 'destroy'])->name('quests.destroy');
+        Route::delete('events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
         Route::delete('workouts/{id}', [\App\Http\Controllers\Workout\WorkoutController::class, 'destroy'])->name('workouts.destroy');
     });
 
