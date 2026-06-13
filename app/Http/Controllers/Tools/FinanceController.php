@@ -27,36 +27,52 @@ class FinanceController extends Controller
 
         $account = \App\Models\Account::findOrFail($request->account_id);
         $amount = $request->amount;
+        $isSalary = $request->has('is_salary') && $request->is_salary == 1;
 
         // 1. Update Physical Account Balance
         $account->balance += $amount;
         $account->save();
 
-        // 2. Distribute to Funds based on target_percentage
-        $funds = \App\Models\Fund::where('user_id', auth()->id())
-            ->whereNotNull('target_percentage')
-            ->where('currency', $account->currency)
-            ->get();
+        if ($isSalary) {
+            // 2. Distribute to Funds based on target_percentage
+            $funds = \App\Models\Fund::where('user_id', auth()->id())
+                ->whereNotNull('target_percentage')
+                ->where('currency', $account->currency)
+                ->get();
 
-        foreach ($funds as $fund) {
-            $splitAmount = $amount * ($fund->target_percentage / 100);
-            
-            $fund->balance += $splitAmount;
-            $fund->save();
+            foreach ($funds as $fund) {
+                if ($fund->target_percentage > 0) {
+                    $splitAmount = $amount * ($fund->target_percentage / 100);
+                    
+                    $fund->balance += $splitAmount;
+                    $fund->save();
 
-            // Log Transaction for each split
+                    // Log Transaction for each split
+                    \App\Models\Transaction::create([
+                        'user_id' => auth()->id(),
+                        'account_id' => $account->id,
+                        'fund_id' => $fund->id,
+                        'type' => 'income',
+                        'amount' => $splitAmount,
+                        'currency' => $account->currency,
+                        'description' => 'Распределение дохода: ' . ($request->description ?? 'Зарплата')
+                    ]);
+                }
+            }
+        } else {
+            // Just log a single income transaction
             \App\Models\Transaction::create([
                 'user_id' => auth()->id(),
                 'account_id' => $account->id,
-                'fund_id' => $fund->id,
                 'type' => 'income',
-                'amount' => $splitAmount,
+                'amount' => $amount,
                 'currency' => $account->currency,
-                'description' => 'Распределение дохода: ' . ($request->description ?? 'Зарплата')
+                'description' => $request->description ?? 'Пополнение счета'
             ]);
         }
 
-        return redirect()->back()->with('success', 'Доход успешно добавлен и распределен по правилу 50/40/10!');
+        $msg = $isSalary ? 'Доход успешно распределен по правилу 50/40/10!' : 'Счет успешно пополнен!';
+        return redirect()->back()->with('success', $msg);
     }
 
     public function storeExpense(Request $request)

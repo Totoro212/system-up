@@ -36,5 +36,4 @@
         @endforelse
     </div>
 </x-card>
-</div>
-</template>
+

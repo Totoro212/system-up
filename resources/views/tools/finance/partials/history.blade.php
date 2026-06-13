@@ -1,4 +1,3 @@
-<template x-if="currentTab === 'finance'">
 <x-card class="mb-6">
     <div class="flex justify-between items-center mb-4">
         <x-h2>📜 История операций</x-h2>
@@ -40,4 +39,5 @@
         @endforelse
     </div>
 </x-card>
+</div>
 </template>
