@@ -19,11 +19,16 @@ class TerminalController extends Controller
         // Финансы
         $accounts = \App\Models\Account::where('user_id', auth()->id())->get();
         $funds = \App\Models\Fund::where('user_id', auth()->id())->get();
+        $transactions = \App\Models\Transaction::where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->limit(20)
+            ->get();
 
         return view('tools.terminal.index', [
             'events' => $events,
             'accounts' => $accounts,
-            'funds' => $funds
+            'funds' => $funds,
+            'transactions' => $transactions
         ]);
     }
 }

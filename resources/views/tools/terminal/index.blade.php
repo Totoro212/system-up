@@ -6,6 +6,7 @@
         @include('tools.events.events')
         @include('tools.finance.partials.funds')
         @include('tools.finance.partials.accounts')
+        @include('tools.finance.partials.history')
 
         @include('tools.terminal.partials.modals')
         @include('tools.finance.partials.modals')

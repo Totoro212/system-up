@@ -1,4 +1,4 @@
-<template x-if="currentTab === 'finance'">
+
 <x-card>
     <div class="flex justify-between items-center mb-4">
         <x-h2>💳 Физические счета</x-h2>
@@ -36,4 +36,5 @@
         @endforelse
     </div>
 </x-card>
+</div>
 </template>

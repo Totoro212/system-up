@@ -125,3 +125,30 @@
         </div>
     </form>
 </x-modal>
+
+<!-- Настройка процентов (50/40/10) -->
+<x-modal name="edit-funds" focusable>
+    <form method="post" action="{{ route('finance.funds.update') }}" class="p-6">
+        @csrf
+        <h2 class="text-lg font-medium text-slate-100 mb-4">
+            ⚙️ Настройка правил распределения
+        </h2>
+        <p class="text-xs text-slate-400 mb-4">
+            Установите целевые проценты для каждого фонда. Сумма должна быть равна 100%. Оставьте 0 для фондов, которые пополняются вручную (например, Семейный капитал).
+        </p>
+
+        <div class="space-y-4">
+            @foreach($funds as $fund)
+                <div>
+                    <x-input-label for="fund_{{ $fund->id }}" value="{{ $fund->icon }} {{ $fund->name }} (%)" />
+                    <x-text-input id="fund_{{ $fund->id }}" name="percentages[{{ $fund->id }}]" type="number" step="1" min="0" max="100" class="mt-1 block w-full" value="{{ $fund->target_percentage }}" required />
+                </div>
+            @endforeach
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <x-secondary-button x-on:click="$dispatch('close')">Отмена</x-secondary-button>
+            <x-primary-button class="ml-3 bg-indigo-600 hover:bg-indigo-500">Сохранить</x-primary-button>
+        </div>
+    </form>
+</x-modal>

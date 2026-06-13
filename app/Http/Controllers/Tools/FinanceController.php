@@ -130,4 +130,27 @@ class FinanceController extends Controller
 
         return redirect()->back()->with('success', 'Перевод выполнен успешно!');
     }
+
+    public function updateFunds(Request $request)
+    {
+        $request->validate([
+            'percentages' => 'required|array',
+            'percentages.*' => 'numeric|min:0|max:100'
+        ]);
+
+        $total = array_sum($request->percentages);
+        if ($total !== 100 && $total !== 0) {
+            return redirect()->back()->withErrors(['percentages' => 'Сумма процентов должна быть равна 100 или 0.']);
+        }
+
+        foreach ($request->percentages as $fundId => $percent) {
+            $fund = \App\Models\Fund::where('id', $fundId)->where('user_id', auth()->id())->first();
+            if ($fund) {
+                $fund->target_percentage = $percent;
+                $fund->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Правила распределения обновлены!');
+    }
 }
