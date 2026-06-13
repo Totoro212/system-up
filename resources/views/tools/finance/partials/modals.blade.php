@@ -2,20 +2,23 @@
 <x-modal name="add-income" focusable>
     <form method="post" action="{{ route('finance.income.store') }}" class="p-6">
         @csrf
-        <h2 class="text-xl font-black text-slate-100 mb-2">📥 Получил деньги</h2>
-        <p class="text-xs text-slate-400 mb-6">Запишите поступление средств на ваши счета.</p>
+        <h2 class="text-xl font-black text-slate-100 mb-2">📥 Получил доход</h2>
+        <p class="text-xs text-slate-400 mb-6">Добавьте новую сумму. По умолчанию деньги падают на главную карту (Uzum).</p>
 
         <div class="space-y-5">
             <div>
-                <x-input-label for="amount" value="Сумма" />
+                <x-input-label for="amount" value="Сколько получили?" />
                 <x-text-input id="amount" name="amount" type="number" step="0.01" class="mt-1 block w-full text-lg font-bold" required />
             </div>
 
             <div>
-                <x-input-label for="account_id" value="Куда поступили деньги? (Счет/Карта)" />
+                <x-input-label for="account_id" value="Куда упали деньги?" />
                 <select name="account_id" id="account_id" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
+                    <!-- Пытаемся поставить Uzum первым или выбранным по умолчанию, но пока просто выводим список -->
                     @foreach($accounts as $account)
-                        <option value="{{ $account->id }}">{{ $account->name }} ({{ $account->currency }})</option>
+                        <option value="{{ $account->id }}" {{ str_contains(strtolower($account->name), 'uzum') ? 'selected' : '' }}>
+                            {{ $account->name }} ({{ $account->currency }})
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -24,14 +27,14 @@
                 <label class="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" name="is_salary" value="1" class="rounded border-slate-800 bg-slate-900 text-indigo-500 shadow-sm focus:ring-indigo-500 mt-1" checked>
                     <div>
-                        <span class="block text-sm font-bold text-indigo-300">Это Зарплата (Основной доход)</span>
-                        <span class="block text-[10px] text-slate-400 mt-1 leading-relaxed">Включите, чтобы система автоматически распределила эту сумму по вашим бюджетам (50/40/10). Если это просто пополнение (долг, подарок) — выключите.</span>
+                        <span class="block text-sm font-bold text-indigo-300">Это Основной доход (Зарплата)</span>
+                        <span class="block text-[10px] text-slate-400 mt-1 leading-relaxed">Система сама раскидает эту сумму по вашим бюджетам (50% Нужды, 35% Желания, 10% Сбережения, 5% Семья). Снимите галочку, если это просто возврат долга или подарок.</span>
                     </div>
                 </label>
             </div>
             
             <div>
-                <x-input-label for="description" value="Комментарий (необязательно)" />
+                <x-input-label for="description" value="Комментарий (от кого?)" />
                 <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" placeholder="Например: Зарплата за май" />
             </div>
         </div>
@@ -48,37 +51,38 @@
     <form method="post" action="{{ route('finance.expense.store') }}" class="p-6">
         @csrf
         <h2 class="text-xl font-black text-slate-100 mb-2">💸 Потратил деньги</h2>
-        <p class="text-xs text-slate-400 mb-6">Запишите расход, чтобы бюджеты обновились.</p>
+        <p class="text-xs text-slate-400 mb-6">Списание физических денег с вашей карты и уменьшение лимита в нужном бюджете.</p>
 
         <div class="space-y-5">
             <div>
-                <x-input-label for="amount_expense" value="Сумма" />
+                <x-input-label for="amount_expense" value="Сколько потратили?" />
                 <x-text-input id="amount_expense" name="amount" type="number" step="0.01" class="mt-1 block w-full text-lg font-bold" required />
             </div>
 
             <div>
-                <x-input-label for="account_id_expense" value="Откуда оплатили? (Счет/Карта)" />
+                <x-input-label for="description_expense" value="На что? (Продукты, Кафе, Бензин)" />
+                <x-text-input id="description_expense" name="description" type="text" class="mt-1 block w-full" placeholder="Например: Продукты в Корзинке" required />
+            </div>
+
+            <div>
+                <x-input-label for="account_id_expense" value="Какой картой реально платили?" />
                 <select name="account_id" id="account_id_expense" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
                     @foreach($accounts as $account)
-                        <option value="{{ $account->id }}">{{ $account->name }} ({{ $account->currency }})</option>
+                        <option value="{{ $account->id }}" {{ str_contains(strtolower($account->name), 'uzum') ? 'selected' : '' }}>
+                            {{ $account->name }} ({{ $account->currency }})
+                        </option>
                     @endforeach
                 </select>
-                <p class="text-[10px] text-slate-500 mt-1">Отсюда спишутся физические деньги.</p>
+                <p class="text-[10px] text-slate-500 mt-1">Отсюда уйдут физические деньги (например, Ipak Yuli ради кэшбека).</p>
             </div>
 
             <div>
-                <x-input-label for="fund_id" value="Из какого бюджета (Фонда)?" />
+                <x-input-label for="fund_id" value="Из какого бюджета (конверта) вычесть лимит?" />
                 <select name="fund_id" id="fund_id" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
                     @foreach($funds as $fund)
-                        <option value="{{ $fund->id }}">{{ $fund->icon }} {{ $fund->name }} (Остаток: {{ number_format($fund->balance, 0, '.', ' ') }})</option>
+                        <option value="{{ $fund->id }}">{{ $fund->icon }} {{ $fund->name }} (Доступно: {{ number_format($fund->balance, 0, '.', ' ') }})</option>
                     @endforeach
                 </select>
-                <p class="text-[10px] text-slate-500 mt-1">Отсюда спишется ваш лимит на траты.</p>
-            </div>
-
-            <div>
-                <x-input-label for="description_expense" value="На что потратили?" />
-                <x-text-input id="description_expense" name="description" type="text" class="mt-1 block w-full" placeholder="Например: Продукты в Корзинке" required />
             </div>
         </div>
 
@@ -93,26 +97,26 @@
 <x-modal name="transfer-money" focusable>
     <form method="post" action="{{ route('finance.transfer') }}" class="p-6">
         @csrf
-        <h2 class="text-xl font-black text-slate-100 mb-2">🔁 Переместил деньги</h2>
-        <p class="text-xs text-slate-400 mb-6">Перевод между своими счетами. Это не влияет на ваши бюджеты.</p>
+        <h2 class="text-xl font-black text-slate-100 mb-2">🔁 Переложил деньги</h2>
+        <p class="text-xs text-slate-400 mb-6">Скинул с карты на карту или снял наличку. Ваши бюджеты (лимиты) от этого не меняются!</p>
 
         <div class="space-y-5">
             <div>
-                <x-input-label for="amount_transfer" value="Сумма" />
+                <x-input-label for="amount_transfer" value="Сумма перевода" />
                 <x-text-input id="amount_transfer" name="amount" type="number" step="0.01" class="mt-1 block w-full text-lg font-bold" required />
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <x-input-label for="from_account_id" value="Откуда снять?" />
+                    <x-input-label for="from_account_id" value="Откуда (Карман 1)" />
                     <select name="from_account_id" id="from_account_id" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
                         @foreach($accounts as $account)
-                            <option value="{{ $account->id }}">{{ $account->name }}</option>
+                            <option value="{{ $account->id }}" {{ str_contains(strtolower($account->name), 'uzum') ? 'selected' : '' }}>{{ $account->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <x-input-label for="to_account_id" value="Куда зачислить?" />
+                    <x-input-label for="to_account_id" value="Куда (Карман 2)" />
                     <select name="to_account_id" id="to_account_id" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
                         @foreach($accounts as $account)
                             <option value="{{ $account->id }}">{{ $account->name }}</option>
