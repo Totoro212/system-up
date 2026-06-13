@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/expense', [\App\Http\Controllers\Tools\FinanceController::class, 'storeExpense'])->name('expense.store');
         Route::post('/transfer', [\App\Http\Controllers\Tools\FinanceController::class, 'transfer'])->name('transfer');
         Route::post('/funds/update', [\App\Http\Controllers\Tools\FinanceController::class, 'updateFunds'])->name('funds.update');
+        Route::post('/account/store', [\App\Http\Controllers\Tools\FinanceController::class, 'storeAccount'])->name('account.store');
     });
 });
 

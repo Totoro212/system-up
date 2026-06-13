@@ -1,9 +1,9 @@
 
-<x-card>
+<x-card class="mb-6">
     <div class="flex justify-between items-center mb-4">
-        <x-h2>💳 Физические счета</x-h2>
-        <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'transfer-money')" class="text-xs text-slate-400 hover:text-white bg-slate-800/50 px-2 py-1 rounded transition">
-            <i class="fa-solid fa-right-left mr-1"></i> Перевод
+        <x-h2>💳 Мои Кошельки (Где лежат деньги)</x-h2>
+        <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-account')" class="text-xs text-slate-400 hover:text-white bg-slate-800/50 px-2 py-1 rounded transition">
+            <i class="fa-solid fa-plus mr-1"></i> Добавить
         </button>
     </div>
 

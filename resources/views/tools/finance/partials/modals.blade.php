@@ -128,3 +128,77 @@
         </div>
     </form>
 </x-modal>
+
+<!-- 4. НАСТРОЙКА % ФОНДОВ (Шестеренка) -->
+<x-modal name="edit-funds" focusable>
+    <form method="post" action="{{ route('finance.funds.update') }}" class="p-6">
+        @csrf
+        <h2 class="text-xl font-black text-slate-100 mb-2">⚙️ Настройка процентов</h2>
+        <p class="text-xs text-slate-400 mb-6">Распределите 100% между вашими фондами. Если поставить 0%, фонд не будет пополняться автоматически при зарплате.</p>
+
+        <div class="space-y-5">
+            @foreach($funds as $fund)
+                <div>
+                    <x-input-label for="fund_{{ $fund->id }}" value="{{ $fund->icon }} {{ $fund->name }} (%)" />
+                    <x-text-input id="fund_{{ $fund->id }}" name="percentages[{{ $fund->id }}]" type="number" step="1" min="0" max="100" class="mt-1 block w-full text-lg font-bold" value="{{ $fund->target_percentage }}" required />
+                </div>
+            @endforeach
+        </div>
+
+        <div class="mt-8 flex justify-end gap-3">
+            <x-secondary-button x-on:click="$dispatch('close')" class="py-2.5">Отмена</x-secondary-button>
+            <x-primary-button class="bg-slate-700 hover:bg-slate-600 py-2.5 px-6">Сохранить</x-primary-button>
+        </div>
+    </form>
+</x-modal>
+
+<!-- 5. ДОБАВИТЬ НОВЫЙ СЧЕТ/КАРТУ -->
+<x-modal name="add-account" focusable>
+    <form method="post" action="{{ route('finance.account.store') }}" class="p-6">
+        @csrf
+        <h2 class="text-xl font-black text-slate-100 mb-2">💳 Добавить новый счет</h2>
+        <p class="text-xs text-slate-400 mb-6">Создайте новую карту, вклад или место для наличных.</p>
+
+        <div class="space-y-5">
+            <div>
+                <x-input-label for="acc_name" value="Название (например: Карта Капиталбанк)" />
+                <x-text-input id="acc_name" name="name" type="text" class="mt-1 block w-full" required />
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <x-input-label for="acc_type" value="Тип счета" />
+                    <select name="type" id="acc_type" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
+                        <option value="card">Карта</option>
+                        <option value="cash">Наличные</option>
+                        <option value="deposit">Вклад</option>
+                    </select>
+                </div>
+                <div>
+                    <x-input-label for="acc_currency" value="Валюта" />
+                    <select name="currency" id="acc_currency" class="mt-1 block w-full bg-slate-950 border-slate-800 text-slate-100 rounded-xl text-sm py-3" required>
+                        <option value="UZS">Сум (UZS)</option>
+                        <option value="USD">Доллар (USD)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <x-input-label for="acc_balance" value="Текущий остаток" />
+                <x-text-input id="acc_balance" name="balance" type="number" step="0.01" class="mt-1 block w-full text-lg font-bold" value="0" required />
+            </div>
+
+            <div class="bg-rose-500/10 border border-rose-500/20 p-4 rounded-xl">
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input type="checkbox" name="is_joint" value="1" class="rounded border-slate-800 bg-slate-900 text-rose-500 shadow-sm focus:ring-rose-500">
+                    <span class="block text-sm font-bold text-rose-300">Это Общий (Семейный) счет</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-end gap-3">
+            <x-secondary-button x-on:click="$dispatch('close')" class="py-2.5">Отмена</x-secondary-button>
+            <x-primary-button class="bg-emerald-600 hover:bg-emerald-500 py-2.5 px-6">Добавить</x-primary-button>
+        </div>
+    </form>
+</x-modal>
