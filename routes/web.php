@@ -40,14 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('codex', [\App\Http\Controllers\Codex\CodexController::class, 'index'])->name('codex');
     Route::get('terminal', [\App\Http\Controllers\Tools\TerminalController::class, 'index'])->name('terminal');
 
-    // Finance Module (API endpoints for modals)
-    Route::prefix('finance')->name('finance.')->group(function () {
-        Route::post('/income', [\App\Http\Controllers\Tools\FinanceController::class, 'storeIncome'])->name('income.store');
-        Route::post('/expense', [\App\Http\Controllers\Tools\FinanceController::class, 'storeExpense'])->name('expense.store');
-        Route::post('/transfer', [\App\Http\Controllers\Tools\FinanceController::class, 'transfer'])->name('transfer');
-        Route::post('/funds/update', [\App\Http\Controllers\Tools\FinanceController::class, 'updateFunds'])->name('funds.update');
-        Route::post('/account/store', [\App\Http\Controllers\Tools\FinanceController::class, 'storeAccount'])->name('account.store');
-    });
+
 });
 
 require __DIR__.'/auth.php';

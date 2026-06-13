@@ -4,17 +4,7 @@ $app = require_once 'bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
-try {
-    $user = App\Models\User::first();
-    App\Models\Account::create([
-        'user_id' => $user->id,
-        'name' => 'Test Account 2',
-        'type' => 'card',
-        'currency' => 'UZS',
-        'balance' => 0,
-        'is_joint' => false,
-    ]);
-    echo 'Success';
-} catch(\Exception $e) {
-    echo "ERROR: " . $e->getMessage();
+$txs = App\Models\Transaction::orderBy('created_at', 'desc')->take(5)->get();
+foreach ($txs as $tx) {
+    echo "{$tx->created_at}: [{$tx->type}] {$tx->amount} {$tx->currency} (Account: {$tx->account_id}, Fund: {$tx->fund_id}) - {$tx->description}\n";
 }
