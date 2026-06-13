@@ -1,58 +1,54 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+  <img src="public/logo.svg" alt="Arise Logo" width="120" />
+  <h1>✨ Arise: Life Management System</h1>
+  <p><i>Персональный цифровой хаб для управления жизнью, задачами и тренировками.</i></p>
+</div>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## 🚀 О проекте
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Arise** — это кастомная система управления жизнью (Life Management Dashboard), разработанная для максимальной продуктивности и контроля над рутиной. Приложение построено с упором на премиальный, темный и минималистичный дизайн с использованием стекломорфизма и микроанимаций.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Это не просто To-Do лист, это полноценный "пульт управления" вашей реальностью.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🌟 Главные модули
 
-## Learning Laravel
+### 🎯 Quests (Квесты)
+Геймифицированная система ежедневных задач.
+- **Ежедневные ритуалы**: Автоматическая загрузка базовых квестов.
+- **Стоицизм**: Ежедневные цитаты великих философов для поддержания фокуса.
+- **Прогресс**: Визуальный трекинг выполнения задач.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 💪 Workout (Тренировки)
+Продвинутый модуль для отслеживания силовых тренировок (Гипертрофия).
+- **Программы**: Разделение на Push / Pull / Legs / Fullbody.
+- **Логирование**: Учет подходов, повторений и рабочего веса.
+- **Аналитика**: Отслеживание максимальных весов и мышечного отказа.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📚 Codex (Кодекс)
+Персональная база знаний и свод жизненных правил. Хранилище важнейших принципов и заметок, которые всегда под рукой.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 🛠️ Terminal (Пульт)
+Ваш командный центр.
+- **Рыночный терминал**: Отслеживание курсов валют (USD/UZS) и криптовалют (BTC) в реальном времени.
+- **Важные даты**: Календарь грядущих событий (дни рождения, подписки и т.д.).
 
-## Agentic Development
+## 💻 Технологии (Tech Stack)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Приложение построено на современном, быстром и надежном стеке:
+- **Backend**: [Laravel 11](https://laravel.com) (PHP)
+- **Frontend**: Blade Templates + [Alpine.js](https://alpinejs.dev) (реактивность)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com) (Кастомная темная тема `slate-950`)
+- **Database**: SQLite / PostgreSQL
+- **Icons**: FontAwesome & Emojis
 
-```bash
-composer require laravel/boost --dev
+## 🎨 Дизайн-философия
 
-php artisan boost:install
-```
+Интерфейс спроектирован так, чтобы вызывать эмоции. 
+Мы используем глубокий темный фон (`#020617`), акцентные неоновые цвета (Indigo, Emerald, Rose), мягкие эмбиент-свечения и плавные переходы (`transition-all`). Никаких скучных серых квадратов — только премиальный "геймерский" и футуристичный опыт.
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+<div align="center">
+  <i>Built with ❤️ for maximum focus and discipline.</i>
+</div>
