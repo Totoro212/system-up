@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Tools;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\FinanceEnvelope;
+use App\Models\FinanceGoal;
+use App\Models\FinanceTransaction;
 
 class ToolsController extends Controller
 {
@@ -18,22 +21,22 @@ class ToolsController extends Controller
         $events = Event::getUpcomingEvents($userId);
 
         // Конверты (Создаем по умолчанию, если их нет)
-        if (\App\Models\FinanceEnvelope::where('user_id', $userId)->count() === 0) {
-            \App\Models\FinanceEnvelope::insert([
+        if (FinanceEnvelope::where('user_id', $userId)->count() === 0) {
+            FinanceEnvelope::insert([
                 ['user_id' => $userId, 'slug' => 'needs', 'name' => '🛒 Потребности', 'percentage' => 50, 'balance' => 0, 'created_at' => now(), 'updated_at' => now()],
                 ['user_id' => $userId, 'slug' => 'wants', 'name' => '🎉 Желания', 'percentage' => 30, 'balance' => 0, 'created_at' => now(), 'updated_at' => now()],
                 ['user_id' => $userId, 'slug' => 'savings', 'name' => '🏦 Сбережения', 'percentage' => 20, 'balance' => 0, 'created_at' => now(), 'updated_at' => now()],
             ]);
         }
 
-        $envelopes = \App\Models\FinanceEnvelope::where('user_id', $userId)->get();
+        $envelopes = FinanceEnvelope::where('user_id', $userId)->get();
         
         $savingsEnvelope = $envelopes->where('slug', 'savings')->first();
         $totalBalance = $savingsEnvelope ? $savingsEnvelope->balance : 0;
 
         $currentMonthStart = now()->startOfMonth();
         
-        $lastReset = \App\Models\FinanceTransaction::where('user_id', $userId)
+        $lastReset = FinanceTransaction::where('user_id', $userId)
             ->whereNull('finance_envelope_id')
             ->where('description', 'budget_reset')
             ->latest()
@@ -43,7 +46,7 @@ class ToolsController extends Controller
             $currentMonthStart = $lastReset->created_at;
         }
 
-        $monthlyAllocations = \App\Models\FinanceTransaction::where('user_id', $userId)
+        $monthlyAllocations = FinanceTransaction::where('user_id', $userId)
             ->where('type', 'income')
             ->where('created_at', '>=', $currentMonthStart)
             ->selectRaw('finance_envelope_id, sum(amount) as total')
@@ -54,7 +57,7 @@ class ToolsController extends Controller
             $envelope->monthly_budget = $monthlyAllocations->get($envelope->id, 0);
         }
 
-        $goals = \App\Models\FinanceGoal::where('user_id', $userId)
+        $goals = FinanceGoal::where('user_id', $userId)
             ->latest()
             ->get()
             ->sortBy(function ($goal) {

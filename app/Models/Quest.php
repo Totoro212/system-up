@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quest extends Model
 {
-    protected $fillable = ['title', 'description', 'type', 'user_id'];
+    protected $fillable = ['title', 'type', 'user_id'];
 
     public function log(){
         return $this->hasMany(Questlog::class);

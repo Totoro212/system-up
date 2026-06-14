@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    use HasFactory;
+
 
     protected $fillable = [
         'user_id',
@@ -34,7 +34,7 @@ class Event extends Model
     {
         return self::where('user_id', $userId)->get()->map(function ($event) {
             $today = \Carbon\Carbon::today();
-            $eventDate = \Carbon\Carbon::parse($event->event_date)->startOfDay();
+            $eventDate = \Carbon\Carbon::parse($event->event_date)->copy()->startOfDay();
             
             if ($event->is_annual) {
                 $eventDate->year($today->year);

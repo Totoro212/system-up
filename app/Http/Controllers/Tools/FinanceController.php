@@ -21,10 +21,18 @@ class FinanceController extends Controller
 
         $envelopes = FinanceEnvelope::where('user_id', $userId)->get();
 
-        foreach ($envelopes as $envelope) {
+        $remaining = $amount;
+        $lastIndex = $envelopes->count() - 1;
+
+        foreach ($envelopes as $index => $envelope) {
             if ($envelope->percentage <= 0) continue;
             
-            $share = (int) ($amount * ($envelope->percentage / 100));
+            // Последний конверт получает остаток, чтобы не терять копейки
+            $share = ($index === $lastIndex)
+                ? $remaining
+                : (int) ($amount * ($envelope->percentage / 100));
+            
+            $remaining -= $share;
             
             FinanceTransaction::create([
                 'user_id' => $userId,

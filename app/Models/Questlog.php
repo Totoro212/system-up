@@ -7,7 +7,7 @@ use App\Models\Quest;
 class Questlog extends Model
 {
     protected $fillable = ['quest_id', 'user_id'];
-    public function log(){
+    public function quest(){
         return $this->belongsTo(Quest::class);
     }
 }

@@ -32,22 +32,6 @@ class Workout extends Model
     }
 
     /**
-     * Scope: только тренировки в ротации программы.
-     */
-    public function scopeInRotation(Builder $query): Builder
-    {
-        return $query->where('in_rotation', true);
-    }
-
-    /**
-     * Scope: только отдельные тренировки вне программы.
-     */
-    public function scopeStandalone(Builder $query): Builder
-    {
-        return $query->where('in_rotation', false);
-    }
-
-    /**
      * Получить пользователя, которому принадлежит тренировка.
      */
     public function user(): BelongsTo

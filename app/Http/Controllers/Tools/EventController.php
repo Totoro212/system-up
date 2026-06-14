@@ -28,7 +28,7 @@ class EventController extends Controller
             'is_annual' => $request->has('is_annual'),
         ]);
 
-        return redirect()->route('terminal')->with('success', 'Событие успешно добавлено!');
+        return redirect()->route('tools')->with('success', 'Событие успешно добавлено!');
     }
 
     /**
@@ -56,7 +56,7 @@ class EventController extends Controller
             'is_annual' => $request->has('is_annual'),
         ]);
 
-        return redirect()->route('terminal')->with('success', 'Событие успешно обновлено!');
+        return redirect()->route('tools')->with('success', 'Событие успешно обновлено!');
     }
 
     /**
@@ -72,6 +72,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route('terminal')->with('success', 'Событие удалено!');
+        return redirect()->route('tools')->with('success', 'Событие удалено!');
     }
 }

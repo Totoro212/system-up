@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Quest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Quest;
 
 class QuestController extends Controller
@@ -25,12 +26,7 @@ class QuestController extends Controller
 
     public function destroy($id)
     {
-        $quest = Quest::findOrFail($id);
-
-        // Убедимся, что квест принадлежит текущему пользователю или является общим системным квестом
-        if ($quest->user_id !== null && $quest->user_id !== auth()->id()) {
-            abort(403, 'У вас нет прав для удаления этого квеста.');
-        }
+        $quest = Quest::where('user_id', auth()->id())->findOrFail($id);
 
         $quest->delete();
 
@@ -44,24 +40,32 @@ class QuestController extends Controller
     {
         $user = auth()->user();
 
-        Quest::create([
-            'title' => 'Движение тела',
-            'user_id' => $user->id,
-            'type' => 'main',
-        ]);
+        // Защита от дублирования: не создаём, если квесты уже есть
+        if (Quest::where('user_id', $user->id)->exists()) {
+            return redirect()->route('dashboard')->with('info', 'Квесты уже существуют.');
+        }
 
-        Quest::create([
-            'title' => 'Deep Work (Глубокая работа)',
-            'user_id' => $user->id,
-            'type' => 'main',
-        ]);
+        DB::transaction(function () use ($user) {
+            Quest::create([
+                'title' => 'Движение тела',
+                'user_id' => $user->id,
+                'type' => 'main',
+            ]);
 
-        Quest::create([
-            'title' => 'Поглощение знаний',
-            'user_id' => $user->id,
-            'type' => 'main',
-        ]);
+            Quest::create([
+                'title' => 'Deep Work (Глубокая работа)',
+                'user_id' => $user->id,
+                'type' => 'main',
+            ]);
+
+            Quest::create([
+                'title' => 'Поглощение знаний',
+                'user_id' => $user->id,
+                'type' => 'main',
+            ]);
+        });
 
         return redirect()->route('dashboard')->with('success', 'Ежедневные квесты успешно установлены!');
     }
 }
+
