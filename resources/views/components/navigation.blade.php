@@ -47,7 +47,7 @@
                         <path d="m5 7 5 5-5 5M12 17h8"/>
                     </svg>
                 </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('tools') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Пульт</span>
+                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('tools') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Инструменты</span>
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('tools') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 

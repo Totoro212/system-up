@@ -44,3 +44,13 @@
     --color-red-500: #ef4444;
     --color-red-900: #7f1d1d;
 }
+
+/* Убираем стрелочки у инпутов с типом number глобально */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

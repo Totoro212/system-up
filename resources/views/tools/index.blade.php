@@ -5,6 +5,7 @@
         @include('tools.market.market')
         @include('tools.events.events')
         @include('tools.finance.finance')
+        @include('tools.goals.goals')
 
         @include('tools.events.modals')
 

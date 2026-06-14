@@ -7,6 +7,7 @@ use App\Http\Controllers\Quest\QuestlogController;
 use App\Http\Controllers\Quest\QuestController;
 use App\Http\Controllers\Workout\WorkoutController;
 use App\Http\Controllers\Tools\ToolsController;
+use App\Http\Controllers\Tools\FinanceController;
 use App\Http\Controllers\Tools\EventController;
 use App\Http\Controllers\Codex\CodexController;
 
@@ -40,6 +41,15 @@ Route::middleware('auth')->group(function () {
         Route::post('quests', [QuestController::class, 'store'])->name('quests.store');
         Route::post('quests/seed-default', [QuestController::class, 'seedDefault'])->name('quests.seed_default');
         
+        // Финансы (Конверты)
+        Route::post('finance/income', [FinanceController::class, 'storeIncome'])->name('finance.income.store');
+        Route::post('finance/capital/adjust', [FinanceController::class, 'adjustCapital'])->name('finance.capital.adjust');
+        Route::post('finance/budget/reset', [FinanceController::class, 'resetBudget'])->name('finance.budget.reset');
+
+        // Цели и Накопления
+        Route::post('finance/goals', [FinanceController::class, 'storeGoal'])->name('finance.goals.store');
+        Route::post('finance/goals/{id}/add', [FinanceController::class, 'addGoalFunds'])->name('finance.goals.add');
+
         // События (Пульт)
         Route::post('events', [EventController::class, 'store'])->name('events.store');
         Route::put('events/{id}', [EventController::class, 'update'])->name('events.update');
