@@ -4,6 +4,7 @@
         @include('tools.hub')
         @include('tools.market.market')
         @include('tools.events.events')
+        @include('tools.finance.finance')
 
         @include('tools.events.modals')
 
@@ -13,7 +14,7 @@
     <script>
         function marketTerminal() {
             return {
-                currentTab: (localStorage.getItem('terminalTab') === 'finance') ? 'hub' : (localStorage.getItem('terminalTab') || 'hub'),
+                currentTab: (localStorage.getItem('terminalTab') || 'hub'),
                 btcPrice: null,
                 btcPrevPrice: null,
                 usdPrice: null,
