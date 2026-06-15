@@ -39,7 +39,7 @@
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('codex') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 
-            <!-- Инструменты -->
+            <!-- Модули -->
             <a href="{{ route('tools') }}"
                 class="flex flex-col items-center gap-1 group transition-all duration-200">
                 <div class="flex flex-col items-center transition-transform duration-200 group-hover:scale-105 {{ request()->routeIs('tools') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">
@@ -47,7 +47,7 @@
                         <path d="m5 7 5 5-5 5M12 17h8"/>
                     </svg>
                 </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('tools') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Инструменты</span>
+                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('tools') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Модули</span>
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('tools') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 

@@ -36,45 +36,6 @@
                             </div>
 
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🔬 Научный
-                                    Темп
-                                    (3-1-1)</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Контроль негативной фазы (Время
-                                    под
-                                    нагрузкой - Time Under Tension):</p>
-                                <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
-                                    <li><strong>3 секунды</strong> — максимально подконтрольно опускай вес</li>
-                                    <li><strong>1 секунда</strong> — пауза в нижней точке (растяжение)</li>
-                                    <li><strong>1 секунда</strong> — взрывное, мощное позитивное усилие вверх</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🧠
-                                    Нейромышечная связь</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Фокус внимания кратно меняет
-                                    активацию целевых мышечных волокон:</p>
-                                <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
-                                    <li><strong>PUSH:</strong> Думай: "Отталкивай пол/снаряд от себя"</li>
-                                    <li><strong>PULL:</strong> Думай: "Тяни локтями назад, а не ладонями"</li>
-                                    <li><strong>LEGS:</strong> Думай: "Вдавливай пятки в пол при подъёме"</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📋 Правило
-                                    двойной прогрессии</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Используй оптимальный силовой
-                                    диапазон 8–12 повторений:</p>
-                                <ul class="list-decimal pl-4 text-xs text-slate-400 space-y-1">
-                                    <li>Начни с нижней границы (выполни 8 повторений)</li>
-                                    <li>Каждую тренировку добавляй по 1–2 повторения</li>
-                                    <li>Когда сможешь сделать 12 раз во всех подходах → УВЕЛИЧЬ ВЕС</li>
-                                    <li>Снова начни новый цикл с 8 повторений</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
                                 <h4 class="text-xs font-black text-red-400 uppercase tracking-wider mb-1.5">🛑
                                     Разгрузочная
                                     неделя (Deload)</h4>
@@ -299,32 +260,6 @@
 
                     <div x-show="activeTab === 4" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-4">
                         <div class="space-y-3.5">
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📅
-                                    Идеальный
-                                    PPL×2 график сплита</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Обеспечивает оптимальную частоту
-                                    проработки каждой мышечной группы (2 раза в неделю) для стабильного
-                                    гипертрофического
-                                    отклика:</p>
-                                <ul class="list-none text-xs text-slate-400 space-y-1.5">
-                                    <li><span class="text-indigo-400 font-bold">ПН:</span> 🔴 PUSH
-                                        (Грудь/Плечи/Трицепс) +
-                                        30 мин легкого Zone 2 кардио</li>
-                                    <li><span class="text-indigo-400 font-bold">ВТ:</span> 🔴 PULL (Спина/Бицепс)</li>
-                                    <li><span class="text-indigo-400 font-bold">СР:</span> 🔴 LEGS + CORE (Ноги/Пресс)
-                                    </li>
-                                    <li><span class="text-indigo-400 font-bold">ЧТ:</span> 🔴 PUSH
-                                        (Грудь/Плечи/Трицепс) +
-                                        30 мин легкого Zone 2 кардио</li>
-                                    <li><span class="text-indigo-400 font-bold">ПТ:</span> 🔴 PULL (Спина/Бицепс)</li>
-                                    <li><span class="text-indigo-400 font-bold">СБ:</span> 🔴 LEGS + CORE (Ноги/Пресс)
-                                    </li>
-                                    <li><span class="text-emerald-400 font-bold">ВС:</span> ✨ ПОЛНЫЙ ОТДЫХ (или 45
-                                        минут
-                                        прогулки на свежем воздухе)</li>
-                                </ul>
-                            </div>
 
                             <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
                                 <h4 class="text-xs font-black text-amber-400 uppercase tracking-wider mb-2">⚠️ Правила
@@ -341,24 +276,6 @@
                                         баланс!
                                     </li>
                                     <li>Постарайся никогда не допускать пропусков тренировок 2 дня подряд.</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">📸
-                                    Чекпоинты
-                                    (Замеры и Фото)</h4>
-                                <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1.5">
-                                    <li><strong>Каждое воскресенье (утро):</strong> Контрольное взвешивание натощак.
-                                        Записывай среднее значение за неделю.</li>
-                                    <li><strong>Каждое 1-е число месяца:</strong> Полные замеры сантиметровой лентой
-                                        (талия,
-                                        грудь, бицепс, бедро). Максимумы в подтягиваниях и брусьях.</li>
-                                    <li><strong>ГЛАВНОЕ: ДЕЛАЙ ФОТО!</strong> Весы часто обманывают из-за задержки воды
-                                        и
-                                        рекомпозиции (когда уходит жир и приходят мышцы). Фотография в зеркале раз в
-                                        месяц —
-                                        твой самый мощный и честный мотиватор!</li>
                                 </ul>
                             </div>
                         </div>
