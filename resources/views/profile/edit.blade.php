@@ -7,18 +7,7 @@
                 <h1 class="text-3xl font-black tracking-widest bg-gradient-to-r from-slate-100 to-slate-400 bg-clip-text text-transparent uppercase">Настройки</h1>
                 <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mt-1">Управление аккаунтом</p>
             </div>
-            
-            <!-- Премиальная кнопка Выхода -->
-            <form method="POST" action="{{ route('logout') }}" class="m-0 flex items-center">
-                @csrf
-                <button type="submit" 
-                        class="px-4 py-2 bg-red-950/20 border border-red-900/40 text-red-400 hover:bg-red-900/30 hover:text-red-300 text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer flex items-center gap-1.5 shadow-lg shadow-red-950/10">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
-                    </svg>
-                    Выйти
-                </button>
-            </form>
+
             <!-- Вкладки управления (Табы) + Выход -->
             <div class="flex items-center gap-3 self-start md:self-auto flex-wrap">
                 <div class="flex bg-slate-950/80 border border-slate-900 p-1 rounded-xl backdrop-blur-md shadow-2xl">
@@ -38,8 +27,19 @@
                         ⚠️ Удаление
                     </button>
                 </div>
-
             </div>
+
+                <!-- Премиальная кнопка Выхода -->
+                <form method="POST" action="{{ route('logout') }}" class="m-0 flex items-center">
+                    @csrf
+                    <button type="submit" 
+                            class="px-4 py-2 bg-red-950/20 border border-red-900/40 text-red-400 hover:bg-red-900/30 hover:text-red-300 text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer flex items-center gap-1.5 shadow-lg shadow-red-950/10">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
+                        </svg>
+                        Выйти
+                    </button>
+                </form>
         </div>
 
         <!-- Контент вкладок с плавной анимацией в единой карточке -->
