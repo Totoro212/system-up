@@ -9,6 +9,7 @@ use App\Http\Controllers\Workout\WorkoutController;
 use App\Http\Controllers\Tools\ToolsController;
 use App\Http\Controllers\Tools\FinanceController;
 use App\Http\Controllers\Tools\EventController;
+use App\Http\Controllers\Tools\LifeGoalController;
 use App\Http\Controllers\Codex\CodexController;
 
 Route::get('/', function () {
@@ -51,6 +52,10 @@ Route::middleware('auth')->group(function () {
         Route::post('finance/goals/{id}/add', [FinanceController::class, 'addGoalFunds'])->name('finance.goals.add');
         Route::post('finance/goals/{id}/reset', [FinanceController::class, 'resetGoalFunds'])->name('finance.goals.reset');
 
+        // Жизненные цели
+        Route::post('life-goals', [LifeGoalController::class, 'store'])->name('life-goals.store');
+        Route::post('life-goals/{id}/toggle', [LifeGoalController::class, 'toggleComplete'])->name('life-goals.toggle');
+
         // События (Пульт)
         Route::post('events', [EventController::class, 'store'])->name('events.store');
         Route::put('events/{id}', [EventController::class, 'update'])->name('events.update');
@@ -69,6 +74,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
         Route::delete('workouts/{id}', [WorkoutController::class, 'destroy'])->name('workouts.destroy');
         Route::delete('finance/goals/{id}', [FinanceController::class, 'destroyGoal'])->name('finance.goals.destroy');
+        Route::delete('life-goals/{id}', [LifeGoalController::class, 'destroy'])->name('life-goals.destroy');
     });
 
 });

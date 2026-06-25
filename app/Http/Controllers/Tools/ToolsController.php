@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\FinanceEnvelope;
 use App\Models\FinanceGoal;
 use App\Models\FinanceTransaction;
+use App\Models\LifeGoal;
 
 class ToolsController extends Controller
 {
@@ -64,11 +65,19 @@ class ToolsController extends Controller
                 return $goal->current_amount >= $goal->target_amount ? 1 : 0;
             });
 
+        $lifeGoals = LifeGoal::where('user_id', $userId)
+            ->latest()
+            ->get()
+            ->sortBy(function ($goal) {
+                return $goal->is_completed ? 1 : 0;
+            });
+
         return view('tools.index', [
             'events' => $events,
             'envelopes' => $envelopes,
             'totalBalance' => $totalBalance,
-            'goals' => $goals
+            'goals' => $goals,
+            'lifeGoals' => $lifeGoals
         ]);
     }
 }
