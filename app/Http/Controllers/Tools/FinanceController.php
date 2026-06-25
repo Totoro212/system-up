@@ -127,4 +127,21 @@ class FinanceController extends Controller
 
         return back()->with('success', 'Средства добавлены к цели!');
     }
+
+    public function destroyGoal($id)
+    {
+        $goal = FinanceGoal::where('user_id', auth()->id())->findOrFail($id);
+        $goal->delete();
+
+        return back()->with('success', 'Цель успешно удалена!');
+    }
+
+    public function resetGoalFunds($id)
+    {
+        $goal = FinanceGoal::where('user_id', auth()->id())->findOrFail($id);
+        $goal->update(['current_amount' => 0]);
+
+        return back()->with('success', 'Накопления цели сброшены!');
+    }
 }
+

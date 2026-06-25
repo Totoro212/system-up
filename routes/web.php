@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
         // Цели и Накопления
         Route::post('finance/goals', [FinanceController::class, 'storeGoal'])->name('finance.goals.store');
         Route::post('finance/goals/{id}/add', [FinanceController::class, 'addGoalFunds'])->name('finance.goals.add');
+        Route::post('finance/goals/{id}/reset', [FinanceController::class, 'resetGoalFunds'])->name('finance.goals.reset');
 
         // События (Пульт)
         Route::post('events', [EventController::class, 'store'])->name('events.store');
@@ -67,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('quests/{id}', [QuestController::class, 'destroy'])->name('quests.destroy');
         Route::delete('events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
         Route::delete('workouts/{id}', [WorkoutController::class, 'destroy'])->name('workouts.destroy');
+        Route::delete('finance/goals/{id}', [FinanceController::class, 'destroyGoal'])->name('finance.goals.destroy');
     });
 
 });
