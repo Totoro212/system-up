@@ -51,6 +51,16 @@
             @endif
         </div>
 
+        <div>
+            <x-input-label for="telegram_chat_id" value="Telegram Chat ID" />
+            <x-text-input id="telegram_chat_id" name="telegram_chat_id" type="text" class="mt-1 block w-full" :value="old('telegram_chat_id', $user->telegram_chat_id)" placeholder="Например: 123456789" />
+            <x-input-error class="mt-2" :messages="$errors->get('telegram_chat_id')" />
+            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">
+                Необходимо для отправки регулярных напоминаний (вода, разминка, глаза) в Telegram.<br>
+                Свой Chat ID можно узнать у ботов <a href="https://t.me/userinfobot" target="_blank" class="text-indigo-400 hover:underline">@userinfobot</a> или <a href="https://t.me/cidbot" target="_blank" class="text-indigo-400 hover:underline">@cidbot</a>. Убедитесь, что вы предварительно запустили (нажали /start) вашего бота.
+            </p>
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
