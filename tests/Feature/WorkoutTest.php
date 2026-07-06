@@ -83,4 +83,149 @@ class WorkoutTest extends TestCase
             'id' => $workout->id,
         ]);
     }
+
+    /**
+     * Тест: пользователь может обновить тренировку.
+     */
+    public function test_user_can_update_workout(): void
+    {
+        $user = User::factory()->create();
+        $workout = Workout::create([
+            'user_id' => $user->id,
+            'title' => 'Initial Workout',
+            'sort_order' => 1,
+            'in_rotation' => true,
+        ]);
+        $exercise = $workout->exercises()->create([
+            'title' => 'Initial Exercise',
+            'sets' => 3,
+            'reps' => '10',
+            'weight' => '50 кг',
+        ]);
+
+        $response = $this
+            ->actingAs($user)
+            ->patch(route('workouts.update', $workout->id), [
+                'title' => 'Updated Workout Title',
+                'exercises' => [
+                    [
+                        'id' => $exercise->id,
+                        'title' => 'Updated Exercise Title',
+                        'sets' => 4,
+                        'reps' => '12',
+                        'weight' => '60 кг',
+                    ],
+                    [
+                        'id' => null, // новое упражнение
+                        'title' => 'New Added Exercise',
+                        'sets' => 3,
+                        'reps' => '15',
+                        'weight' => '20 кг',
+                    ]
+                ]
+            ]);
+
+        $response->assertRedirect(route('workouts.index'));
+        $response->assertSessionHas('success', 'Программа тренировки успешно обновлена!');
+
+        $this->assertDatabaseHas('workouts', [
+            'id' => $workout->id,
+            'title' => 'Updated Workout Title',
+        ]);
+
+        $this->assertDatabaseHas('exercises', [
+            'id' => $exercise->id,
+            'title' => 'Updated Exercise Title',
+            'sets' => 4,
+            'reps' => '12',
+            'weight' => '60 кг',
+        ]);
+
+        $this->assertDatabaseHas('exercises', [
+            'workout_id' => $workout->id,
+            'title' => 'New Added Exercise',
+            'sets' => 3,
+            'reps' => '15',
+            'weight' => '20 кг',
+        ]);
+    }
+
+    /**
+     * Тест: пользователь не может обновить чужую тренировку.
+     */
+    public function test_user_cannot_update_others_workout(): void
+    {
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+
+        $workout = Workout::create([
+            'user_id' => $user1->id,
+            'title' => 'User 1 Workout',
+            'sort_order' => 1,
+            'in_rotation' => true,
+        ]);
+
+        $response = $this
+            ->actingAs($user2)
+            ->patch(route('workouts.update', $workout->id), [
+                'title' => 'Hacked title',
+                'exercises' => [
+                    [
+                        'title' => 'Hacked exercise',
+                        'sets' => 3,
+                        'reps' => '10',
+                    ]
+                ]
+            ]);
+
+        $response->assertStatus(404);
+    }
+
+    /**
+     * Тест: удаление упражнения при редактировании тренировки.
+     */
+    public function test_updating_workout_deletes_removed_exercises(): void
+    {
+        $user = User::factory()->create();
+        $workout = Workout::create([
+            'user_id' => $user->id,
+            'title' => 'Initial Workout',
+            'sort_order' => 1,
+            'in_rotation' => true,
+        ]);
+        $exercise1 = $workout->exercises()->create([
+            'title' => 'Exercise 1',
+            'sets' => 3,
+            'reps' => '10',
+        ]);
+        $exercise2 = $workout->exercises()->create([
+            'title' => 'Exercise 2',
+            'sets' => 4,
+            'reps' => '12',
+        ]);
+
+        $response = $this
+            ->actingAs($user)
+            ->patch(route('workouts.update', $workout->id), [
+                'title' => 'Workout with only Exercise 1',
+                'exercises' => [
+                    [
+                        'id' => $exercise1->id,
+                        'title' => 'Exercise 1',
+                        'sets' => 3,
+                        'reps' => '10',
+                    ]
+                ]
+            ]);
+
+        $response->assertRedirect(route('workouts.index'));
+
+        $this->assertDatabaseHas('exercises', [
+            'id' => $exercise1->id,
+        ]);
+
+        $this->assertDatabaseMissing('exercises', [
+            'id' => $exercise2->id,
+        ]);
+    }
 }

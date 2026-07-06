@@ -168,6 +168,47 @@ class WorkoutController extends Controller
     }
 
     /**
+     * Обновить тренировку и её упражнения безопасной транзакцией.
+     */
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $workout = Workout::where('user_id', auth()->id())->findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'exercises' => ['required', 'array', 'min:1'],
+            'exercises.*.id' => ['nullable', 'integer'],
+            'exercises.*.title' => ['required', 'string', 'max:255'],
+            'exercises.*.sets' => ['required', 'integer', 'min:1'],
+            'exercises.*.reps' => ['required', 'string', 'max:255'],
+            'exercises.*.weight' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        DB::transaction(function () use ($validated, $workout) {
+            $workout->update([
+                'title' => $validated['title'],
+            ]);
+
+            $existingExerciseIds = [];
+            foreach ($validated['exercises'] as $exerciseData) {
+                if (!empty($exerciseData['id'])) {
+                    $exercise = $workout->exercises()->findOrFail($exerciseData['id']);
+                    $exercise->update($exerciseData);
+                    $existingExerciseIds[] = $exercise->id;
+                } else {
+                    $newExercise = $workout->exercises()->create($exerciseData);
+                    $existingExerciseIds[] = $newExercise->id;
+                }
+            }
+
+            // Удаляем упражнения, которые больше не присутствуют в обновленном списке
+            $workout->exercises()->whereNotIn('id', $existingExerciseIds)->delete();
+        });
+
+        return redirect()->route('workouts.index')->with('success', 'Программа тренировки успешно обновлена!');
+    }
+
+    /**
      * Отметить тренировку как выполненную сегодня и сохранить рабочие веса.
      */
     public function complete(Request $request, $id): RedirectResponse

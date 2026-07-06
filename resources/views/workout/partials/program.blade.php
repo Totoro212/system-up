@@ -25,14 +25,38 @@
                                 @endif
                             </x-p>
                         </div>
-                        <form method="POST" action="{{ route('workouts.destroy', $workout->id) }}"
-                            onsubmit="return confirm('Удалить эту программу тренировок?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-red-400 hover:border-red-900/30 flex items-center justify-center transition-colors cursor-pointer">
-                                <span class="text-xs">✕</span>
+                        <div class="flex items-center gap-2">
+                            <!-- Кнопка редактирования -->
+                            <button 
+                                data-workout="{{ e(json_encode([
+                                    'id' => $workout->id,
+                                    'title' => $workout->title,
+                                    'exercises' => $workout->exercises->map(function($ex) {
+                                        return [
+                                            'id' => $ex->id,
+                                            'title' => $ex->title,
+                                            'sets' => $ex->sets,
+                                            'reps' => $ex->reps,
+                                            'weight' => $ex->weight ?? '',
+                                        ];
+                                    })->toArray()
+                                ])) }}"
+                                @click="$dispatch('open-edit-workout-modal', JSON.parse($event.currentTarget.getAttribute('data-workout')))" 
+                                class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-indigo-400 hover:border-indigo-900/30 flex items-center justify-center transition-colors cursor-pointer" 
+                                type="button" 
+                                title="Редактировать">
+                                <span class="text-xs">✏️</span>
                             </button>
-                        </form>
+
+                            <form method="POST" action="{{ route('workouts.destroy', $workout->id) }}"
+                                onsubmit="return confirm('Удалить эту программу тренировок?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-red-400 hover:border-red-900/30 flex items-center justify-center transition-colors cursor-pointer" title="Удалить">
+                                    <span class="text-xs">✕</span>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     @include('workout._exercise-list', ['workout' => $workout])
                 </x-card>
