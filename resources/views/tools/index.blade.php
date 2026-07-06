@@ -6,6 +6,7 @@
         @include('tools.events.events')
         @include('tools.finance.finance')
         @include('tools.goals.goals')
+        @include('tools.reminders.reminders')
 
         @include('tools.events.modals')
 

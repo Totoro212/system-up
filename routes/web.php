@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function () {
         // Жизненные цели
         Route::post('life-goals', [LifeGoalController::class, 'store'])->name('life-goals.store');
         Route::post('life-goals/{id}/toggle', [LifeGoalController::class, 'toggleComplete'])->name('life-goals.toggle');
+        Route::post('life-goals/telegram-settings', [LifeGoalController::class, 'updateTelegramSettings'])->name('life-goals.telegram.update');
+        Route::post('life-goals/telegram-test', [LifeGoalController::class, 'sendTestNotification'])->name('life-goals.telegram.test');
 
         // События (Пульт)
         Route::post('events', [EventController::class, 'store'])->name('events.store');

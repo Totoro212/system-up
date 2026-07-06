@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'telegram_chat_id', 'telegram_reminders_enabled', 'telegram_reminders_interval', 'telegram_reminders_start_hour', 'telegram_reminders_end_hour', 'telegram_reminders_last_sent_at'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -27,6 +27,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'telegram_reminders_enabled' => 'boolean',
+            'telegram_reminders_last_sent_at' => 'datetime',
         ];
     }
 

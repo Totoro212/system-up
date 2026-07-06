@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->boolean('telegram_reminders_enabled')->default(false);
+            $table->integer('telegram_reminders_interval')->default(60); // в минутах
+            $table->integer('telegram_reminders_start_hour')->default(9); // 0-23
+            $table->integer('telegram_reminders_end_hour')->default(18); // 0-23
+            $table->timestamp('telegram_reminders_last_sent_at')->nullable();
         });
     }
 
@@ -22,7 +26,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn([
+                'telegram_reminders_enabled',
+                'telegram_reminders_interval',
+                'telegram_reminders_start_hour',
+                'telegram_reminders_end_hour',
+                'telegram_reminders_last_sent_at'
+            ]);
         });
     }
 };
