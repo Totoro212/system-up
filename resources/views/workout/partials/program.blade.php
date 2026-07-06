@@ -28,7 +28,7 @@
                         <div class="flex items-center gap-2">
                             <!-- Кнопка редактирования -->
                             <button 
-                                data-workout="{{ e(json_encode([
+                                data-workout="{{ json_encode([
                                     'id' => $workout->id,
                                     'title' => $workout->title,
                                     'exercises' => $workout->exercises->map(function($ex) {
@@ -40,7 +40,7 @@
                                             'weight' => $ex->weight ?? '',
                                         ];
                                     })->toArray()
-                                ])) }}"
+                                ]) }}"
                                 @click="$dispatch('open-edit-workout-modal', JSON.parse($event.currentTarget.getAttribute('data-workout')))" 
                                 class="w-8 h-8 rounded-xl bg-slate-950 border border-slate-900 text-slate-400 hover:text-indigo-400 hover:border-indigo-900/30 flex items-center justify-center transition-colors cursor-pointer" 
                                 type="button" 
