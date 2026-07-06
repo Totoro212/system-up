@@ -8,9 +8,6 @@
                         <div class="cursor-pointer flex-1"
                             x-on:click="activeWorkout = activeWorkout === {{ $workout->id }} ? null : {{ $workout->id }}">
                             <div class="flex flex-wrap items-center gap-1.5">
-                                <span class="text-xs font-bold text-indigo-300 bg-indigo-500/10 px-2.5 py-0.5 rounded border border-indigo-500/20">
-                                    #{{ $workout->queue_position }} в очереди
-                                </span>
                                 <span class="px-2.5 py-0.5 rounded text-xs font-black uppercase tracking-wider border {{ $workout->status_color }}">
                                     {{ $workout->status_label }}
                                 </span>

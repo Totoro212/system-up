@@ -32,9 +32,8 @@ class WorkoutController extends Controller
             ->ordered()
             ->get();
 
-        // Разделяем на программные (в ротации) и отдельные
-        $programWorkouts = $workouts->where('in_rotation', true);
-        $standaloneWorkouts = $workouts->where('in_rotation', false);
+        // Все тренировки участвуют в ротации программы
+        $programWorkouts = $workouts;
 
         // Определяем следующую тренировку в очереди (round-robin) ТОЛЬКО среди программных:
         // Приоритет: сначала те, что никогда не выполнялись (NULL),
@@ -76,9 +75,6 @@ class WorkoutController extends Controller
                     $workout->status_color = 'text-red-400 bg-red-500/10 border-red-500/20';
                 }
             }
-
-            // Позиция в очереди (1-indexed, для отображения)
-            $workout->queue_position = $workout->sort_order + 1;
 
             // Рассчитываем прогрессию для каждого упражнения
             foreach ($workout->exercises as $exercise) {
@@ -132,7 +128,7 @@ class WorkoutController extends Controller
 
         $totalProgramWorkouts = $programWorkouts->count();
 
-        return view('workout.index', compact('programWorkouts', 'standaloneWorkouts', 'todayWorkout', 'totalProgramWorkouts'));
+        return view('workout.index', compact('programWorkouts', 'todayWorkout', 'totalProgramWorkouts'));
     }
 
     /**
@@ -154,15 +150,13 @@ class WorkoutController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
-            $inRotation = !empty($validated['in_rotation']);
-
             // sort_order назначается автоматически
             $maxOrder = auth()->user()->workouts()->max('sort_order') ?? -1;
 
             $workout = auth()->user()->workouts()->create([
                 'title' => $validated['title'],
                 'sort_order' => $maxOrder + 1,
-                'in_rotation' => $inRotation,
+                'in_rotation' => true,
             ]);
 
             foreach ($validated['exercises'] as $exerciseData) {
@@ -401,12 +395,12 @@ class WorkoutController extends Controller
                 ],
             ]);
 
-            // 4. TONUS (sort_order: 3, вне программы — отдельная тренировка)
+            // 4. TONUS (sort_order: 3, в ротации программы)
             $tonus = Workout::create([
                 'user_id' => $user->id,
                 'title' => 'ТОНУС — всё тело (турник + брусья)',
                 'sort_order' => 3,
-                'in_rotation' => false,
+                'in_rotation' => true,
             ]);
 
             $tonus->exercises()->createMany([

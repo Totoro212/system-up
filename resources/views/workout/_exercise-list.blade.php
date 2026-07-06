@@ -1,6 +1,5 @@
 {{-- Раскрывающийся список упражнений (переиспользуемый partial) --}}
-@php $collapseVar = $workout->in_rotation ? 'activeWorkout' : 'activeStandalone'; @endphp
-<div x-show="{{ $collapseVar }} === {{ $workout->id }}" x-collapse
+<div x-show="activeWorkout === {{ $workout->id }}" x-collapse
     class="mt-4 pt-4 border-t border-slate-950 space-y-3">
     <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">Упражнения:</span>
 

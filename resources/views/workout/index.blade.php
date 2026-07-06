@@ -24,7 +24,6 @@
 
         @include('workout.partials.today')
         @include('workout.partials.program')
-        @include('workout.partials.standalone')
 
         @include('workout.partials.modals')
 
