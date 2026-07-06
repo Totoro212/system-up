@@ -5,12 +5,12 @@
 
     @foreach ($workout->exercises as $exercise)
         <div class="bg-slate-950/80 border border-slate-900 rounded-xl p-4">
-            <div class="flex justify-between items-center flex-wrap gap-2">
+            <div>
                 <x-h3 class="text-slate-200 font-bold">
                     {{ $exercise->title }}</x-h3>
-                <span class="text-xs font-mono text-emerald-400 font-bold bg-emerald-500/5 px-2.5 py-1 rounded">
+                <div class="text-xs font-mono text-emerald-400 font-bold mt-1">
                     {{ $exercise->sets }} × {{ $exercise->reps }}
-                </span>
+                </div>
             </div>
             <div class="flex flex-wrap gap-2 mt-2">
                 @if ($exercise->target_muscles)

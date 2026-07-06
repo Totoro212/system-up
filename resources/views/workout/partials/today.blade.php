@@ -31,13 +31,12 @@
                         <div class="mt-6 space-y-4">
                             @foreach ($todayWorkout->exercises as $exercise)
                                 <div class="bg-slate-950/50 border border-slate-900/60 rounded-xl p-4">
-                                    <div class="flex justify-between items-center flex-wrap gap-2">
+                                    <div>
                                         <x-h3>
                                             {{ $exercise->title }}</x-h3>
-                                        <span
-                                            class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/5 px-2.5 py-1 rounded border border-emerald-500/10">
+                                        <div class="text-xs font-mono font-bold text-emerald-400 mt-1">
                                             {{ $exercise->sets }} × {{ $exercise->reps }}
-                                        </span>
+                                        </div>
                                     </div>
 
                                     <div class="flex flex-wrap gap-2 mt-2.5">
