@@ -166,8 +166,27 @@
             </div>
         @endif
 
+        <!-- Global Top Bar -->
+        <header class="relative z-10 {{ request()->routeIs('profile.edit') ? 'max-w-4xl' : 'max-w-2xl' }} mx-auto px-4 pt-6 flex justify-between items-center">
+            <a href="{{ route('dashboard') }}" class="flex items-center gap-2 group">
+                <img src="/logo.svg" class="w-6 h-6 transition-transform group-hover:scale-105" alt="Logo">
+                <span class="text-xs font-black uppercase tracking-widest text-slate-300 group-hover:text-indigo-400 transition-colors">Arise</span>
+            </a>
+            
+            @if(!request()->routeIs('profile.edit'))
+            <a href="{{ route('profile.edit') }}" 
+               class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/30 text-slate-400 hover:text-indigo-400 flex items-center justify-center transition-colors cursor-pointer shadow-lg"
+               title="Профиль">
+                <svg class="w-4 h-4 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </a>
+            @endif
+        </header>
+
         <!-- Page Content (Чистые, легкие отступы) -->
-        <main class="pt-8 pb-28">
+        <main class="pt-4 pb-28">
             {{ $slot }}
         </main>
     </div>

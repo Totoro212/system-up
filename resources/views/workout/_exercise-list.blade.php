@@ -23,18 +23,6 @@
                         💪 {{ $exercise->weight }}
                     </span>
                 @endif
-
-                @if ($exercise->progression_status !== 'new')
-                    <span class="text-xs font-bold px-2 py-0.5 rounded border {{ $exercise->progression_color }}">
-                        📈 {{ $exercise->progression_label }}
-                    </span>
-                @endif
-
-                @if ($exercise->suggested_weight)
-                    <span class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-400/20">
-                        ⚡ +2.5 кг → {{ $exercise->suggested_weight }} кг
-                    </span>
-                @endif
             </div>
 
             @if ($exercise->description)

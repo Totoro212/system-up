@@ -228,4 +228,76 @@ class WorkoutTest extends TestCase
             'id' => $exercise2->id,
         ]);
     }
+
+    /**
+     * Тест: пользователь может загрузить программу по умолчанию.
+     */
+    public function test_user_can_seed_default_workouts(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('workouts.seed_default'));
+
+        $response->assertRedirect(route('workouts.index'));
+        $response->assertSessionHas('success', 'Основная программа тренировок PULL/PUSH/LEGS успешно установлена!');
+
+        // Проверяем создание 3-х тренировок
+        $this->assertDatabaseHas('workouts', [
+            'user_id' => $user->id,
+            'title' => 'PULL — Спина, Бицепс, Задняя дельта',
+            'sort_order' => 0,
+        ]);
+
+        $this->assertDatabaseHas('workouts', [
+            'user_id' => $user->id,
+            'title' => 'PUSH — Плечи, Грудь, Трицепс, Пресс',
+            'sort_order' => 1,
+        ]);
+
+        $this->assertDatabaseHas('workouts', [
+            'user_id' => $user->id,
+            'title' => 'LEGS — Ноги, Ягодицы, Икры',
+            'sort_order' => 2,
+        ]);
+
+        // Убедимся, что старый TONUS или старый формат больше не создается
+        $this->assertDatabaseMissing('workouts', [
+            'user_id' => $user->id,
+            'title' => 'ТОНУС — всё тело (турник + брусья)',
+        ]);
+    }
+
+    /**
+     * Тест: пользователь может выполнить тренировку без указания весов.
+     */
+    public function test_user_can_complete_workout_without_weights(): void
+    {
+        $user = User::factory()->create();
+        $workout = Workout::create([
+            'user_id' => $user->id,
+            'title' => 'Test Workout',
+            'sort_order' => 1,
+            'in_rotation' => true,
+        ]);
+        $exercise = $workout->exercises()->create([
+            'title' => 'Test Exercise',
+            'sets' => 3,
+            'reps' => '10',
+        ]);
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('workouts.complete', $workout->id));
+
+        $response->assertRedirect(route('workouts.index'));
+        $response->assertSessionHas('success', 'Отлично! Тренировка выполнена! 💪');
+
+        $workout->refresh();
+        $this->assertNotNull($workout->last_performed_at);
+
+        // Убедимся, что записи логов весов не были созданы
+        $this->assertDatabaseEmpty('exercise_logs');
+    }
 }

@@ -27,18 +27,6 @@
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('workouts.index') || request()->routeIs('workouts.*') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 
-            <!-- Кодекс -->
-            <a href="{{ route('codex') }}"
-                class="flex flex-col items-center gap-1 group transition-all duration-200">
-                <div class="flex flex-col items-center transition-transform duration-200 group-hover:scale-105 {{ request()->routeIs('codex') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">
-                    <svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 19.5c0-.8.7-1.5 1.5-1.5H20M4 19.5c0 .8.7 1.5 1.5 1.5H20M4 19.5V3.5c0-.8.7-1.5 1.5-1.5H20v16.5"/>
-                    </svg>
-                </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('codex') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Кодекс</span>
-                <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('codex') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
-            </a>
-
             <!-- Модули -->
             <a href="{{ route('tools') }}"
                 class="flex flex-col items-center gap-1 group transition-all duration-200">
@@ -49,19 +37,6 @@
                 </div>
                 <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('tools') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Модули</span>
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('tools') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
-            </a>
-
-            <!-- Профиль -->
-            <a href="{{ route('profile.edit') }}"
-                class="flex flex-col items-center gap-1 group transition-all duration-200">
-                <div class="flex flex-col items-center transition-transform duration-200 group-hover:scale-105 {{ request()->routeIs('profile.edit') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">
-                    <svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('profile.edit') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Профиль</span>
-                <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('profile.edit') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 
         </nav>

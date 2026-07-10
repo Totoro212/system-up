@@ -52,34 +52,6 @@
                                                 💪 {{ $exercise->weight }}
                                             </span>
                                         @endif
-
-                                        <!-- Бейдж прогрессии -->
-                                        @if ($exercise->progression_status !== 'new')
-                                            <span
-                                                class="text-xs font-bold px-2.5 py-0.5 rounded border {{ $exercise->progression_color }}">
-                                                📈 {{ $exercise->progression_label }}
-                                            </span>
-                                        @endif
-
-                                        <!-- Рекомендация при стагнации или регрессе -->
-                                        @if ($exercise->suggested_weight)
-                                            <span
-                                                class="text-xs font-bold text-amber-300 bg-amber-500/5 px-2.5 py-0.5 rounded border border-amber-400/20 animate-pulse">
-                                                ⚡ Рекомендуем: {{ $exercise->suggested_weight }} кг
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                    <!-- Инпут для ввода рабочего веса -->
-                                    <div class="mt-3 flex items-center gap-2">
-                                        <label
-                                            class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest whitespace-nowrap">Вес
-                                            (кг):</label>
-                                        <input type="number" name="weights[{{ $exercise->id }}]" step="0.5"
-                                            min="0" max="500"
-                                            placeholder="{{ $exercise->suggested_weight ?? ($exercise->last_weight ?? 'кг') }}"
-                                            value="{{ $exercise->last_weight }}"
-                                            class="w-full bg-slate-950 border border-slate-900 rounded-lg px-3 py-2 text-xs text-slate-200 font-mono placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
                                     </div>
 
                                     @if ($exercise->description)
@@ -95,7 +67,7 @@
                         <!-- Кнопка «Выполнить тренировку» -->
                         <x-primary-button class="w-full mt-5 py-3 text-xs tracking-widest">
                             <span>✅</span>
-                            <span>Выполнить и записать веса</span>
+                            <span>Выполнить тренировку</span>
                         </x-primary-button>
                     </form>
                 </div>

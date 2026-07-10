@@ -485,52 +485,6 @@
 
             <div x-data="{ activeTab: null }" class="grid grid-cols-1 gap-3.5">
 
-                <!-- 1. ПРОГРЕССИЯ -->
-                <x-card class="bg-slate-900/60 border-slate-900">
-                    <div class="cursor-pointer flex justify-between items-center"
-                        x-on:click="activeTab = activeTab === 1 ? null : 1">
-                        <div class="flex items-center gap-3">
-                            <span class="text-lg">📈</span>
-                            <div>
-                                <x-h3>Прогрессия нагрузок</x-h3>
-                                <x-p class="text-slate-400 mt-0.5">Еженедельная перегрузка, научный темп и нейросвязь</x-p>
-                            </div>
-                        </div>
-                        <span class="text-xs text-slate-400 transform transition-transform duration-200"
-                            :class="activeTab === 1 ? 'rotate-180' : ''">▼</span>
-                    </div>
-
-                    <div x-show="activeTab === 1" x-collapse class="mt-4 pt-4 border-t border-slate-950 space-y-4">
-                        <div class="space-y-3.5">
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-indigo-400 uppercase tracking-wider mb-2">🔄
-                                    Еженедельная
-                                    перегрузка</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-2">Каждую неделю делай ОДНО из:</p>
-                                <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
-                                    <li>Увеличение повторений (например, с 3×10 до 3×11)</li>
-                                    <li>Добавление подхода (с 3×10 до 4×10)</li>
-                                    <li>Увеличение рабочего веса (например, рюкзак с 3 кг до 5 кг)</li>
-                                    <li>Усложнение упражнения (отжимания от пола → ноги на возвышении)</li>
-                                    <li>Замедление темпа движения (3 сек вниз, 1 сек вверх)</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-                                <h4 class="text-xs font-black text-red-400 uppercase tracking-wider mb-1.5">🛑
-                                    Разгрузочная
-                                    неделя (Deload)</h4>
-                                <p class="text-xs text-slate-300 leading-relaxed">
-                                    Каждые 8–10 недель устраивай разгрузку: делай те же упражнения, но с 50% от обычных
-                                    подходов и повторений. При высоком темпе PPL×2 (6 тренировок в неделю) deload
-                                    жизненно
-                                    необходим, чтобы избежать перетренированности ЦНС и воспаления суставов.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </x-card>
-
                 <!-- 2. ВОССТАНОВЛЕНИЕ -->
                 <x-card class="bg-slate-900/60 border-slate-900">
                     <div class="cursor-pointer flex justify-between items-center"

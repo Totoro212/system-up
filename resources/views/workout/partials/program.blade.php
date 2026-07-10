@@ -71,7 +71,7 @@
                         <form method="POST" action="{{ route('workouts.seed_default') }}">
                             @csrf
                             <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5">
-                                🚀 Загрузить PUSH / PULL / LEGS по умолчанию
+                                🚀 Загрузить PULL / PUSH / LEGS по умолчанию
                             </button>
                         </form>
                     </div>

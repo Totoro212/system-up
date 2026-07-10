@@ -64,6 +64,20 @@
                             </div>
                         </div>
                     </button>
+
+                    <!-- КНОПКА: КОДЕКС -->
+                    <a href="{{ route('codex') }}" 
+                       class="w-full bg-slate-900 hover:bg-slate-900/60 border border-slate-900 hover:border-violet-500/20 text-left rounded-2xl p-5 transition-all duration-200 cursor-pointer shadow-lg group relative overflow-hidden block">
+                        <div class="absolute -right-6 -top-6 w-16 h-16 bg-violet-500/5 rounded-full blur-xl group-hover:bg-violet-500/10 transition-all"></div>
+                        
+                        <div class="flex items-center gap-3.5">
+                            <span class="text-2xl bg-slate-950/80 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-850/50">📜</span>
+                            <div>
+                                <x-h3 class="text-slate-200 group-hover:text-violet-300 transition-colors">Кодекс</x-h3>
+                                <x-p class="text-slate-400 mt-1">Базовый кодекс жизни, столпы здоровья, безопасности и база знаний.</x-p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </template>
