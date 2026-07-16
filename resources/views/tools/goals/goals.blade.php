@@ -2,14 +2,19 @@
 <template x-if="currentTab === 'goals'">
     <div class="space-y-6 max-w-2xl mx-auto pb-20">
 
-        <!-- Шапка -->
-        <div class="flex items-center justify-between pb-4 border-b border-slate-900/50">
+        <!-- Навигационная панель назад -->
+        <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
             <button @click="currentTab = 'hub'"
                 class="text-[10px] font-extrabold text-emerald-400 hover:text-emerald-300 uppercase tracking-widest flex items-center gap-1.5 cursor-pointer bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-850/50 hover:-translate-y-0.5 transition-all">
                 <span>←</span>
                 <span>В Инструменты</span>
             </button>
-            <x-h1 class="text-2xl text-slate-100">🎯 Жизненные цели</x-h1>
+        </div>
+
+        <!-- Заголовок страницы -->
+        <div>
+            <x-h1>🎯 Жизненные цели</x-h1>
+            <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Долгосрочные цели и стремления</x-p>
         </div>
 
         <!-- Добавить Жизненную Цель (Скрытая форма) -->
@@ -26,7 +31,7 @@
 
             <!-- Форма добавления -->
             <x-card x-show="showAddLifeGoal" style="display: none;"
-                class="p-6 bg-slate-900/60 border border-slate-800 shadow-xl relative overflow-hidden animate-fade-in">
+                class="p-4 sm:p-6 bg-slate-900/60 border border-slate-800 shadow-xl relative overflow-hidden animate-fade-in">
                 <div
                     class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none">
                 </div>
@@ -62,7 +67,7 @@
             @if (isset($lifeGoals) && $lifeGoals->count() > 0)
                 @foreach ($lifeGoals as $lifeGoal)
                     <div
-                        class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 relative overflow-hidden shadow-lg group hover:border-slate-700 transition-colors flex items-start gap-4">
+                        class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-lg group hover:border-slate-700 transition-colors flex items-start gap-3 sm:gap-4">
                         
                         <!-- Кастомный чекбокс (форма переключения статуса) -->
                         <form method="POST" action="{{ route('life-goals.toggle', $lifeGoal->id) }}" class="mt-1 shrink-0">
@@ -80,7 +85,7 @@
                         <div class="flex-1 min-w-0">
                             <div class="flex flex-col sm:flex-row justify-between sm:items-start gap-2">
                                 <div class="min-w-0">
-                                    <h3 class="text-base sm:text-lg font-black truncate-normal {{ $lifeGoal->is_completed ? 'text-slate-500 line-through' : 'text-slate-100' }}">
+                                    <h3 class="text-base sm:text-lg font-black break-words whitespace-normal {{ $lifeGoal->is_completed ? 'text-slate-500 line-through' : 'text-slate-100' }}">
                                         {{ $lifeGoal->title }}
                                     </h3>
                                     
