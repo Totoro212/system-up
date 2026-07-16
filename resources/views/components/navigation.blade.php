@@ -15,18 +15,6 @@
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('dashboard') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 
-            <!-- Тренировки -->
-            <a href="{{ route('workouts.index') }}"
-                class="flex flex-col items-center gap-1 group transition-all duration-200">
-                <div class="flex flex-col items-center transition-transform duration-200 group-hover:scale-105 {{ request()->routeIs('workouts.index') || request()->routeIs('workouts.*') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">
-                    <svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.5 10.5h11M6.5 13.5h11M3 8v8a2 2 0 0 0 2 2h1.5v-12H5a2 2 0 0 0 -2 2zm14.5-2v12H19a2 2 0 0 0 2-2V8a2 2 0 0 0 -2 -2z"/>
-                    </svg>
-                </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('workouts.index') || request()->routeIs('workouts.*') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Зал</span>
-                <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('workouts.index') || request()->routeIs('workouts.*') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
-            </a>
-
             <!-- Модули -->
             <a href="{{ route('tools') }}"
                 class="flex flex-col items-center gap-1 group transition-all duration-200">

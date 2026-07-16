@@ -164,7 +164,7 @@ class WorkoutController extends Controller
 
         $workout->update(['last_performed_at' => now()]);
 
-        return redirect()->route('workouts.index')->with('success', 'Отлично! Тренировка выполнена! 💪');
+        return redirect()->back(fallback: route('workouts.index'))->with('success', 'Отлично! Тренировка выполнена! 💪');
     }
 
     /**
