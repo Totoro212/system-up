@@ -59,8 +59,8 @@
                         <div class="flex items-center gap-3.5">
                             <span class="text-2xl bg-slate-950/80 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-850/50">🎯</span>
                             <div>
-                                <x-h3 class="text-slate-200 group-hover:text-emerald-300 transition-colors">Цели</x-h3>
-                                <x-p class="text-slate-400 mt-1">Управление жизненными целями и финансовыми накоплениями.</x-p>
+                                <x-h3 class="text-slate-200 group-hover:text-emerald-300 transition-colors">Жизненные цели</x-h3>
+                                <x-p class="text-slate-400 mt-1">Управление вашими жизненными целями.</x-p>
                             </div>
                         </div>
                     </button>
