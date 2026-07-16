@@ -47,11 +47,6 @@ Route::middleware('auth')->group(function () {
         Route::post('finance/capital/adjust', [FinanceController::class, 'adjustCapital'])->name('finance.capital.adjust');
         Route::post('finance/budget/reset', [FinanceController::class, 'resetBudget'])->name('finance.budget.reset');
 
-        // Цели и Накопления
-        Route::post('finance/goals', [FinanceController::class, 'storeGoal'])->name('finance.goals.store');
-        Route::post('finance/goals/{id}/add', [FinanceController::class, 'addGoalFunds'])->name('finance.goals.add');
-        Route::post('finance/goals/{id}/reset', [FinanceController::class, 'resetGoalFunds'])->name('finance.goals.reset');
-
         // Жизненные цели
         Route::post('life-goals', [LifeGoalController::class, 'store'])->name('life-goals.store');
         Route::post('life-goals/{id}/toggle', [LifeGoalController::class, 'toggleComplete'])->name('life-goals.toggle');
@@ -74,7 +69,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('quests/{id}', [QuestController::class, 'destroy'])->name('quests.destroy');
         Route::delete('events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
         Route::delete('workouts/{id}', [WorkoutController::class, 'destroy'])->name('workouts.destroy');
-        Route::delete('finance/goals/{id}', [FinanceController::class, 'destroyGoal'])->name('finance.goals.destroy');
         Route::delete('life-goals/{id}', [LifeGoalController::class, 'destroy'])->name('life-goals.destroy');
     });
 

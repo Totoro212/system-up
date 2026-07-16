@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Tools;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\FinanceEnvelope;
-use App\Models\FinanceGoal;
 use App\Models\FinanceTransaction;
 use App\Models\LifeGoal;
 
@@ -58,13 +57,6 @@ class ToolsController extends Controller
             $envelope->monthly_budget = $monthlyAllocations->get($envelope->id, 0);
         }
 
-        $goals = FinanceGoal::where('user_id', $userId)
-            ->latest()
-            ->get()
-            ->sortBy(function ($goal) {
-                return $goal->current_amount >= $goal->target_amount ? 1 : 0;
-            });
-
         $lifeGoals = LifeGoal::where('user_id', $userId)
             ->latest()
             ->get()
@@ -76,7 +68,6 @@ class ToolsController extends Controller
             'events' => $events,
             'envelopes' => $envelopes,
             'totalBalance' => $totalBalance,
-            'goals' => $goals,
             'lifeGoals' => $lifeGoals
         ]);
     }

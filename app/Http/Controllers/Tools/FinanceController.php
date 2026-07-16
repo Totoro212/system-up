@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FinanceEnvelope;
 use App\Models\FinanceTransaction;
-use App\Models\FinanceGoal;
 
 class FinanceController extends Controller
 {
@@ -99,49 +98,6 @@ class FinanceController extends Controller
         return back()->with('success', 'Бюджеты успешно сброшены!');
     }
 
-    public function storeGoal(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'target_amount' => 'required|numeric|min:1',
-        ]);
-
-        FinanceGoal::create([
-            'user_id' => auth()->id(),
-            'name' => $validated['name'],
-            'target_amount' => $validated['target_amount'],
-            'current_amount' => 0,
-        ]);
-
-        return back()->with('success', 'Цель успешно добавлена!');
-    }
-
-    public function addGoalFunds(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'amount' => 'required|numeric|min:1',
-        ]);
-
-        $goal = FinanceGoal::where('user_id', auth()->id())->findOrFail($id);
-        $goal->increment('current_amount', $validated['amount']);
-
-        return back()->with('success', 'Средства добавлены к цели!');
-    }
-
-    public function destroyGoal($id)
-    {
-        $goal = FinanceGoal::where('user_id', auth()->id())->findOrFail($id);
-        $goal->delete();
-
-        return back()->with('success', 'Цель успешно удалена!');
-    }
-
-    public function resetGoalFunds($id)
-    {
-        $goal = FinanceGoal::where('user_id', auth()->id())->findOrFail($id);
-        $goal->update(['current_amount' => 0]);
-
-        return back()->with('success', 'Накопления цели сброшены!');
     }
 }
 
