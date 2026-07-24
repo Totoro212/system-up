@@ -9,15 +9,6 @@
                 <span>←</span>
                 <span>В Инструменты</span>
             </button>
-            <div class="text-center sm:text-right">
-                <p class="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-1">Ваш Капитал
-                    (Сбережения)</p>
-                <h1
-                    class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-emerald-400 drop-shadow-[0_0_15px_rgba(16,185,129,0.1)] relative z-10 break-all sm:break-normal">
-                    {{ number_format($totalBalance, 0, '', ' ') }} <span
-                        class="text-lg sm:text-xl text-slate-500 font-bold ml-1">UZS</span>
-                </h1>
-            </div>
         </div>
 
 
@@ -145,41 +136,5 @@
                 </form>
             </x-card>
         </div>
-
-        <!-- Управление Капиталом -->
-        <div class="pt-8 mt-4 border-t border-slate-900/50">
-            <details class="group">
-                <summary
-                    class="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest cursor-pointer list-none flex items-center justify-center gap-2 hover:text-indigo-400 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                        stroke="currentColor" class="w-4 h-4">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                    </svg>
-                    Управление капиталом (Покупка / Проценты)
-                </summary>
-                <div class="mt-4 animate-fade-in">
-                    <form method="POST" action="{{ route('finance.capital.adjust') }}"
-                        class="flex flex-col sm:flex-row items-center gap-2 bg-slate-900/40 p-4 rounded-xl border border-slate-800 shadow-inner">
-                        @csrf
-                        <select name="operation" required
-                            class="w-full sm:w-auto bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:border-indigo-500/50 focus:ring-0 transition-all font-medium appearance-none cursor-pointer">
-                            <option value="sub">➖ Изъять (Покупка)</option>
-                            <option value="add">➕ Добавить (Проценты)</option>
-                        </select>
-
-                        <input type="number" name="amount" required placeholder="Сумма"
-                            class="w-full sm:w-1/3 bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 placeholder-slate-600 focus:border-indigo-500/50 focus:ring-0 transition-all font-medium text-right"
-                            style="-moz-appearance: textfield;">
-
-                        <button type="submit"
-                            class="w-full sm:flex-1 shrink-0 flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 hover:bg-indigo-500/20 hover:text-indigo-300 transition-all font-bold text-sm">
-                            Сохранить
-                        </button>
-                    </form>
-                </div>
-            </details>
-        </div>
-
     </div>
 </template>

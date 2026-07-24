@@ -44,7 +44,6 @@ Route::middleware('auth')->group(function () {
         
         // Финансы (Конверты)
         Route::post('finance/income', [FinanceController::class, 'storeIncome'])->name('finance.income.store');
-        Route::post('finance/capital/adjust', [FinanceController::class, 'adjustCapital'])->name('finance.capital.adjust');
         Route::post('finance/budget/reset', [FinanceController::class, 'resetBudget'])->name('finance.budget.reset');
 
         // Жизненные цели

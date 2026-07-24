@@ -31,9 +31,6 @@ class ToolsController extends Controller
 
         $envelopes = FinanceEnvelope::where('user_id', $userId)->get();
         
-        $savingsEnvelope = $envelopes->where('slug', 'savings')->first();
-        $totalBalance = $savingsEnvelope ? $savingsEnvelope->balance : 0;
-
         $currentMonthStart = now()->startOfMonth();
         
         $lastReset = FinanceTransaction::where('user_id', $userId)
@@ -67,7 +64,6 @@ class ToolsController extends Controller
         return view('tools.index', [
             'events' => $events,
             'envelopes' => $envelopes,
-            'totalBalance' => $totalBalance,
             'lifeGoals' => $lifeGoals
         ]);
     }

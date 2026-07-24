@@ -49,42 +49,6 @@ class FinanceController extends Controller
         return back()->with('success', 'Доход успешно распределен! Переведите сбережения на вклад.');
     }
 
-    public function adjustCapital(Request $request)
-    {
-        $validated = $request->validate([
-            'operation' => 'required|in:add,sub',
-            'amount' => 'required|numeric|min:1',
-        ]);
-
-        $userId = auth()->id();
-        $savingsEnvelope = FinanceEnvelope::where('user_id', $userId)->where('slug', 'savings')->firstOrFail();
-
-        if ($validated['operation'] === 'sub' && $savingsEnvelope->balance < $validated['amount']) {
-            return back()->withErrors(['amount' => 'Недостаточно средств в капитале.']);
-        }
-
-        $type = $validated['operation'] === 'add' ? 'income' : 'expense';
-        $desc = $validated['operation'] === 'add' ? 'Проценты / Кешбэк' : 'Изъятие из капитала';
-
-        FinanceTransaction::create([
-            'user_id' => $userId,
-            'finance_envelope_id' => $savingsEnvelope->id,
-            'type' => $type,
-            'amount' => $validated['amount'],
-            'description' => $desc
-        ]);
-
-        if ($validated['operation'] === 'add') {
-            $savingsEnvelope->increment('balance', $validated['amount']);
-            $msg = 'Проценты успешно добавлены к капиталу!';
-        } else {
-            $savingsEnvelope->decrement('balance', $validated['amount']);
-            $msg = 'Средства успешно изъяты из капитала!';
-        }
-
-        return back()->with('success', $msg);
-    }
-
     public function resetBudget()
     {
         FinanceTransaction::create([
@@ -96,8 +60,6 @@ class FinanceController extends Controller
         ]);
 
         return back()->with('success', 'Бюджеты успешно сброшены!');
-    }
-
     }
 }
 
