@@ -28,39 +28,35 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
                     <!-- КАРТОЧКА: BITCOIN -->
-                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
+                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[120px]">
                         <div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-500/5 rounded-full blur-xl"></div>
                         
                         <div>
                             <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest">💰 BITCOIN (BTC/USDT)</span>
-                                <span class="text-[10px] font-bold text-slate-500" x-text="btcChange">--</span>
+                                <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest">💰 ЗОЛОТО</span>
                             </div>
                             
                             <div class="mt-4">
                                 <div class="text-2xl sm:text-3xl font-black text-slate-100 tracking-tight font-mono" x-text="btcPriceFormatted">
                                     Загрузка...
                                 </div>
-                                <p class="text-xs text-slate-400 font-medium mt-1" x-text="btcInUzsFormatted">--</p>
                             </div>
                         </div>
                     </x-card>
 
                     <!-- КАРТОЧКА: USD / UZS -->
-                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
+                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[120px]">
                         <div class="absolute -right-6 -top-6 w-20 h-20 bg-emerald-500/5 rounded-full blur-xl"></div>
                         
                         <div>
                             <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest">💵 ДОЛЛАР США (USD/UZS)</span>
-                                <span class="text-[10px] font-bold text-emerald-400">Официальный</span>
+                                <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest">💵 ДОЛЛАР</span>
                             </div>
                             
                             <div class="mt-4">
                                 <div class="text-2xl sm:text-3xl font-black text-slate-100 tracking-tight font-mono" x-text="usdPriceFormatted">
                                     Загрузка...
                                 </div>
-                                <p class="text-xs text-slate-400 font-medium mt-1">Курс мирового валютного рынка</p>
                             </div>
                         </div>
                     </x-card>

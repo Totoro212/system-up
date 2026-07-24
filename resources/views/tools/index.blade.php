@@ -51,12 +51,6 @@
                     return '$' + parseFloat(this.btcPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 },
 
-                get btcInUzsFormatted() {
-                    if (!this.btcPrice || !this.usdPrice) return '--';
-                    const uzsVal = this.btcPrice * this.usdPrice;
-                    return '≈ ' + uzsVal.toLocaleString('ru-RU', { maximumFractionDigits: 0 }) + ' UZS';
-                },
-
                 get usdPriceFormatted() {
                     if (!this.usdPrice) return 'Загрузка...';
                     return this.usdPrice.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' UZS';
