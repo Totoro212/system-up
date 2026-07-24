@@ -227,15 +227,19 @@ function videoVault() {
         getEmbedUrl(url) {
             if (!url) return null;
             
-            // YouTube regEx
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
+            // 1. YouTube regEx
+            const ytMatch = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
+            if (ytMatch && ytMatch[2].length === 11) {
+                return 'https://www.youtube.com/embed/' + ytMatch[2] + '?rel=0&modestbranding=1';
+            }
 
-            if (match && match[2].length === 11) {
-                return 'https://www.youtube.com/embed/' + match[2] + '?rel=0&modestbranding=1';
+            // 2. Telegram Embed (например https://t.me/my_channel/42)
+            const tgMatch = url.match(/https?:\/\/t\.me\/([a-zA-Z0-9_]+)\/(\d+)/);
+            if (tgMatch) {
+                return `https://t.me/${tgMatch[1]}/${tgMatch[2]}?embed=1`;
             }
             
-            return null; // не ютуб (например загруженный mp4 / mov)
+            return null; // Прямая ссылка на mp4 / загруженный файл
         },
 
         async uploadFile(event) {
