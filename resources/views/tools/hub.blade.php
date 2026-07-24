@@ -19,7 +19,7 @@
                             <span class="text-2xl bg-slate-950/80 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-850/50">📈</span>
                             <div>
                                 <x-h3 class="text-indigo-300 group-hover:text-indigo-200 transition-colors">Рыночный терминал</x-h3>
-                                <x-p class="text-slate-400 mt-1">Курсы BTC и USD к узбекскому суму (UZS) в реальном времени.</x-p>
+                                <x-p class="text-slate-400 mt-1">Курсы в реальном времени.</x-p>
                             </div>
                         </div>
                     </button>

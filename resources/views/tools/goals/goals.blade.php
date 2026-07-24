@@ -5,7 +5,7 @@
         <!-- Навигационная панель назад -->
         <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
             <button @click="currentTab = 'hub'"
-                class="text-[10px] font-extrabold text-emerald-400 hover:text-emerald-300 uppercase tracking-widest flex items-center gap-1.5 cursor-pointer bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-850/50 hover:-translate-y-0.5 transition-all">
+                 class="text-[10px] font-extrabold text-indigo-400 hover:text-indigo-300 uppercase tracking-widest flex items-center gap-1.5 cursor-pointer bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-850/50 hover:-translate-y-0.5 transition-all">
                 <span>←</span>
                 <span>В Инструменты</span>
             </button>
