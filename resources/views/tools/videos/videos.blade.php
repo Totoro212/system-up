@@ -141,19 +141,17 @@ function videoVault() {
             if (tgMatch && tgMatch[1] !== 'c') {
                 return `https://t.me/${tgMatch[1]}/${tgMatch[2]}?embed=1`;
             }
+
+            // 3. Google Drive Embed (надежный встроенный плеер)
+            const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([a-zA-Z0-9_-]+)/);
+            if (driveMatch) {
+                return `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
+            }
             
-            return null; // Google Drive / MP4 / Cloudinary отправляем в чистый HTML5 плеер
+            return null; // MP4 / Cloudinary -> проигрывается в чистом HTML5 видеоплеере
         },
 
         getDirectVideoUrl(url) {
-            if (!url) return '';
-
-            // Автоматическое преобразование ссылок Google Диска в прямой видеопоток без иконок/переходов
-            const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
-            if (driveMatch) {
-                return `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
-            }
-
             return url;
         },
 
