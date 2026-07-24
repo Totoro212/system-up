@@ -6,6 +6,7 @@
         @include('tools.events.events')
         @include('tools.finance.finance')
         @include('tools.goals.goals')
+        @include('tools.videos.videos')
 
         @include('tools.events.modals')
 

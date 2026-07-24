@@ -59,6 +59,9 @@ Route::middleware('auth')->group(function () {
         Route::post('workouts/seed-default', [WorkoutController::class, 'seedDefault'])->name('workouts.seed_default');
         Route::post('workouts/{id}/complete', [WorkoutController::class, 'complete'])->name('workouts.complete');
         Route::patch('workouts/{id}', [WorkoutController::class, 'update'])->name('workouts.update');
+
+        // Видеотека (Загрузка файлов)
+        Route::post('tools/videos/upload', [ToolsController::class, 'uploadVideo'])->name('tools.videos.upload');
     });
 
     // ==========================================
