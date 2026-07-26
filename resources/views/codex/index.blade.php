@@ -374,13 +374,15 @@
                                 мышление:</strong> Никогда не верь слепо. Спрашивай: «Где доказательства? Кому выгодно?»
                         </div>
                         <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🛡️ Стойкость
-                                к давлению:</strong> Противостой манипуляциям и толпе. Будь хозяином своих решений.
+                                к давлению:</strong> Четкие внутренние ориентиры помогают противостоять манипуляциям и давлению общества.
                         </div>
                         <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>⚖️
-                                Ответственность:</strong> Бери ответственность за свои выборы — они неразделимы со
-                            свободой.</div>
+                                Ценностный выбор:</strong> Принимая решение, спрашивай себя: «Какой вариант соответствует моим ценностям?» Это дает ясность и целостность.</div>
                         <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5"><strong>🧘‍♂️
                                 Самодостаточность:</strong> Умей быть счастливым наедине с собой. Решай проблемы сам.
+                        </div>
+                        <div class="bg-slate-900/50 p-2.5 rounded-lg border border-violet-500/5 sm:col-span-2"><strong>🙏
+                                Благодарность:</strong> Счастливый человек радуется тому, что у него есть, а не страдает по тому, чего нет. Регулярно фиксируй ценность имеющегося.
                         </div>
                     </div>
                 </div>
@@ -412,6 +414,10 @@
                                 Уверенность:</strong> Не оправдывайся без реальной причины.</div>
                         <div class="bg-slate-900/50 p-2.5 rounded-lg border border-rose-500/5"><strong>🤲
                                 Альтруизм:</strong> Помогай без ожидания ответной выгоды.</div>
+                        <div class="bg-slate-900/50 p-2.5 rounded-lg border border-rose-500/5"><strong>❤️
+                                Знаки внимания:</strong> Проявляй маленькие знаки внимания близким — они создают большую любовь.</div>
+                        <div class="bg-slate-900/50 p-2.5 rounded-lg border border-rose-500/5 sm:col-span-2"><strong>👨‍👩‍👦
+                                Время для семьи:</strong> Регулярно уделяй время живому общению с членами семьи.</div>
                         <div class="bg-slate-900/50 p-2.5 rounded-lg border border-rose-500/5 sm:col-span-2"><strong>🔇
                                 Уважение:</strong> Не перебивай. Не жалуйся. Читай вслух для тренировки дикции.</div>
                     </div>
@@ -455,6 +461,8 @@
                                         <div class="bg-slate-900/50 p-2.5 rounded-lg border border-amber-500/5">
                                             <strong>🧘‍♂️ Контроль:</strong> Контролируй реакции — ты не владеешь
                                             внешним миром, но владеешь собой.</div>
+                                        <div class="bg-slate-900/50 p-2.5 rounded-lg border border-amber-500/5">
+                                            <strong>🎯 Целеполагание:</strong> Действуй целенаправленно. Есть цель — есть движение, нет цели — нет движения.</div>
                                         <div
                                             class="bg-slate-900/50 p-2.5 rounded-lg border border-amber-500/5 sm:col-span-2">
                                             <strong>🧠 Лидерство:</strong> Будь спокоен под давлением — это отличает

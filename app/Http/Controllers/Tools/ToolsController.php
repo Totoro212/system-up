@@ -67,22 +67,4 @@ class ToolsController extends Controller
             'lifeGoals' => $lifeGoals
         ]);
     }
-
-    /**
-     * Безопасная загрузка локального видеофайла на сервер.
-     */
-    public function uploadVideo(\Illuminate\Http\Request $request)
-    {
-        $request->validate([
-            'video' => 'required|file|mimes:mp4,webm,ogg,quicktime,mov|max:102400', // Мaкс 100 МБ, строгая валидация MIME-типов
-        ]);
-
-        $path = $request->file('video')->store('videos', 'public');
-
-        return response()->json([
-            'success' => true,
-            'url' => \Illuminate\Support\Facades\Storage::url($path),
-            'filename' => $request->file('video')->getClientOriginalName(),
-        ]);
-    }
 }
