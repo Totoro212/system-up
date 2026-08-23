@@ -11,7 +11,7 @@
                         <circle cx="12" cy="12" r="2"/>
                     </svg>
                 </div>
-                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('dashboard') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Квесты</span>
+                <span class="text-[9px] font-extrabold uppercase tracking-wider transition-colors duration-200 {{ request()->routeIs('dashboard') ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300' }}">Упражнения</span>
                 <span class="w-1 h-1 rounded-full transition-all duration-300 {{ request()->routeIs('dashboard') ? 'bg-indigo-400 shadow-[0_0_8px_#818cf8]' : 'bg-transparent' }}"></span>
             </a>
 

@@ -2,6 +2,7 @@
     <div class="max-w-2xl mx-auto p-4 space-y-6 pb-20" x-data="marketTerminal()">
 
         @include('tools.hub')
+        @include('tools.quests.quests')
         @include('tools.market.market')
         @include('tools.events.events')
         @include('tools.finance.finance')

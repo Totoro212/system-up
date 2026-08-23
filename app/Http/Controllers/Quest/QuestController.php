@@ -21,7 +21,7 @@ class QuestController extends Controller
             'type' => 'main',
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Квест успешно добавлен!');
+        return redirect()->back()->with('success', 'Квест успешно добавлен!');
     }
 
     public function destroy($id)
@@ -30,7 +30,7 @@ class QuestController extends Controller
 
         $quest->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Квест удален!');
+        return redirect()->back()->with('success', 'Квест удален!');
     }
 
     /**
@@ -42,7 +42,7 @@ class QuestController extends Controller
 
         // Защита от дублирования: не создаём, если квесты уже есть
         if (Quest::where('user_id', $user->id)->exists()) {
-            return redirect()->route('dashboard')->with('info', 'Квесты уже существуют.');
+            return redirect()->back()->with('info', 'Квесты уже существуют.');
         }
 
         DB::transaction(function () use ($user) {
@@ -65,7 +65,7 @@ class QuestController extends Controller
             ]);
         });
 
-        return redirect()->route('dashboard')->with('success', 'Ежедневные квесты успешно установлены!');
+        return redirect()->back()->with('success', 'Ежедневные квесты успешно установлены!');
     }
 }
 
