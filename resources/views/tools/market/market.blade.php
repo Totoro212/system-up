@@ -21,28 +21,11 @@
                 <!-- Заголовок страницы -->
                 <div>
                     <x-h1>Рынки</x-h1>
-                    <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Рыночный терминал в реальном времени</x-p>
+                    <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Рыночный терминал </x-p>
                 </div>
 
                 <!-- Сетка карточек с котировками -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    
-                    <!-- КАРТОЧКА: BITCOIN -->
-                    <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[120px]">
-                        <div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-500/5 rounded-full blur-xl"></div>
-                        
-                        <div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest">💰 ЗОЛОТО</span>
-                            </div>
-                            
-                            <div class="mt-4">
-                                <div class="text-2xl sm:text-3xl font-black text-slate-100 tracking-tight font-mono" x-text="btcPriceFormatted">
-                                    Загрузка...
-                                </div>
-                            </div>
-                        </div>
-                    </x-card>
 
                     <!-- КАРТОЧКА: USD / UZS -->
                     <x-card class="bg-slate-900 border-slate-850/80 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[120px]">
@@ -67,7 +50,7 @@
                 <div class="bg-slate-900/40 border border-slate-900/60 rounded-2xl p-4 flex flex-wrap gap-4 justify-between items-center text-xs">
                     <div class="flex items-center gap-2 text-slate-400">
                         <span>🕒</span>
-                        <span>Обновлено: <strong class="text-slate-200 font-mono" x-text="lastUpdated">--:--:--</strong></span>
+                        <span>Обновлено: <strong class="text-slate-200 font-mono" x-text="lastUpdated">--:--:</strong></span>
                     </div>
                     <div class="flex items-center gap-2 text-slate-400">
                         <span>🔄</span>

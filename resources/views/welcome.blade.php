@@ -55,12 +55,10 @@
             
             <!-- Левая часть: Лаконичное приветствие -->
             <div class="space-y-6 text-center md:text-left">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 text-[11px] font-semibold tracking-wide">
-                    ✨ Твой день под контролем
-                </span>
+         
                 
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                    Система меняющая жизнь
+                   ✨ Система
                 </h1>
 
                 <!-- Основные кнопки -->
@@ -79,7 +77,7 @@
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/15 text-center">
-                                Войти в систему
+                                Войти
                             </a>
                         @endif
                     @endauth
@@ -92,7 +90,7 @@
 
     <!-- Аккуратный минималистичный подвал -->
     <footer class="w-full text-center py-6 border-t border-slate-950 text-xs text-slate-600 z-10 max-w-5xl mx-auto px-6">
-        <p>ARISE © 2026. Трекер для твоей дисциплины.</p>
+        <p>ARISE © 2026. Трекер.</p>
     </footer>
 
 </body>

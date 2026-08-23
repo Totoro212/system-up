@@ -47,31 +47,20 @@
                 },
 
                 get btcPriceFormatted() {
-                    if (!this.btcPrice) return 'Загрузка...';
-                    return '$' + parseFloat(this.btcPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    if (!this.btcPrice) return '';
+                    return  parseInt(this.btcPrice).toLocaleString('en-US');
                 },
 
                 get usdPriceFormatted() {
                     if (!this.usdPrice) return 'Загрузка...';
-                    return this.usdPrice.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' UZS';
-                },
+                    return this.usdPrice.toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + `,${Math.round(this.btcPrice)} UZS`;
 
-                get btcChange() {
-                    if (!this.btcPrevPrice || !this.btcPrice) return '🟢 0.00%';
-                    const diff = this.btcPrice - this.btcPrevPrice;
-                    const percent = (diff / this.btcPrevPrice) * 100;
-                    if (percent >= 0) {
-                        return '🟢 +' + percent.toFixed(2) + '%';
-                    } else {
-                        return '🔴 ' + percent.toFixed(2) + '%';
-                    }
                 },
 
                 async refreshRates() {
                     this.loading = true;
                     
                     try {
-                        // 1. Загрузка курса Биткоина с Binance
                         const btcRes = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
                         if (btcRes.ok) {
                             const btcData = await btcRes.json();
@@ -81,7 +70,7 @@
                             } else {
                                 this.btcPrevPrice = newBtcPrice;
                             }
-                            this.btcPrice = newBtcPrice;
+                            this.btcPrice = (newBtcPrice/1000);
                         }
 
                         // 2. Загрузка курса доллара UZS
