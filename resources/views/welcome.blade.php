@@ -69,9 +69,6 @@
                         </a>
                     @else
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/15 text-center">
-                                Создать аккаунт бесплатно
-                            </a>
                             <a href="{{ route('login') }}" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold text-sm transition-all text-center">
                                 У меня уже есть профиль
                             </a>

@@ -7,11 +7,9 @@
                         <span>В Инструменты</span>
                     </a>
         <!-- Заголовок страницы -->
-        <div class="flex justify-between items-center pb-4 border-b border-slate-900/50">
-            <div>
-                <x-h1>🏋️ Тренировки</x-h1>
-                <x-p class="text-slate-400 font-bold uppercase tracking-wider mt-1">Программа: {{ $totalProgramWorkouts }} тренировок в ротации</x-p>
-            </div>
+        <div class="flex justify-between items-center border-b border-slate-900/50">
+            <x-h1>🏋️ Тренировки</x-h1>
+
             <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-workout')">
                 <span>+</span>
                 <span>Создать план</span>
@@ -26,7 +24,6 @@
             </div>
         @endif
 
-        @include('workout.partials.today')
         @include('workout.partials.program')
 
         @include('workout.partials.modals')
