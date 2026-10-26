@@ -4,11 +4,6 @@
         @include('tools.hub')
         @include('tools.quests.quests')
         @include('tools.market.market')
-        @include('tools.events.events')
-        @include('tools.finance.finance')
-        @include('tools.goals.goals')
-
-        @include('tools.events.modals')
 
     </div>
 
