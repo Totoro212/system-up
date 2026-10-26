@@ -18,28 +18,28 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col justify-between relative overflow-x-hidden">
+<body class="bg-slate-950 text-slate-300 min-h-screen antialiased flex flex-col justify-between relative overflow-x-hidden">
 
     <!-- Мягкий фоновый градиент для создания уютной глубины (без резких неоновых вспышек) -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-indigo-950/20 via-transparent to-transparent pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-indigo-100/50 via-transparent to-transparent pointer-events-none"></div>
 
     <!-- Верхняя панель (Навигация) -->
     <header class="w-full max-w-5xl mx-auto px-6 py-6 flex justify-between items-center z-10">
         <!-- Логотип -->
         <a href="/" class="flex items-center gap-2 group">
-            <span class="text-xl font-bold tracking-wider text-white">ARISE</span>
+            <span class="text-xl font-black tracking-wider text-slate-900">ARISE</span>
         </a>
         
         <!-- Кнопки входа в шапке -->
         @if (Route::has('login'))
             <nav class="flex items-center gap-4 text-sm font-medium">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs tracking-wide uppercase transition-all shadow-md shadow-indigo-600/10">
+                    <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs tracking-wide uppercase transition-all shadow-md shadow-indigo-600/15">
                         Дашборд
                     </a>
                 @else
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-semibold tracking-wider uppercase transition-all">
+                        <a href="{{ route('register') }}" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold tracking-wider uppercase transition-all shadow-sm">
                             Регистрация
                         </a>
                     @endif
@@ -57,23 +57,23 @@
             <div class="space-y-6 text-center md:text-left">
          
                 
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
                    ✨ Система
                 </h1>
 
                 <!-- Основные кнопки -->
                 <div class="flex flex-col sm:flex-row gap-3 pt-4 justify-center md:justify-start">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/15 text-center">
+                        <a href="{{ url('/dashboard') }}" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/20 text-center">
                             Перейти в дашборд
                         </a>
                     @else
                         @if (Route::has('register'))
-                            <a href="{{ route('login') }}" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold text-sm transition-all text-center">
+                            <a href="{{ route('login') }}" class="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-sm transition-all text-center shadow-sm">
                                 У меня уже есть профиль
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/15 text-center">
+                            <a href="{{ route('login') }}" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-600/20 text-center">
                                 Войти
                             </a>
                         @endif
@@ -86,7 +86,7 @@
     </main>
 
     <!-- Аккуратный минималистичный подвал -->
-    <footer class="w-full text-center py-6 border-t border-slate-950 text-xs text-slate-600 z-10 max-w-5xl mx-auto px-6">
+    <footer class="w-full text-center py-6 border-t border-slate-200 text-xs text-slate-400 z-10 max-w-5xl mx-auto px-6">
         <p>ARISE © 2026. Трекер.</p>
     </footer>
 

@@ -42,23 +42,23 @@
                         <div class="space-y-4 max-h-[300px] overflow-y-auto pr-1">
                             <template x-for="(exercise, index) in exercises" :key="index">
                                 <div
-                                    class="bg-slate-950/80 border border-slate-850 p-4 rounded-2xl relative space-y-3">
+                                    class="bg-slate-50 border border-slate-200/90 p-4 rounded-2xl relative space-y-3 shadow-sm">
 
                                     <!-- Кнопка удаления упражнения -->
                                     <button type="button" x-show="exercises.length > 1"
                                         x-on:click="removeExercise(index)"
-                                        class="absolute top-2.5 right-2.5 w-6 h-6 rounded-md bg-slate-900 border border-slate-800 text-slate-400 hover:text-red-400 flex items-center justify-center transition-colors cursor-pointer text-xs">
+                                        class="absolute top-2.5 right-2.5 w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-400 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer text-xs shadow-none">
                                         ✕
                                     </button>
 
-                                    <div class="text-xs font-black text-slate-400 uppercase tracking-widest"
+                                    <div class="text-xs font-black text-slate-600 uppercase tracking-widest"
                                         x-text="'Упражнение #' + (index + 1)"></div>
 
                                     <!-- Название -->
                                     <div>
                                         <input type="text" :name="'exercises[' + index + '][title]'" required
                                             placeholder="Название (например: Жим штанги лежа)"
-                                            class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                            class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                     </div>
 
                                     <!-- Подходы, Повторы, Вес -->
@@ -66,17 +66,17 @@
                                         <div>
                                             <input type="text" inputmode="numeric" pattern="[0-9]*" :name="'exercises[' + index + '][sets]'" required
                                                 placeholder="Подходы (например: 4)"
-                                                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                         </div>
                                         <div>
                                             <input type="text" :name="'exercises[' + index + '][reps]'" required
                                                 placeholder="Повторы (например: 12)"
-                                                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                         </div>
                                         <div>
                                             <input type="text" :name="'exercises[' + index + '][weight]'"
                                                 placeholder="Вес (например: 50 кг)"
-                                                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                         </div>
                                     </div>
 
@@ -134,12 +134,12 @@
                     </div>
 
                     <!-- Динамический блок упражнений -->
-                    <div class="space-y-4 border-t border-slate-850 pt-4">
+                    <div class="space-y-4 border-t border-slate-100 pt-4">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-black text-slate-300 uppercase tracking-widest">Упражнения в
+                            <span class="text-xs font-black text-slate-700 uppercase tracking-widest">Упражнения в
                                 тренировке</span>
                             <button type="button" x-on:click="exercises.push({ id: null, title: '', sets: 3, reps: '10-12', weight: '' })"
-                                class="text-xs font-bold text-indigo-400 hover:text-indigo-300 uppercase tracking-wider cursor-pointer">
+                                class="text-xs font-bold text-indigo-700 hover:text-indigo-800 uppercase tracking-wider cursor-pointer">
                                 ➕ Добавить упражнение
                             </button>
                         </div>
@@ -147,7 +147,7 @@
                         <div class="space-y-4 max-h-[300px] overflow-y-auto pr-1">
                             <template x-for="(exercise, index) in exercises" :key="index">
                                 <div
-                                    class="bg-slate-950/80 border border-slate-850 p-4 rounded-2xl relative space-y-3">
+                                    class="bg-slate-50 border border-slate-200 rounded-2xl p-4 relative space-y-3">
 
                                     <!-- Передача ID существующего упражнения, если есть -->
                                     <input type="hidden" :name="'exercises[' + index + '][id]'" x-model="exercise.id">
@@ -155,18 +155,18 @@
                                     <!-- Кнопка удаления упражнения -->
                                     <button type="button" x-show="exercises.length > 1"
                                         x-on:click="exercises.splice(index, 1)"
-                                        class="absolute top-2.5 right-2.5 w-6 h-6 rounded-md bg-slate-900 border border-slate-800 text-slate-400 hover:text-red-400 flex items-center justify-center transition-colors cursor-pointer text-xs">
+                                        class="absolute top-2.5 right-2.5 w-6 h-6 rounded-md bg-white border border-slate-200 text-slate-400 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer text-xs shadow-sm">
                                         ✕
                                     </button>
 
-                                    <div class="text-xs font-black text-slate-400 uppercase tracking-widest"
+                                    <div class="text-xs font-black text-slate-600 uppercase tracking-widest"
                                         x-text="'Упражнение #' + (index + 1)"></div>
 
                                     <!-- Название -->
                                     <div>
                                         <input type="text" :name="'exercises[' + index + '][title]'" x-model="exercise.title" required
                                             placeholder="Название (например: Жим штанги лежа)"
-                                            class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                            class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                     </div>
 
                                     <!-- Подходы, Повторы, Вес -->
@@ -174,17 +174,17 @@
                                         <div>
                                             <input type="text" inputmode="numeric" pattern="[0-9]*" :name="'exercises[' + index + '][sets]'" x-model="exercise.sets" required
                                                 placeholder="Подходы (например: 4)"
-                                                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                         </div>
                                         <div>
                                             <input type="text" :name="'exercises[' + index + '][reps]'" x-model="exercise.reps" required
                                                 placeholder="Повторы (например: 12)"
-                                                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                         </div>
                                         <div>
                                             <input type="text" :name="'exercises[' + index + '][weight]'" x-model="exercise.weight"
                                                 placeholder="Вес (например: 50 кг)"
-                                                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-650 focus:outline-none focus:border-indigo-500 transition-colors">
+                                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/15 transition-all">
                                         </div>
                                     </div>
 
@@ -194,7 +194,7 @@
                     </div>
 
                     <!-- Кнопки управления -->
-                    <div class="flex justify-end gap-3 pt-2.5 border-t border-slate-850">
+                    <div class="flex justify-end gap-3 pt-2.5 border-t border-slate-100">
                         <x-secondary-button x-on:click="$dispatch('close')" type="button">
                             Отмена
                         </x-secondary-button>

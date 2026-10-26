@@ -49,30 +49,6 @@ class WorkoutController extends Controller
             $todayWorkout = $nextWorkout;
         }
 
-        // Рассчитываем статусы отставания для каждой тренировки
-        foreach ($workouts as $workout) {
-            if (!$workout->last_performed_at) {
-                $workout->status = 'not_started';
-                $workout->status_label = 'Не начато';
-                $workout->status_color = 'text-slate-400 bg-slate-500/10 border-slate-500/20';
-            } else {
-                $daysSince = now()->diffInDays($workout->last_performed_at);
-                if ($daysSince < 7) {
-                    $workout->status = 'in_tone';
-                    $workout->status_label = 'В тонусе';
-                    $workout->status_color = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
-                } elseif ($daysSince <= 10) {
-                    $workout->status = 'warning';
-                    $workout->status_label = 'Пропуск';
-                    $workout->status_color = 'text-amber-400 bg-amber-500/10 border-amber-500/20';
-                } else {
-                    $workout->status = 'lagging';
-                    $workout->status_label = 'Отстает! 🔥';
-                    $workout->status_color = 'text-red-400 bg-red-500/10 border-red-500/20';
-                }
-            }
-        }
-
         $totalProgramWorkouts = $programWorkouts->count();
 
         return view('workout.index', compact('programWorkouts', 'todayWorkout', 'totalProgramWorkouts'));

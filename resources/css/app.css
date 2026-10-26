@@ -9,40 +9,180 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* Premium Deep Dark Theme (Obsidian/Linear vibe) */
+    /* Soft, Eye-Friendly Light Theme (High-Contrast & Zero Glare) */
     
-    /* Backgrounds (Slate) - True deep black to rich dark gray */
-    --color-slate-800: #1e1e24;
-    --color-slate-850: #16161a; /* custom mid-step for cards */
-    --color-slate-900: #0d0d12;
-    --color-slate-950: #050508;
+    /* Backgrounds (Slate) - Comfort Canvas to Crisp Surfaces */
+    --color-slate-950: #f7f8fa; /* Soft warm canvas, 0 eye fatigue */
+    --color-slate-900: #ffffff; /* Crisp, clean card surface */
+    --color-slate-850: #f1f3f7; /* Nested cards, badges, inputs */
+    --color-slate-800: #e2e6ed; /* Gentle hairline borders */
+    --color-slate-750: #d8dee8; /* Active / subtle hover borders */
+    --color-slate-700: #cbd2de;
 
-    /* Text colors - Crisp and high contrast */
-    --color-slate-200: #f8fafc;
-    --color-slate-300: #cbd5e1;
-    --color-slate-400: #94a3b8;
-    --color-slate-500: #64748b;
+    /* High-Contrast Text Hierarchy (Четкий, глубокий, никогда не сливается с фоном) */
+    --color-slate-100: #020617; /* Глубокий цвет заголовков H1 */
+    --color-slate-200: #0f172a; /* Четкий темный цвет для H2/H3 */
+    --color-slate-300: #1e293b; /* Насыщенный угольный текст (100% читаемость) */
+    --color-slate-350: #1e293b;
+    --color-slate-400: #334155; /* Контрастный графитовый для списков и описаний (не блеклый) */
+    --color-slate-500: #475569; /* Спокойный читаемый средний тон для метаданных */
+    --color-slate-600: #64748b; /* Второстепенные подсказки */
+    --color-slate-650: #64748b;
 
-    /* Primary Accent (Indigo) - Deep, rich electric indigo */
-    --color-indigo-300: #818cf8;
-    --color-indigo-400: #6366f1;
-    --color-indigo-500: #4f46e5;
-    --color-indigo-600: #4338ca;
+    /* Primary Accent (Royal Slate Indigo) - Контрастный на светлом фоне */
+    --color-indigo-300: #4f46e5;
+    --color-indigo-400: #4338ca;
+    --color-indigo-500: #3730a3;
+    --color-indigo-600: #312e81;
+    --color-indigo-700: #1e1b4b;
 
-    /* Success (Emerald) - Vibrant deep neon green */
-    --color-emerald-400: #34d399;
-    --color-emerald-500: #10b981;
-    --color-emerald-600: #059669;
+    /* Success (Rich Pine / Emerald) - Глубокий шалфей/изумруд, не блекнет на белом */
+    --color-emerald-300: #059669;
+    --color-emerald-400: #047857;
+    --color-emerald-500: #065f46;
+    --color-emerald-600: #064e3b;
 
-    /* Warning (Amber) - Rich deep gold */
-    --color-amber-300: #fcd34d;
-    --color-amber-400: #fbbf24;
-    --color-amber-500: #f59e0b;
+    /* Blue (Rich Sapphire) */
+    --color-blue-300: #2563eb;
+    --color-blue-400: #1d4ed8;
+    --color-blue-500: #1e40af;
 
-    /* Danger (Red) - Deep crimson */
-    --color-red-400: #f87171;
-    --color-red-500: #ef4444;
-    --color-red-900: #7f1d1d;
+    /* Violet (Royal Purple) */
+    --color-violet-300: #7c3aed;
+    --color-violet-400: #6d28d9;
+    --color-violet-500: #5b21b6;
+
+    /* Warning (Deep Honey / Amber Bronze) */
+    --color-amber-300: #d97706;
+    --color-amber-400: #b45309;
+    --color-amber-500: #92400e;
+
+    /* Danger (Deep Crimson / Rose) */
+    --color-red-400: #b91c1c;
+    --color-red-500: #991b1b;
+    --color-red-600: #7f1d1d;
+    --color-red-900: #fee2e2;
+
+    --color-rose-300: #e11d48;
+    --color-rose-400: #be123c;
+    --color-rose-500: #9f1239;
+}
+
+/* Повышение четкости и контраста для текста и карточек (100% защита от выцветания и белого текста) */
+.text-slate-900 {
+    color: #0f172a !important;
+}
+.text-slate-800 {
+    color: #1e293b !important;
+}
+.text-slate-700 {
+    color: #334155 !important;
+}
+.text-slate-600 {
+    color: #475569 !important;
+}
+.text-slate-500 {
+    color: #64748b !important;
+}
+.text-slate-400 {
+    color: #475569 !important;
+}
+.text-slate-300 {
+    color: #1e293b !important;
+}
+.text-slate-200 {
+    color: #0f172a !important;
+}
+.text-slate-100 {
+    color: #020617 !important;
+}
+
+/* Ховеры для темного текста */
+.hover\:text-slate-900:hover {
+    color: #0f172a !important;
+}
+.hover\:text-slate-800:hover {
+    color: #1e293b !important;
+}
+.hover\:text-slate-700:hover {
+    color: #334155 !important;
+}
+
+/* Глубокие читаемые акцентные цвета (не блеклые и не ядовито-яркие) */
+.text-emerald-400,
+.text-emerald-300 {
+    color: var(--color-emerald-400) !important;
+}
+.text-blue-400,
+.text-blue-300 {
+    color: var(--color-blue-400) !important;
+}
+.text-violet-400,
+.text-violet-300 {
+    color: var(--color-violet-400) !important;
+}
+.text-amber-400,
+.text-amber-300 {
+    color: var(--color-amber-400) !important;
+}
+.text-red-400,
+.text-red-300 {
+    color: var(--color-red-400) !important;
+}
+.text-rose-400,
+.text-rose-300 {
+    color: var(--color-rose-400) !important;
+}
+.text-indigo-400,
+.text-indigo-300 {
+    color: var(--color-indigo-400) !important;
+}
+
+/* Карточки контента внутри списков и кодекса получают четкие светлые границы и фон */
+.bg-slate-900\/50,
+.bg-slate-900\/60,
+.bg-slate-900\/40 {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
+}
+
+.bg-slate-950\/30,
+.bg-slate-950\/40,
+.bg-slate-950\/50,
+.bg-slate-950\/60 {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+.border-slate-800\/40,
+.border-slate-800\/60,
+.border-slate-900\/50 {
+    border-color: #e2e8f0 !important;
+}
+
+/* Мягкий кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f4f8;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Деликатные тени для ощущения парения карточек без перегруза */
+.shadow-soft {
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+}
+.shadow-elevated {
+    box-shadow: 0 12px 35px -4px rgba(15, 23, 42, 0.07), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
 }
 
 /* Убираем стрелочки у инпутов с типом number глобально */
